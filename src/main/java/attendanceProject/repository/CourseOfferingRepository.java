@@ -1,6 +1,6 @@
-package com.miu.edu.projectea.repository;
+package attendanceProject.repository;
 
-import com.miu.edu.projectea.domain.CourseOffering;
+import attendanceProject.domain.CourseOffering;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CourseOfferingRepository extends JpaRepository<CourseOffering, Long> {

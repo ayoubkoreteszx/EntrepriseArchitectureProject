@@ -1,4 +1,4 @@
-package com.miu.edu.projectea.domain;
+package attendanceProject.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -6,12 +6,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
+@Entity
 public class Faculty extends Person{
-    @OneToMany
-
-    private CourseOffering courseOffering;
-    @OneToMany
-    private List<Student> student;
+    private String salutation;
     @ElementCollection
     @CollectionTable(name="FacultyHobbies")
     private List<String> hobbies;

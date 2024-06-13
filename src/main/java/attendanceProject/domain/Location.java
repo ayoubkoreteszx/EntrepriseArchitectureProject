@@ -1,4 +1,4 @@
-package com.miu.edu.projectea.domain;
+package attendanceProject.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,9 +7,10 @@ import lombok.Data;
 @Entity
 public class Location {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
+    @JoinColumn(name = "type_id")
     private LocationType locationType;
     @Embedded
     private Audit audit;

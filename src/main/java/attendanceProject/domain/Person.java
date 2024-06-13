@@ -1,19 +1,22 @@
-package com.miu.edu.projectea.domain;
+package attendanceProject.domain;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Inheritance(strategy = InheritanceType.JOINED)
+@SecondaryTable(name = "PersonAccount", pkJoinColumns = @PrimaryKeyJoinColumn(name = "person_id"))
 @Entity
 public abstract class Person {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Embedded
     private Audit audit;
-    @OneToOne(mappedBy = "person")
-    private PersonAccount personAccount;
+    @Column(table = "PersonAccount")
+    private String username;
+    @Column(table = "PersonAccount")
+    private String password;
     private LocalDate birthDay;
     private String email;
     private String firstName;

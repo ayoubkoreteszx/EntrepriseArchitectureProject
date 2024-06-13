@@ -1,4 +1,4 @@
-package com.miu.edu.projectea.domain;
+package attendanceProject.domain;
 
 public enum GenderType {
     MALE,FEMALE,OTHER
