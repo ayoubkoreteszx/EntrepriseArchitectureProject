@@ -13,6 +13,6 @@ public class AttendanceServiceImpl implements AttendanceService {
     private AttendanceRepository attendanceRepository;
     @Override
     public List<AttendanceRecord> getAttendanceByStudentAndCourseOffering(Long studentId, Long courseOfferingId) {
-        return attendanceRepository.findByStudent_StudentIdAndSession_CourseOffering_Id(studentId, courseOfferingId);
+        return attendanceRepository.findByStudent_IdAndSession_CourseOffering_Id(studentId, courseOfferingId);
     }
 }

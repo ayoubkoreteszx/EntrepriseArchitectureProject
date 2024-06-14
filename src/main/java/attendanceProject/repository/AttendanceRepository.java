@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface AttendanceRepository extends JpaRepository<AttendanceRecord, Long> {
-    List<AttendanceRecord> findByStudent_StudentIdAndSession_CourseOffering_Id
+    List<AttendanceRecord> findByStudent_IdAndSession_CourseOffering_Id
             (Long studentId, Long courseOfferingId);
 }
