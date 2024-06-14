@@ -27,8 +27,8 @@ public class CourseOffering {
     private CourseofferingType courseofferingType;
     private LocalDate startDate;
     private LocalDate endDate;
-    @OneToMany
-    @JoinColumn(name = "course_offering_id")
-    private List<Session> sessions;
+//    @OneToMany
+//    @JoinColumn(name = "course_offering_id")
+//    private List<Session> sessions;
 
 }

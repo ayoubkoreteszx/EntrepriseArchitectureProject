@@ -18,5 +18,7 @@ public class AttendanceRecord {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "locationId")
     private  Location location;
-
+    @ManyToOne
+    @JoinColumn(name = "sessin_id")
+    private Session session;
 }
