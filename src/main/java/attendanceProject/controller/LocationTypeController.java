@@ -1,7 +1,6 @@
 package attendanceProject.controller;
 
 import attendanceProject.domain.LocationType;
-import attendanceProject.repository.LocationRepository;
 import attendanceProject.service.locationTypeService.LocationTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +15,6 @@ import java.util.Objects;
 public class LocationTypeController {
     @Autowired
     private LocationTypeService locationTypeService;
-    @Autowired
-    private LocationRepository locationRepository;
 
     @GetMapping
     public ResponseEntity<?> findAll() {
