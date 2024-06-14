@@ -1,9 +1,6 @@
 package attendanceProject.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -18,5 +15,7 @@ public class Session {
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
-
+    @ManyToOne
+    @JoinColumn(name = "course_offeringId")
+    private CourseOffering courseOffering;
 }
