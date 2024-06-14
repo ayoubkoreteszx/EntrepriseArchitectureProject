@@ -37,5 +37,4 @@ public class StudentViewController {
                 throw new IllegalStateException("Course offering has not started yet.");
             }
         }
-    }
 }
