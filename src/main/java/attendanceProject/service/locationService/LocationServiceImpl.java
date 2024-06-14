@@ -50,6 +50,6 @@ public class LocationServiceImpl implements LocationService {
         }
         location.setLocationType(locationType);
         location.setId(id);
-        return location;
+        return locationRepository.save(location);
     }
 }
