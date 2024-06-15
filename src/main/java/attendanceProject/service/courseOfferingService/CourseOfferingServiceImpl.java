@@ -4,14 +4,13 @@ import attendanceProject.domain.CourseOffering;
 import attendanceProject.repository.CourseOfferingRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 public class CourseOfferingServiceImpl implements CourseOfferingService {
 
-    private CourseOfferingRepository courseOfferingRepository;
+    private final CourseOfferingRepository courseOfferingRepository;
 
     public CourseOfferingServiceImpl(CourseOfferingRepository courseOfferingRepository) {
         this.courseOfferingRepository = courseOfferingRepository;
@@ -33,13 +32,11 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
     }
 
     @Override
-    public CourseOffering updateCourseOffering(Long id, CourseOffering courseOffering) throws SQLException {
+    public CourseOffering updateCourseOffering(Long id, CourseOffering courseOffering) {
         CourseOffering oldCourseOffering = getCourseOfferingById(id);
         if (Objects.nonNull(oldCourseOffering)) {
             courseOffering.setId(id);
             courseOfferingRepository.save(courseOffering);
-        } else {
-            throw new SQLException("CourseOffering with id " + id + " not found");
         }
         return courseOffering;
     }
@@ -48,4 +45,5 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
     public List<CourseOffering> findAllCourseOfferings() {
         return courseOfferingRepository.findAll();
     }
+
 }

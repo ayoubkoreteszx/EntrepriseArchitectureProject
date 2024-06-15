@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,7 +68,7 @@ public class CourseOfferingServiceTest {
     }
 
     @Test
-    void updateCourseOffering() throws SQLException {
+    void updateCourseOffering() {
         CourseOffering oldCourseOffering = new CourseOffering();
         oldCourseOffering.setId(1L);
         oldCourseOffering.setCapacity(100);
@@ -88,10 +87,13 @@ public class CourseOfferingServiceTest {
     }
 
     @Test
-    void updateCourseOfferingNotExisting() throws SQLException {
-        when(courseOfferingRepository.findById(1L)).thenReturn(Optional.empty());
-        CourseOffering courseOffering = new CourseOffering();
-        courseOffering.setId(2L);
-        assertThrows(SQLException.class, () -> courseOfferingService.updateCourseOffering(1L, courseOffering));
+    void updateCourseOfferingNotExisting() {
+        // suppose there is no id with 1L
+        long id = 1L;
+        CourseOffering courseOfferingToUpdate = new CourseOffering();
+        courseOfferingToUpdate.setCapacity(100);
+        when(courseOfferingRepository.findById(id)).thenReturn(Optional.empty());
+        CourseOffering courseOffering = courseOfferingService.updateCourseOffering(id, courseOfferingToUpdate);
+        assertEquals(courseOffering.getId(), 0);
     }
 }

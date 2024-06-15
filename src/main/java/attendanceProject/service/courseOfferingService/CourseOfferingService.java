@@ -9,6 +9,6 @@ public interface CourseOfferingService {
     CourseOffering getCourseOfferingById(Long id);
     void deleteCourseOfferingById(Long id);
     CourseOffering createCourseOffering(CourseOffering courseOffering);
-    CourseOffering updateCourseOffering(Long id, CourseOffering courseOffering) throws SQLException;
+    CourseOffering updateCourseOffering(Long id, CourseOffering courseOffering);
     List<CourseOffering> findAllCourseOfferings();
 }
