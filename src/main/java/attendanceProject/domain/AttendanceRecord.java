@@ -11,11 +11,11 @@ public class AttendanceRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private LocalDateTime scanDateTime;
+    private LocalDateTime scanDateTime = LocalDateTime.now();
     @ManyToOne
     @JoinColumn(name = "studentId")
     private Student student;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "locationId")
     private  Location location;
     @ManyToOne
