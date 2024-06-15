@@ -59,7 +59,7 @@ class AttendanceRecordRepositoryTest {
         location = locationRepository.save(location);
 
         AttendanceRecord record1 = new AttendanceRecord();
-        record1.setSession(sessions.getFirst());
+        record1.setSession(sessions.get(0));
         record1.setStudent(student);
         record1.setLocation(location);
 //        record1.setId(1L);

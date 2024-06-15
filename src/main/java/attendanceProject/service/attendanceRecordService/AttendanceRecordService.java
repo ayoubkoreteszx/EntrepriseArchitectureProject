@@ -1,15 +1,15 @@
 package attendanceProject.service.attendanceRecordService;
 
 import attendanceProject.domain.AttendanceRecord;
+import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 
 import java.util.List;
 
 public interface AttendanceRecordService {
-    AttendanceRecord createAttendanceRecorde(AttendanceRecord attendanceRecord,
-                                             Long studentId, Long sessionId);
-    AttendanceRecord getAttendanceRecordById(Long id);
-    AttendanceRecord updateAttendanceRecord(Long id, AttendanceRecord attendanceRecord);
-    List<AttendanceRecord> getAllAttendanceRecords();
+    AttendanceRecordDTO createAttendanceRecord(AttendanceRecordDTO attendanceRecordDTO);
+    AttendanceRecordDTO getAttendanceRecordById(Long id);
+    AttendanceRecordDTO updateAttendanceRecord(Long id, AttendanceRecordDTO attendanceRecordDTO);
+    List<AttendanceRecordDTO> getAllAttendanceRecords();
     void deleteAttendanceRecord(long id);
-    List<AttendanceRecord> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseId);
+    List<AttendanceRecordDTO> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseId);
 }

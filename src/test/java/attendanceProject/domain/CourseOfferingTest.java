@@ -22,9 +22,9 @@ class CourseOfferingTest {
         assertThat(sessions).hasSize(15); // Expects 15 sessions (excluding 2 Sundays)
 
         // Check first session date, end and start times
-        assertThat(sessions.getFirst().getStartTime()).isEqualTo(LocalTime.of( 10, 0));
-        assertThat(sessions.getFirst().getEndTime()).isEqualTo(LocalTime.of( 12, 30));
-        assertThat(sessions.getFirst().getDate()).isEqualTo(LocalDate.of(2024, 6, 1));
+        assertThat(sessions.get(0).getStartTime()).isEqualTo(LocalTime.of( 10, 0));
+        assertThat(sessions.get(0).getEndTime()).isEqualTo(LocalTime.of( 12, 30));
+        assertThat(sessions.get(0).getDate()).isEqualTo(LocalDate.of(2024, 6, 1));
 
         // Check second session on Saturday
         assertThat(sessions.get(1).getStartTime()).isEqualTo(LocalTime.of(13, 30));
@@ -32,9 +32,9 @@ class CourseOfferingTest {
         assertThat(sessions.get(1).getDate()).isEqualTo(LocalDate.of(2024, 6, 1));
 
         // Check morning session on Monday (last day)
-        assertThat(sessions.getLast().getStartTime()).isEqualTo(LocalTime.of(10, 0));
-        assertThat(sessions.getLast().getEndTime()).isEqualTo(LocalTime.of(12, 30));
-        assertThat(sessions.getLast().getDate()).isEqualTo(LocalDate.of(2024, 6, 10));
+        assertThat(sessions.get(sessions.size()-1).getStartTime()).isEqualTo(LocalTime.of(10, 0));
+        assertThat(sessions.get(sessions.size()-1).getEndTime()).isEqualTo(LocalTime.of(12, 30));
+        assertThat(sessions.get(sessions.size()-1).getDate()).isEqualTo(LocalDate.of(2024, 6, 10));
     }
 
     @Test
@@ -50,9 +50,9 @@ class CourseOfferingTest {
         assertThat(sessions).hasSize(1);
 
         // check if created session is morning session
-        assertThat(sessions.getFirst().getStartTime()).isEqualTo(LocalTime.of( 10, 0));
-        assertThat(sessions.getFirst().getEndTime()).isEqualTo(LocalTime.of( 12, 30));
-        assertThat(sessions.getLast().getDate()).isEqualTo(LocalDate.of(2024, 6, 3));
+        assertThat(sessions.get(0).getStartTime()).isEqualTo(LocalTime.of( 10, 0));
+        assertThat(sessions.get(0).getEndTime()).isEqualTo(LocalTime.of( 12, 30));
+        assertThat(sessions.get(sessions.size()-1).getDate()).isEqualTo(LocalDate.of(2024, 6, 3));
     }
 
     @Test

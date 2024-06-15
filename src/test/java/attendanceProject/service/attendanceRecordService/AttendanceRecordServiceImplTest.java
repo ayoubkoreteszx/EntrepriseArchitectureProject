@@ -1,11 +1,14 @@
 package attendanceProject.service.attendanceRecordService;
 
 import attendanceProject.domain.AttendanceRecord;
+import attendanceProject.domain.Location;
 import attendanceProject.domain.Session;
 import attendanceProject.domain.Student;
 import attendanceProject.repository.AttendanceRecordRepository;
-import attendanceProject.repository.PersonRepository;
 import attendanceProject.repository.SessionRepository;
+import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
+import attendanceProject.service.locationService.LocationService;
+import attendanceProject.service.personService.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,64 +30,79 @@ class AttendanceRecordServiceImplTest {
     private AttendanceRecordRepository attendanceRecordRepository;
 
     @Mock
-    private PersonRepository personRepository;
+    private PersonService personService;
 
     @Mock
     private SessionRepository sessionRepository;
 
+    @Mock
+    private LocationService locationService;
+
     @InjectMocks
     private AttendanceRecordServiceImpl attendanceRecordService;
 
+    private AttendanceRecordDTO attendanceRecordDTO;
     private AttendanceRecord attendanceRecord;
     private Student student;
     private Session session;
+    private Location location;
 
     @BeforeEach
     void setUp() {
+        attendanceRecordDTO = new AttendanceRecordDTO();
+        attendanceRecordDTO.setStudentId(1L);
+        attendanceRecordDTO.setSessionId(1L);
+        attendanceRecordDTO.setLocationId(1L);
+
         attendanceRecord = new AttendanceRecord();
         student = new Student();
+        student.setId(1L);
         session = new Session();
+        session.setId(1L);
+        location = new Location();
+        location.setId(1L);
+        attendanceRecord.setStudent(student);
+        attendanceRecord.setSession(session);
+        attendanceRecord.setLocation(location);
+
     }
 
     @Test
-    void createAttendanceRecord_ShouldReturnSavedRecord() {
-        Long studentId = 1L;
-        Long sessionId = 1L;
-
-        when(personRepository.findById(studentId)).thenReturn(Optional.of(student));
-        when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+    void createAttendanceRecord_ShouldReturnSavedRecordDTO() {
+        when(personService.getPersonById(1L)).thenReturn(student);
+        when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
+        when(locationService.findLocationById(1L)).thenReturn(location);
         when(attendanceRecordRepository.save(any(AttendanceRecord.class))).thenReturn(attendanceRecord);
 
-        AttendanceRecord savedRecord = attendanceRecordService.createAttendanceRecorde(attendanceRecord, studentId, sessionId);
+        AttendanceRecordDTO savedRecordDTO = attendanceRecordService.createAttendanceRecord(attendanceRecordDTO);
 
-        assertNotNull(savedRecord);
-        verify(personRepository, times(1)).findById(studentId);
-        verify(sessionRepository, times(1)).findById(sessionId);
-        verify(attendanceRecordRepository, times(1)).save(attendanceRecord);
+        assertNotNull(savedRecordDTO);
+        verify(personService, times(1)).getPersonById(1L);
+        verify(sessionRepository, times(1)).findById(1L);
+        verify(locationService, times(1)).findLocationById(1L);
+        verify(attendanceRecordRepository, times(1)).save(any(AttendanceRecord.class));
     }
 
     @Test
-    void getAttendanceRecordById_ShouldReturnRecord() {
-        Long id = 1L;
+    void getAttendanceRecordById_ShouldReturnRecordDTO() {
+        when(attendanceRecordRepository.findById(1L)).thenReturn(Optional.of(attendanceRecord));
 
-        when(attendanceRecordRepository.findById(id)).thenReturn(Optional.of(attendanceRecord));
+        AttendanceRecordDTO foundRecordDTO = attendanceRecordService.getAttendanceRecordById(1L);
 
-        AttendanceRecord foundRecord = attendanceRecordService.getAttendanceRecordById(id);
-
-        assertNotNull(foundRecord);
-        verify(attendanceRecordRepository, times(1)).findById(id);
+        assertNotNull(foundRecordDTO);
+        verify(attendanceRecordRepository, times(1)).findById(1L);
     }
 
     @Test
-    void getAllAttendanceRecords_ShouldReturnAllRecords() {
+    void getAllAttendanceRecords_ShouldReturnAllRecordDTOs() {
         List<AttendanceRecord> records = List.of(attendanceRecord);
 
         when(attendanceRecordRepository.findAll()).thenReturn(records);
 
-        List<AttendanceRecord> allRecords = attendanceRecordService.getAllAttendanceRecords();
+        List<AttendanceRecordDTO> allRecordDTOs = attendanceRecordService.getAllAttendanceRecords();
 
-        assertNotNull(allRecords);
-        assertEquals(1, allRecords.size());
+        assertNotNull(allRecordDTOs);
+        assertEquals(1, allRecordDTOs.size());
         verify(attendanceRecordRepository, times(1)).findAll();
     }
 
@@ -100,17 +118,17 @@ class AttendanceRecordServiceImplTest {
     }
 
     @Test
-    void getAttendanceRecordsByStudentAndCourseOffering_ShouldReturnRecords() {
+    void getAttendanceRecordsByStudentAndCourseOffering_ShouldReturnRecordDTOs() {
         Long studentId = 1L;
         Long courseOfferingId = 1L;
         List<AttendanceRecord> records = List.of(attendanceRecord);
 
         when(attendanceRecordRepository.findByStudent_IdAndSession_CourseOffering_Id(studentId, courseOfferingId)).thenReturn(records);
 
-        List<AttendanceRecord> foundRecords = attendanceRecordService.getAttendanceRecordsByStudentAndCourseOffering(studentId, courseOfferingId);
+        List<AttendanceRecordDTO> foundRecordDTOs = attendanceRecordService.getAttendanceRecordsByStudentAndCourseOffering(studentId, courseOfferingId);
 
-        assertNotNull(foundRecords);
-        assertEquals(1, foundRecords.size());
+        assertNotNull(foundRecordDTOs);
+        assertEquals(1, foundRecordDTOs.size());
         verify(attendanceRecordRepository, times(1)).findByStudent_IdAndSession_CourseOffering_Id(studentId, courseOfferingId);
     }
 }
