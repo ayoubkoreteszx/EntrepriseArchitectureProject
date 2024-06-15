@@ -1,4 +1,3 @@
-#person,location,Course,Course_registration,AttendanceRecord
 spring:
   application:
     name: ProjectEA
