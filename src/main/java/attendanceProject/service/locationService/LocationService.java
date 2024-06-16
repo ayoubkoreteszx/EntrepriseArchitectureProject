@@ -2,13 +2,14 @@ package attendanceProject.service.locationService;
 
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
+import attendanceProject.service.locationService.DTO.LocationDTO;
 
 import java.util.List;
 
 public interface LocationService {
-    public List<Location> findAllLocations();
-    public Location findLocationById(long id);
-    public Location createLocation(Location location, Long locationTypeId);
+    public List<LocationDTO> findAllLocations();
+    public LocationDTO findLocationById(long id);
+    public LocationDTO createLocation(LocationDTO locationDTO);
     public void deleteLocation(Long id);
-    public Location updateLocation(Long id, Location location, Long locationTypeId);
+    public LocationDTO updateLocation(Long id, LocationDTO locationDTO);
 }

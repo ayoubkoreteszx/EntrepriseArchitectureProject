@@ -1,9 +1,7 @@
 package attendanceProject.controller;
 
-import attendanceProject.domain.AttendanceRecord;
 import attendanceProject.domain.CourseOffering;
-import attendanceProject.service.attendanceService.AttendanceService;
-import attendanceProject.service.courseOfferingService.CourseOfferingService;
+import attendanceProject.service.attendanceRecordService.AttendanceRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,14 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 @RestController
 @RequestMapping("/student-view")
 public class StudentViewController {
     @Autowired
-    private AttendanceService attendanceService;
+    private AttendanceRecordService attendanceRecordService;
 
     @Autowired
     private WebClient webClient;
@@ -35,7 +32,7 @@ public class StudentViewController {
         }
         if (!courseOffering.getStartDate().isAfter(LocalDate.now())) {
                 return new ResponseEntity<>(
-                        attendanceService.getAttendanceByStudentAndCourseOffering(studentId, offeringId),
+                        attendanceRecordService.getAttendanceRecordsByStudentAndCourseOffering(studentId, offeringId),
                         HttpStatus.OK
                 );
             } else {
