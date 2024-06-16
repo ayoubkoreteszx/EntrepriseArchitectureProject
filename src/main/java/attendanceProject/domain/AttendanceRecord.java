@@ -21,4 +21,14 @@ public class AttendanceRecord {
     @ManyToOne
     @JoinColumn(name = "sessin_id")
     private Session session;
+
+    public AttendanceRecord() {
+    }
+
+    public AttendanceRecord(LocalDateTime scanDateTime, Student student, Location location, Session session) {
+        this.scanDateTime = scanDateTime;
+        this.student = student;
+        this.location = location;
+        this.session = session;
+    }
 }

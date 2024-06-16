@@ -3,6 +3,9 @@ package attendanceProject.service.attendanceRecordService;
 import attendanceProject.domain.AttendanceRecord;
 import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 
+import attendanceProject.domain.Course;
+import attendanceProject.service.DTO.CourseDTO;
+
 import java.util.List;
 
 public interface AttendanceRecordService {
@@ -12,4 +15,6 @@ public interface AttendanceRecordService {
     List<AttendanceRecordDTO> getAllAttendanceRecords();
     void deleteAttendanceRecord(long id);
     List<AttendanceRecordDTO> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseId);
+    public List<AttendanceRecord> getAttendanceRecordsByStudentId(String studentId);
+    AttendanceRecord saveAttendanceRecord(AttendanceRecord attendanceRecord);
 }
