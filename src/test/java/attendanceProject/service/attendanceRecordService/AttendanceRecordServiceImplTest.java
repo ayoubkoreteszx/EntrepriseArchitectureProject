@@ -5,10 +5,10 @@ import attendanceProject.domain.Location;
 import attendanceProject.domain.Session;
 import attendanceProject.domain.Student;
 import attendanceProject.repository.AttendanceRecordRepository;
+import attendanceProject.repository.LocationRepository;
+import attendanceProject.repository.PersonRepository;
 import attendanceProject.repository.SessionRepository;
 import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
-import attendanceProject.service.locationService.LocationService;
-import attendanceProject.service.personService.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,13 +30,13 @@ class AttendanceRecordServiceImplTest {
     private AttendanceRecordRepository attendanceRecordRepository;
 
     @Mock
-    private PersonService personService;
+    private PersonRepository personRepository;
 
     @Mock
     private SessionRepository sessionRepository;
 
     @Mock
-    private LocationService locationService;
+    private LocationRepository locationRepository;
 
     @InjectMocks
     private AttendanceRecordServiceImpl attendanceRecordService;
@@ -69,17 +69,17 @@ class AttendanceRecordServiceImplTest {
 
     @Test
     void createAttendanceRecord_ShouldReturnSavedRecordDTO() {
-        when(personService.getPersonById(1L)).thenReturn(student);
+        when(personRepository.findById(1L)).thenReturn(Optional.of(student));
         when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
-        when(locationService.findLocationById(1L)).thenReturn(location);
+        when(locationRepository.findById(1L)).thenReturn(Optional.of(location));
         when(attendanceRecordRepository.save(any(AttendanceRecord.class))).thenReturn(attendanceRecord);
 
         AttendanceRecordDTO savedRecordDTO = attendanceRecordService.createAttendanceRecord(attendanceRecordDTO);
 
         assertNotNull(savedRecordDTO);
-        verify(personService, times(1)).getPersonById(1L);
+        verify(personRepository, times(1)).findById(1L);
         verify(sessionRepository, times(1)).findById(1L);
-        verify(locationService, times(1)).findLocationById(1L);
+        verify(locationRepository, times(1)).findById(1L);
         verify(attendanceRecordRepository, times(1)).save(any(AttendanceRecord.class));
     }
 

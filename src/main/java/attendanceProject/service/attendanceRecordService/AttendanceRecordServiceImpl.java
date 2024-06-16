@@ -5,11 +5,11 @@ import attendanceProject.domain.Location;
 import attendanceProject.domain.Session;
 import attendanceProject.domain.Student;
 import attendanceProject.repository.AttendanceRecordRepository;
+import attendanceProject.repository.LocationRepository;
+import attendanceProject.repository.PersonRepository;
 import attendanceProject.repository.SessionRepository;
 import attendanceProject.service.attendanceRecordService.DTO.AttendanceDTOMapper;
 import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
-import attendanceProject.service.locationService.LocationService;
-import attendanceProject.service.personService.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,19 +21,19 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     private AttendanceRecordRepository attendanceRecordRepository;
 
     @Autowired
-    PersonService personService;
+    PersonRepository personRepository;
 
     @Autowired
     SessionRepository sessionRepository;
 
     @Autowired
-    private LocationService locationService;
+    private LocationRepository locationRepository;
 
     @Override
     public AttendanceRecordDTO createAttendanceRecord(AttendanceRecordDTO attendanceRecordDTO) {
-        Student student = (Student) personService.getPersonById(attendanceRecordDTO.getStudentId());
+        Student student = (Student) personRepository.findById(attendanceRecordDTO.getStudentId()).get();
         Session session = sessionRepository.findById(attendanceRecordDTO.getSessionId()).get();
-        Location location = locationService.findLocationById(attendanceRecordDTO.getLocationId());
+        Location location = locationRepository.findById(attendanceRecordDTO.getLocationId()).get();
         AttendanceRecord attendanceRecord = new AttendanceRecord();
         attendanceRecord.setStudent(student);
         attendanceRecord.setSession(session);

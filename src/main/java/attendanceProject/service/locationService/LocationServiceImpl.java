@@ -3,6 +3,8 @@ package attendanceProject.service.locationService;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
 import attendanceProject.repository.LocationRepository;
+import attendanceProject.service.locationService.DTO.LocationDTO;
+import attendanceProject.service.locationService.DTO.LocationDTOMapper;
 import attendanceProject.service.locationTypeService.LocationTypeService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +20,26 @@ public class LocationServiceImpl implements LocationService {
     @Autowired
     LocationTypeService locationTypeService;
     @Override
-    public List<Location> findAllLocations() {
-        return locationRepository.findAll();
+    public List<LocationDTO> findAllLocations() {
+        return LocationDTOMapper.mapToDTOList(locationRepository.findAll());
     }
 
     @Override
-    public Location findLocationById(long id) {
-        return locationRepository.findById(id).orElse(null);
+    public LocationDTO findLocationById(long id) {
+        return LocationDTOMapper.mapToDTO(locationRepository.findById(id).orElse(null));
     }
 
     @Override
-    public Location createLocation(Location location, Long locationTypeId) {
-        LocationType locationType = locationTypeService.findLocationTypeById(locationTypeId);
+    public LocationDTO createLocation(LocationDTO locationDTO) {
+        LocationType locationType = locationTypeService.findLocationTypeById(locationDTO.getLocationTypeId());
         if(Objects.isNull(locationType)) {
             throw new EntityNotFoundException("LocationType not found");
         }
+        Location location = new Location();
         location.setLocationType(locationType);
-        return locationRepository.save(location);
+        location.setName(locationDTO.getName());
+        location.setCapacity(locationDTO.getCapacity());
+        return LocationDTOMapper.mapToDTO(locationRepository.save(location));
     }
 
     @Override
@@ -43,13 +48,16 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Location updateLocation(Long id, Location location, Long locationTypeId) {
-        LocationType locationType = locationTypeService.findLocationTypeById(locationTypeId);
-        if(Objects.isNull(locationType)) {
-            throw new EntityNotFoundException("LocationType not found");
+    public LocationDTO updateLocation(Long id, LocationDTO locationDTO) {
+        LocationType locationType = locationTypeService.findLocationTypeById(locationDTO.getLocationTypeId());
+        Location location = locationRepository.findById(id).orElse(null);
+        if(Objects.nonNull(locationType) && Objects.nonNull(location)){
+            location.setLocationType(locationType);
+            location.setName(locationDTO.getName());
+            location.setCapacity(locationDTO.getCapacity());
+            locationRepository.save(location);
         }
-        location.setLocationType(locationType);
-        location.setId(id);
-        return locationRepository.save(location);
+
+        return LocationDTOMapper.mapToDTO(location);
     }
 }

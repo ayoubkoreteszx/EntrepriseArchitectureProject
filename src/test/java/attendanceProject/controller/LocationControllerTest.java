@@ -1,6 +1,7 @@
 package attendanceProject.controller;
 
 import attendanceProject.domain.Location;
+import attendanceProject.service.locationService.DTO.LocationDTO;
 import attendanceProject.service.locationService.LocationService;
 import org.junit.jupiter.api.Test;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -32,13 +33,13 @@ public class LocationControllerTest {
 
     @Test
     public void testFindAll() throws Exception {
-        Location location1 = new Location();
+        LocationDTO location1 = new LocationDTO();
         location1.setId(1L);
         location1.setName("Location1");
-        Location location2 = new Location();
+        LocationDTO location2 = new LocationDTO();
         location2.setId(2L);
         location2.setName("Location2");
-        List<Location> locations = Arrays.asList(location1, location2);
+        List<LocationDTO> locations = Arrays.asList(location1, location2);
 
         when(locationService.findAllLocations()).thenReturn(locations);
 
@@ -53,7 +54,7 @@ public class LocationControllerTest {
 
     @Test
     public void testFindById_Success() throws Exception {
-        Location location = new Location();
+        LocationDTO location = new LocationDTO();
         location.setId(1L);
         location.setName("Location1");
 
@@ -76,11 +77,11 @@ public class LocationControllerTest {
 
     @Test
     public void testCreateLocation() throws Exception {
-        Location location = new Location();
+        LocationDTO location = new LocationDTO();
         location.setId(1L);
         location.setName("Location1");
 
-        when(locationService.createLocation(location, 1L)).thenReturn(location);
+        when(locationService.createLocation(location)).thenReturn(location);
 
         mockMvc.perform(post("/sys-admin/locations")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -94,11 +95,11 @@ public class LocationControllerTest {
 
     @Test
     public void testUpdateLocation() throws Exception {
-        Location location = new Location();
+        LocationDTO location = new LocationDTO();
         location.setId(1L);
         location.setName("UpdatedLocation");
 
-        when(locationService.updateLocation(1L, location, 1L)).thenReturn(location);
+        when(locationService.updateLocation(1L, location)).thenReturn(location);
 
         mockMvc.perform(put("/sys-admin/locations/1")
                         .contentType(MediaType.APPLICATION_JSON)

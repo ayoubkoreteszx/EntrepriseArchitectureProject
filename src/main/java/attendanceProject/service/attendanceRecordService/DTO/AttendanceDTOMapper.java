@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class AttendanceDTOMapper {
     public static AttendanceRecordDTO mapToDTO(AttendanceRecord attendanceRecord){
+        if(attendanceRecord == null)
+            return null;
         AttendanceRecordDTO dto = new AttendanceRecordDTO();
         dto.setId(attendanceRecord.getId());
         dto.setScanDateTime(attendanceRecord.getScanDateTime());
