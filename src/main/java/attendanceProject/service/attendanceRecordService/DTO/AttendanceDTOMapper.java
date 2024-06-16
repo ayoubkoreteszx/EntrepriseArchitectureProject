@@ -12,8 +12,8 @@ public class AttendanceDTOMapper {
         AttendanceRecordDTO dto = new AttendanceRecordDTO();
         dto.setId(attendanceRecord.getId());
         dto.setScanDateTime(attendanceRecord.getScanDateTime());
-        dto.setLocationId(attendanceRecord.getLocation().getId());
-        dto.setStudentId(attendanceRecord.getStudent().getId());
+        dto.setLactionName(attendanceRecord.getLocation().getName());
+        dto.setStudentId(attendanceRecord.getStudent().getStudentId());
         dto.setSessionId(attendanceRecord.getSession().getId());
         return dto;
     }

@@ -15,6 +15,7 @@ public interface AttendanceRecordService {
     List<AttendanceRecordDTO> getAllAttendanceRecords();
     void deleteAttendanceRecord(long id);
     List<AttendanceRecordDTO> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseId);
+    List<AttendanceRecordDTO> getAttendanceRecordsByCourseOffering(Long courseOfferingId);
     public List<AttendanceRecord> getAttendanceRecordsByStudentId(String studentId);
     AttendanceRecord saveAttendanceRecord(AttendanceRecord attendanceRecord);
 }

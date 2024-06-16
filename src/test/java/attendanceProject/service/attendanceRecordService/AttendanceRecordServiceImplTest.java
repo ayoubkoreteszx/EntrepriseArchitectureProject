@@ -4,10 +4,7 @@ import attendanceProject.domain.AttendanceRecord;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.Session;
 import attendanceProject.domain.Student;
-import attendanceProject.repository.AttendanceRecordRepository;
-import attendanceProject.repository.LocationRepository;
-import attendanceProject.repository.PersonRepository;
-import attendanceProject.repository.SessionRepository;
+import attendanceProject.repository.*;
 import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +27,7 @@ class AttendanceRecordServiceImplTest {
     private AttendanceRecordRepository attendanceRecordRepository;
 
     @Mock
-    private PersonRepository personRepository;
+    private StudentRepository studentRepository;
 
     @Mock
     private SessionRepository sessionRepository;
@@ -50,15 +47,15 @@ class AttendanceRecordServiceImplTest {
     @BeforeEach
     void setUp() {
         attendanceRecordDTO = new AttendanceRecordDTO();
-        attendanceRecordDTO.setStudentId(1L);
-        attendanceRecordDTO.setSessionId(1L);
-        attendanceRecordDTO.setLocationId(1L);
+        attendanceRecordDTO.setStudentId("123");
+        attendanceRecordDTO.setSessionId("123");
+        attendanceRecordDTO.setLactionName("Azerty");
 
         attendanceRecord = new AttendanceRecord();
         student = new Student();
         student.setId(1L);
         session = new Session();
-        session.setId(1L);
+        session.setId("123");
         location = new Location();
         location.setId(1L);
         attendanceRecord.setStudent(student);
@@ -69,17 +66,17 @@ class AttendanceRecordServiceImplTest {
 
     @Test
     void createAttendanceRecord_ShouldReturnSavedRecordDTO() {
-        when(personRepository.findById(1L)).thenReturn(Optional.of(student));
-        when(sessionRepository.findById(1L)).thenReturn(Optional.of(session));
-        when(locationRepository.findById(1L)).thenReturn(Optional.of(location));
+        when(studentRepository.findByStudentId("123")).thenReturn(student);
+        when(sessionRepository.findById("123")).thenReturn(Optional.of(session));
+        when(locationRepository.findByName("Azerty")).thenReturn(location);
         when(attendanceRecordRepository.save(any(AttendanceRecord.class))).thenReturn(attendanceRecord);
 
         AttendanceRecordDTO savedRecordDTO = attendanceRecordService.createAttendanceRecord(attendanceRecordDTO);
 
         assertNotNull(savedRecordDTO);
-        verify(personRepository, times(1)).findById(1L);
-        verify(sessionRepository, times(1)).findById(1L);
-        verify(locationRepository, times(1)).findById(1L);
+        verify(studentRepository, times(1)).findByStudentId("123");
+        verify(sessionRepository, times(1)).findById("123");
+        verify(locationRepository, times(1)).findByName("Azerty");
         verify(attendanceRecordRepository, times(1)).save(any(AttendanceRecord.class));
     }
 

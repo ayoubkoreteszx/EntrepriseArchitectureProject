@@ -46,9 +46,9 @@ public class AttendanceRecordControllerTest {
     public void testGetAttendanceRecordById() throws Exception {
         AttendanceRecordDTO attendanceRecordDTO = new AttendanceRecordDTO();
         attendanceRecordDTO.setId(1L);
-        attendanceRecordDTO.setSessionId(1L);
-        attendanceRecordDTO.setLocationId(1L);
-        attendanceRecordDTO.setStudentId(1L);
+        attendanceRecordDTO.setSessionId("123");
+        attendanceRecordDTO.setLactionName("Here");
+        attendanceRecordDTO.setStudentId("123");
 
         when(attendanceRecordService.getAttendanceRecordById(1L)).thenReturn(attendanceRecordDTO);
 
