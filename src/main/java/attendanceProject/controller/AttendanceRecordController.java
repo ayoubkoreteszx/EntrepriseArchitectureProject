@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import attendanceProject.service.DTO.AttendanceRecordDTO;
 import attendanceProject.service.mapper.AttendanceRecordMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +26,8 @@ public class AttendanceRecordController {
         this.attendanceRecordService = attendanceRecordService;
     }
 
-
-
     @GetMapping("/{studentId}")
-    public List<AttendanceRecordDTO> getAttendanceRecords(@PathVariable String studentId) {
+    public List<attendanceProject.service.DTO.AttendanceRecordDTO> getAttendanceRecords(@PathVariable String studentId) {
         List<AttendanceRecord> attendanceRecords = attendanceRecordService.getAttendanceRecordsByStudentId(studentId);
         return attendanceRecordMapper.toDTOs(attendanceRecords);
     }
