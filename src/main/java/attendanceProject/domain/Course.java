@@ -1,8 +1,10 @@
 package attendanceProject.domain;
 
+import attendanceProject.service.DTO.CourseDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -24,4 +26,27 @@ public class Course {
     List<Course> prerequisites;
     @Embedded
     private Audit audit;
+
+    public Course() {
+    }
+
+
+
+
+    public void UpdateAudit(LocalDate updatedDate, String updatedBy)
+    {
+        if (this.audit == null) {
+            this.audit = new Audit();
+            this.audit.createdBy = updatedBy;
+            this.audit.createdDate = updatedDate;
+        }
+        this.audit.updatedDate = updatedDate;
+        this.audit.updatedBy = updatedBy;
+    }
+    public void UpdateAudit(String updatedBy)
+    {
+        this.audit.updatedDate = LocalDate.now();
+        this.audit.updatedBy = updatedBy;
+    }
+
 }
