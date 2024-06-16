@@ -23,10 +23,10 @@ public class Audit {
         this.updatedBy = updatedBy;
     }
 
-    public Audit(LocalDate createdDate, String createdBy) {
-        this.createdDate = createdDate;
-        this.createdBy = createdBy;
-    }
+//    public Audit(LocalDate createdDate, String createdBy) {
+//        this.createdDate = createdDate;
+//        this.createdBy = createdBy;
+//    }
 
     public Audit(String username) {
         this.createdDate = LocalDate.now();

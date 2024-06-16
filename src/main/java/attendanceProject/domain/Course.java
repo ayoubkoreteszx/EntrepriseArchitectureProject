@@ -30,15 +30,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(CourseDTO courseDTO)
-    {
-        this.credits = courseDTO.getCredits();
-        this.courseDescription = courseDTO.getCourseDescription();
-        this.courseName = courseDTO.getCourseName();
-        this.courseCode = courseDTO.getCourseCode();
-        this.department = courseDTO.getDepartment();
-//        this.prerequisites = new ArrayList<Course>();
-    }
+
 
 
     public void UpdateAudit(LocalDate updatedDate, String updatedBy)

@@ -1,12 +1,14 @@
 package attendanceProject.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @SecondaryTable(name = "PersonAccount", pkJoinColumns = @PrimaryKeyJoinColumn(name = "person_id"))
 @Entity
+@Data
 public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

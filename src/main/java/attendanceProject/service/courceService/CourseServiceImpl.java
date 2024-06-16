@@ -4,6 +4,7 @@ import attendanceProject.service.DTO.CourseDTO;
 import attendanceProject.domain.Audit;
 import attendanceProject.domain.Course;
 import attendanceProject.repository.CourseRepository;
+import attendanceProject.service.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course saveCourse(CourseDTO courseDTO) {
-        Course course = new Course(courseDTO);
+        CourseMapper courseMapper = new CourseMapper();
+        Course course = courseMapper.CourseMapperDTO(courseDTO);
         if (courseDTO.getPrerequisiteIds() != null) {
             List<Course> prerequisites = new ArrayList<>();
             for (Long id : courseDTO.getPrerequisiteIds()) {
