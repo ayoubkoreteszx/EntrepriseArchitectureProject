@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class AttendanceRecordDTO {
     private long id;
     private LocalDateTime scanDateTime;
-    private long studentId;
-    private long sessionId;
-    private long locationId;
+    private String studentId;
+    private String sessionId;
+    private String lactionName;
 }

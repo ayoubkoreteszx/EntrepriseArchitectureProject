@@ -14,5 +14,6 @@ public interface AttendanceRecordRepository extends JpaRepository<AttendanceReco
             "a.session.courseOffering.id =:courseOfferingId")
     List<AttendanceRecord> findByStudent_IdAndSession_CourseOffering_Id
             (@Param("studentId") Long studentId, @Param("courseOfferingId") Long courseOfferingId);
+    List<AttendanceRecord> findByCourseOffering_Id(Long courseOfferingId);
     List<AttendanceRecord> findByStudent_StudentId(String studentId);
 }
