@@ -70,4 +70,13 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
         return AttendanceDTOMapper.mapToDTOList(attendanceRecordRepository.
                 findByStudent_IdAndSession_CourseOffering_Id(studentId, courseOfferingId));
     }
+
+    public List<AttendanceRecord> getAttendanceRecordsByStudentId(String studentId) {
+        return attendanceRecordRepository.findByStudent_StudentId(studentId);
+    }
+
+    @Override
+    public AttendanceRecord saveAttendanceRecord(AttendanceRecord attendanceRecord) {
+        return attendanceRecordRepository.save(attendanceRecord);
+    }
 }
