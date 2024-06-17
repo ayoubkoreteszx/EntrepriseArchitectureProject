@@ -2,6 +2,7 @@ package attendanceProject.controller.Dto.faculty;
 
 import attendanceProject.domain.Faculty;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,7 @@ public class FacultyMapper {
         faculty.setUsername(facultyDtoRequest.getUsername());
         faculty.setPassword(facultyDtoRequest.getPassword());
         faculty.setGender(facultyDtoRequest.getGender());
-        faculty.setHobbies(facultyDtoRequest.getHobbies());
+        faculty.setHobbies(Arrays.asList(facultyDtoRequest.getHobbies().split(",")));
         return faculty;
     }
     public static FacultyResponse mapToFacultyResponse(Faculty faculty) {

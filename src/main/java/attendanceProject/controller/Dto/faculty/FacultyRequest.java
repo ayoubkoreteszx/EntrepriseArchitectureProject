@@ -31,8 +31,8 @@ public class FacultyRequest {
     @Schema(description="your gender", example="MALE", required=true)
     private GenderType gender;
 
-    @Schema(description = " faculty hobbies", example = "[tennis,swim]", required = true)
-    private List<String> hobbies;
+    @Schema(description = " faculty hobbies", example = "tennis,swim", required = true)
+    private String hobbies;
 
 
 }
