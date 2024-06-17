@@ -1,8 +1,6 @@
 package attendanceProject.service.locationService;
 
-import attendanceProject.domain.Location;
-import attendanceProject.domain.LocationType;
-import attendanceProject.service.locationService.DTO.LocationDTO;
+import attendanceProject.controller.Dto.location.LocationDTO;
 
 import java.util.List;
 
