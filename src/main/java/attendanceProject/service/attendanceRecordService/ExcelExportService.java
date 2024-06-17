@@ -2,7 +2,7 @@ package attendanceProject.service.attendanceRecordService;
 
 import attendanceProject.domain.*;
 import attendanceProject.repository.SessionRepository;
-import attendanceProject.service.attendanceRecordService.DTO.AttendanceDTOMapper;
+import attendanceProject.controller.Dto.attendance.AttendanceDTOMapper;
 import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;

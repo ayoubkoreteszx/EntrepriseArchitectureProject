@@ -2,7 +2,7 @@ package attendanceProject.controller;
 
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
-import attendanceProject.service.locationService.DTO.LocationDTO;
+import attendanceProject.controller.Dto.location.LocationDTO;
 import attendanceProject.service.locationService.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

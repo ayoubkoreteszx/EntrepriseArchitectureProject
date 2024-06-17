@@ -1,15 +1,16 @@
-package attendanceProject.service.attendanceRecordService.DTO;
+package attendanceProject.controller.Dto.attendance;
 
 import attendanceProject.domain.AttendanceRecord;
+import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AttendanceDTOMapper {
-    public static AttendanceRecordDTO mapToDTO(AttendanceRecord attendanceRecord){
+    public static attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO mapToDTO(AttendanceRecord attendanceRecord){
         if(attendanceRecord == null)
             return null;
-        AttendanceRecordDTO dto = new AttendanceRecordDTO();
+        attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO dto = new attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO();
         dto.setId(attendanceRecord.getId());
         dto.setScanDateTime(attendanceRecord.getScanDateTime());
         dto.setLactionName(attendanceRecord.getLocation().getName());
