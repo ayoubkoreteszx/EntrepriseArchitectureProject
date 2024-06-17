@@ -1,7 +1,8 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.request.StudentMapper;
-import attendanceProject.controller.request.StudentRequest;
+import attendanceProject.controller.Dto.student.StudentMapper;
+import attendanceProject.controller.Dto.student.StudentRequest;
+import attendanceProject.controller.webClientConfig.ResponseMessage;
 import attendanceProject.domain.Faculty;
 import attendanceProject.domain.Person;
 import attendanceProject.domain.Student;
@@ -16,46 +17,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
 @RestController
 
-@RequestMapping("/person")
-@Tag(name = "Person Management System", description = "Operations pertaining to person in Person Management System")
-public class PersonController  {
+@RequestMapping("/student")
+@Tag(name = "Student Management System")
+public class StudentController  {
     @Autowired
     private PersonService personService;
+    @Autowired
+    private WebClient webClient;
     @GetMapping("/all")
-    @Operation(summary = "View a list of available persons")
+    @Operation(summary = "View a list of available students")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the persons",
+            @ApiResponse(responseCode = "200", description = "Found the students",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Person.class))),
-            @ApiResponse(responseCode = "404", description = "Persons not found", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Student not found", content = @Content)
     })
-    public ResponseEntity<?> getAllPersons() {
-        List<Person> persons = personService.getAllPersons();
+    public ResponseEntity<?> getAllStudent() {
+        List<Student> persons = personService.getAlStudents();
         if (persons == null) {
             return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity<>(persons, HttpStatus.OK);
+        return new ResponseEntity<>(StudentMapper.mapToStudentResponseList(persons), HttpStatus.OK);
     }
 
-    @GetMapping("/person/{id}")
-    @Operation(summary = "Get a person by id")
+    @GetMapping("/student/{id}")
+    @Operation(summary = "Get a student by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the person",
+            @ApiResponse(responseCode = "200", description = "Found the student",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Person.class))),
-            @ApiResponse(responseCode = "404", description = "Person not found", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Student not found", content = @Content)
     })
-    public ResponseEntity<?> getPersonById(@PathVariable long id) {
-        Person person = personService.getPersonById(id);
+    public ResponseEntity<?> getStudentById(@PathVariable long id) {
+        Student person = personService.getStudentById(id);
         if (person == null) {
             return ResponseEntity.notFound().build();
         }
-        return new ResponseEntity<>(person, HttpStatus.OK);
+        return new ResponseEntity<>(StudentMapper.mapToStudentResponse(person), HttpStatus.OK);
     }
 
 
@@ -66,11 +70,23 @@ public class PersonController  {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Person.class)))
     })
-    public ResponseEntity<StudentRequest> addStudent(@RequestBody StudentRequest student) {
-        personService.addPerson(StudentMapper.mapToStudent(student));
+    public ResponseEntity<?> addStudent(@RequestBody StudentRequest student) {
+        Faculty facultyResponse = webClient.get()
+                .uri("http://localhost:8080/faculty/" + student.getAdvisorId())
+                .retrieve()
+                .bodyToMono(Faculty.class)
+                .block();
+        if (facultyResponse == null) {
+            ResponseMessage rs=new ResponseMessage();
+            rs.setMessage("Faculty not found");
+            return new ResponseEntity<>(rs,HttpStatus.NOT_FOUND);
+        }
+        Student student1 =StudentMapper.mapToStudent(student);
+        student1.setAdvisor(facultyResponse);
+        personService.addPerson(student1);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
-
+/*
     @Operation(summary = "Add a faculty")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Faculty added successfully",
@@ -83,29 +99,29 @@ public class PersonController  {
         return new ResponseEntity<>(faculty, HttpStatus.OK);
     }
 
-
+*/
 
     @PutMapping ("/update")
-    @Operation(summary = "Update a person")
+    @Operation(summary = "Update a Student")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Person updated",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Person.class))),
             @ApiResponse(responseCode = "404", description = "Person not updated", content = @Content)
     })
-    public ResponseEntity<?> updatePerson(@RequestBody Person person) {
-        personService.updatePerson(person);
+    public ResponseEntity<?> updateStudent(@RequestBody StudentRequest person) {
+        personService.updatePerson(StudentMapper.mapToStudent(person));
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
 
     @DeleteMapping ("/delete")
-    @Operation(summary = "Delete a person")
+    @Operation(summary = "Delete a Student")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Person deleted",
+            @ApiResponse(responseCode = "200", description = "student deleted",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Person.class))),
-            @ApiResponse(responseCode = "404", description = "Person not deleted", content = @Content)
+            @ApiResponse(responseCode = "404", description = "Student not deleted", content = @Content)
     })
     public ResponseEntity<?> deletePerson(@PathVariable long personId) {
         personService.deletePerson(personId);
