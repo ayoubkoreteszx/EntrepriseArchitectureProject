@@ -24,9 +24,10 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public void updatePerson(Person person) {
-     personRepository.save(person);
+    public void updatePerson(Person student) {
+        personRepository.save(student);
     }
+
 
     @Override
     public void deletePerson(long personId) {
@@ -38,13 +39,23 @@ public class PersonServiceImpl implements PersonService{
     }
 
     @Override
-    public Person getPersonById(long id) {
-
-        return personRepository.findById(id).isPresent()?personRepository.findById(id).get():null;
+    public Student getStudentById(long id) {
+        return personRepository.findByStudentId(id);
     }
 
     @Override
-    public List<Person> getAllPersons() {
-        return personRepository.findAll();
+    public List<Student> getAlStudents() {
+        return personRepository.findAllStudent();
     }
+
+    @Override
+    public Faculty getFacultyById(long id) {
+        return personRepository.findByFacultyId(id);
+    }
+
+    @Override
+    public List<Faculty> getAllFaculties() {
+        return personRepository.findAllFaculty()   ;
+    }
+
 }
