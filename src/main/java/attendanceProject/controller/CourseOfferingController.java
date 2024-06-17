@@ -1,8 +1,12 @@
 package attendanceProject.controller;
 
 import attendanceProject.controller.Dto.courseOffering.CourseOfferingMapper;
+import attendanceProject.controller.Dto.courseOffering.CourseOfferingRequest;
 import attendanceProject.controller.Dto.courseOffering.CourseOfferingResponse;
+import attendanceProject.controller.webClientConfig.ResponseMessage;
+import attendanceProject.domain.Course;
 import attendanceProject.domain.CourseOffering;
+import attendanceProject.domain.Faculty;
 import attendanceProject.service.courseOfferingService.CourseOfferingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,11 +17,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/course-offerings")
@@ -25,9 +31,11 @@ import java.util.Objects;
 public class CourseOfferingController {
 
     private final CourseOfferingService courseOfferingService;
+    private final WebClient webClient;
 
-    public CourseOfferingController(CourseOfferingService courseOfferingService) {
+    public CourseOfferingController(CourseOfferingService courseOfferingService, WebClient webClient) {
         this.courseOfferingService = courseOfferingService;
+        this.webClient = webClient;
     }
 
     /**
@@ -41,23 +49,31 @@ public class CourseOfferingController {
                             schema =  @Schema(implementation = CourseOfferingResponse.class))),
             @ApiResponse( responseCode = "404", description = "Course offering not found", content = @Content)
     })
-    public ResponseEntity<?> getCourseOfferingById(@PathVariable Long id) {
+    public ResponseEntity<CourseOfferingResponse> getCourseOfferingById(@PathVariable Long id) {
         CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(id);
         if (Objects.isNull(courseOffering)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok( CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering));
+        return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering));
     }
 
     /**
      * Provide a list of all course offerings.
      */
     @GetMapping
-    public ResponseEntity<List<CourseOffering>> findAllCourseOfferings() {
-        return new ResponseEntity<>(
-                courseOfferingService.findAllCourseOfferings(),
-                HttpStatus.OK
-        );
+    @Operation(summary = "View a list of available course offerings")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found course offerings",
+                    content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = CourseOfferingResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Course offerings not found", content = @Content)
+    })
+    public ResponseEntity<List<CourseOfferingResponse>> findAllCourseOfferings() {
+        List<CourseOffering> courseOfferings = courseOfferingService.findAllCourseOfferings();
+        if (Objects.isNull(courseOfferings)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingResponseList(courseOfferings));
     }
 
     /**
@@ -65,8 +81,36 @@ public class CourseOfferingController {
      * response.
      */
     @PostMapping
-    public ResponseEntity<Void> createCourseOffering(@RequestBody CourseOffering newCourseOffering) {
-        CourseOffering courseOffering = courseOfferingService.createCourseOffering(newCourseOffering);
+    @Operation(summary = "Add a course offering")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "New course offering is created",
+                    content = @Content(mediaType = "application/json"))
+    })
+    public ResponseEntity<Void> createCourseOffering(@RequestBody CourseOfferingRequest newCourseOffering) {
+        Faculty facultyResponse = webClient.get()
+                .uri("http://localhost:8080/faculty/" + newCourseOffering.getFacultyId())
+                .retrieve()
+                .bodyToMono(Faculty.class)
+                .block();
+        if (Objects.isNull(facultyResponse)) {
+            ResponseMessage rs = new ResponseMessage("Faculty not found");
+            return ResponseEntity.ofNullable(rs).notFound().build();
+        }
+
+        Course course = webClient.get()
+                .uri("http://localhost:8080/courses/" + newCourseOffering.getCourseId())
+                .retrieve()
+                .bodyToMono(Course.class)
+                .block();
+        if (Objects.isNull(course)) {
+            ResponseMessage rs = new ResponseMessage("Course not found");
+            return ResponseEntity.ofNullable(rs).notFound().build();
+        }
+
+        CourseOffering courseOffering = CourseOfferingMapper.mapToCourseOffering(newCourseOffering);
+        courseOffering.setFaculty(facultyResponse);
+        courseOffering.setCourse(course);
+        courseOfferingService.createCourseOffering(courseOffering);
         URI location =
                 ServletUriComponentsBuilder.fromCurrentRequestUri()
                         .path("/{childId}")
@@ -92,7 +136,8 @@ public class CourseOfferingController {
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(id);
         if (Objects.isNull(courseOffering)) {
-            return ResponseEntity.notFound().build();
+            System.out.println("No course offering found with id " + id);
+            return ResponseEntity.noContent().build();
         }
         courseOfferingService.deleteCourseOfferingById(id);
         return ResponseEntity.noContent().build();
