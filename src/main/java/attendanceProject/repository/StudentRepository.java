@@ -1,10 +1,10 @@
 package attendanceProject.repository;
 
-import attendanceProject.domain.Location;
+import attendanceProject.domain.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LocationRepository extends JpaRepository<Location, Long> {
-    Location findByName(String name);
+public interface StudentRepository extends JpaRepository<Student, Long> {
+    Student findByStudentId(String studentId);
 }

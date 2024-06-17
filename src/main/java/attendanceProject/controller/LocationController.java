@@ -2,6 +2,7 @@ package attendanceProject.controller;
 
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
+import attendanceProject.service.locationService.DTO.LocationDTO;
 import attendanceProject.service.locationService.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,30 +20,30 @@ public class LocationController {
 
     @GetMapping
     public ResponseEntity<?> findAll() {
-        return new ResponseEntity<List<Location>>(
+        return new ResponseEntity<List<LocationDTO>>(
                 locationService.findAllLocations(),
                 HttpStatus.OK
         );
     }
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        Location location = locationService.findLocationById(id);
+        LocationDTO location = locationService.findLocationById(id);
         if (Objects.isNull(location)) {
             return new ResponseEntity<LocationType>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Location>(location, HttpStatus.OK);
+        return new ResponseEntity<LocationDTO>(location, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<?> createLocation(@RequestBody Location location, @RequestParam Long locationTypeId) {
-        return new ResponseEntity<Location>(
-                locationService.createLocation(location, locationTypeId),
+    public ResponseEntity<?> createLocation(@RequestBody LocationDTO location) {
+        return new ResponseEntity<LocationDTO>(
+                locationService.createLocation(location),
                 HttpStatus.CREATED
         );
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateLocation(@PathVariable Long id, @RequestBody Location location, @RequestParam Long locationTypeId) {
-        return new ResponseEntity<Location>(
-                locationService.updateLocation(id, location, locationTypeId),
+    public ResponseEntity<?> updateLocation(@PathVariable Long id, @RequestBody LocationDTO location) {
+        return new ResponseEntity<LocationDTO>(
+                locationService.updateLocation(id, location),
                 HttpStatus.OK
         );
     }

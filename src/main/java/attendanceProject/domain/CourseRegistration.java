@@ -14,6 +14,6 @@ public class CourseRegistration {
     private CourseOffering courseOffering;
     @ManyToOne
     @JoinColumn(name = "studentId")
-    @OrderColumn(name = "sequence")
+//    @OrderColumn(name = "sequence")
     private Student student;
 }
