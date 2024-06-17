@@ -9,8 +9,10 @@ import java.util.List;
 public interface PersonService {
     public void addPerson(Student person);
     public void addPerson(Faculty faculty);
-    public void updatePerson(Person person);
+    public void updatePerson(Person student);
     public void deletePerson(long id);
-    public Person getPersonById(long id);
-    public List<Person> getAllPersons();
+    public Student getStudentById(long id);
+    public List<Student> getAlStudents();
+    public Faculty getFacultyById(long id);
+    public List<Faculty> getAllFaculties();
 }

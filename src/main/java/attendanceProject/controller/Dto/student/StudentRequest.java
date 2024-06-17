@@ -1,4 +1,4 @@
-package attendanceProject.controller.request;
+package attendanceProject.controller.Dto.student;
 
 import attendanceProject.domain.Audit;
 import attendanceProject.domain.GenderType;
