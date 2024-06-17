@@ -1,5 +1,6 @@
 package attendanceProject.controller;
 
+import attendanceProject.controller.Dto.location.CreateLocationParameters;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
 import attendanceProject.controller.Dto.location.LocationDTO;
@@ -34,16 +35,19 @@ public class LocationController {
         return new ResponseEntity<LocationDTO>(location, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<?> createLocation(@RequestBody LocationDTO location) {
+    public ResponseEntity<?> createLocation(@RequestBody CreateLocationParameters parameters) {
         return new ResponseEntity<LocationDTO>(
-                locationService.createLocation(location),
+                locationService.createLocation(parameters),
                 HttpStatus.CREATED
         );
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateLocation(@PathVariable Long id, @RequestBody LocationDTO location) {
+    public ResponseEntity<?> updateLocation(@PathVariable Long id, @RequestBody CreateLocationParameters parameters) {
+        LocationDTO updated = locationService.updateLocation(id, parameters);
+        if(updated == null)
+            return new ResponseEntity<>("Record not exist", HttpStatus.BAD_REQUEST);
         return new ResponseEntity<LocationDTO>(
-                locationService.updateLocation(id, location),
+                updated,
                 HttpStatus.OK
         );
     }

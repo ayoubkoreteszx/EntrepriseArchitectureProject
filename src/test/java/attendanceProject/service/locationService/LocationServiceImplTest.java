@@ -1,5 +1,6 @@
 package attendanceProject.service.locationService;
 
+import attendanceProject.controller.Dto.location.CreateLocationParameters;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
 import attendanceProject.repository.LocationRepository;
@@ -91,12 +92,14 @@ class LocationServiceImplTest {
         Location location = new Location();
         location.setName("Location1");
         location.setLocationType(locationType);
-        LocationDTO locationDTO = LocationDTOMapper.mapToDTO(location);
+        CreateLocationParameters parameters = new CreateLocationParameters();
+        parameters.setLocationTypeId(1L);
+
 
         when(locationTypeService.findLocationTypeById(1L)).thenReturn(locationType);
         when(locationRepository.save(location)).thenReturn(location);
 
-        LocationDTO result = locationService.createLocation(locationDTO);
+        LocationDTO result = locationService.createLocation(parameters);
 
         assertNotNull(result);
 //        assertEquals("Location1", result.getName());
@@ -112,12 +115,14 @@ class LocationServiceImplTest {
         Location location = new Location();
         location.setName("Location1");
         location.setLocationType(locationType);
-        LocationDTO locationDTO = LocationDTOMapper.mapToDTO(location);
+
+        CreateLocationParameters parameters = new CreateLocationParameters();
+        parameters.setLocationTypeId(1L);
 
         when(locationTypeService.findLocationTypeById(1L)).thenReturn(null);
 
         assertThrows(EntityNotFoundException.class, () -> {
-            locationService.createLocation(locationDTO);
+            locationService.createLocation(parameters);
         });
 
         verify(locationTypeService, times(1)).findLocationTypeById(1L);
@@ -153,8 +158,10 @@ class LocationServiceImplTest {
         when(locationTypeService.findLocationTypeById(1L)).thenReturn(locationType);
         when(locationRepository.findById(1L)).thenReturn(Optional.of(oldLocation));
         when(locationRepository.save(any(Location.class))).thenReturn(newLocation);
-
-        LocationDTO result = locationService.updateLocation(1L, locationDTO);
+        CreateLocationParameters parameters = new CreateLocationParameters();
+        parameters.setLocationTypeId(1L);
+        parameters.setName("NewLocation");
+        LocationDTO result = locationService.updateLocation(1L, parameters);
 
         assertNotNull(result);
         assertEquals("NewLocation", result.getName());

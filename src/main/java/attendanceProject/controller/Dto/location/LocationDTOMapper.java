@@ -1,6 +1,7 @@
 package attendanceProject.controller.Dto.location;
 
 import attendanceProject.domain.Location;
+import attendanceProject.domain.LocationType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,5 +21,12 @@ public class LocationDTOMapper {
     public static List<LocationDTO> mapToDTOList(List<Location> locations) {
         return locations.stream().map(LocationDTOMapper::mapToDTO)
                 .collect(Collectors.toList());
+    }
+    public static Location mapToLocation(CreateLocationParameters parameters, LocationType locationType){
+        Location location = new Location();
+        location.setLocationType(locationType);
+        location.setName(parameters.getName());
+        location.setCapacity(parameters.getCapacity());
+        return location;
     }
 }

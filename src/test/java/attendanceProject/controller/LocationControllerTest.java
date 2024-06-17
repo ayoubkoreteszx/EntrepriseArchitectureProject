@@ -1,5 +1,6 @@
 package attendanceProject.controller;
 
+import attendanceProject.controller.Dto.location.CreateLocationParameters;
 import attendanceProject.controller.Dto.location.LocationDTO;
 import attendanceProject.service.locationService.LocationService;
 import org.junit.jupiter.api.Test;
@@ -77,7 +78,11 @@ public class LocationControllerTest {
         location.setId(1L);
         location.setName("Location1");
 
-        when(locationService.createLocation(location)).thenReturn(location);
+        CreateLocationParameters parameters = new CreateLocationParameters();
+        parameters.setId(1L);
+        parameters.setName("Location1");
+
+        when(locationService.createLocation(parameters)).thenReturn(location);
 
         mockMvc.perform(post("/sys-admin/locations")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -95,7 +100,11 @@ public class LocationControllerTest {
         location.setId(1L);
         location.setName("UpdatedLocation");
 
-        when(locationService.updateLocation(1L, location)).thenReturn(location);
+        CreateLocationParameters parameters = new CreateLocationParameters();
+        parameters.setId(1L);
+        parameters.setName("UpdatedLocation");
+
+        when(locationService.updateLocation(1L, parameters)).thenReturn(location);
 
         mockMvc.perform(put("/sys-admin/locations/1")
                         .contentType(MediaType.APPLICATION_JSON)
