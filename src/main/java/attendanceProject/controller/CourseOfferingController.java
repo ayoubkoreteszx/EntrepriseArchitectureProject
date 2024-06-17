@@ -41,12 +41,12 @@ public class CourseOfferingController {
                             schema =  @Schema(implementation = CourseOfferingResponse.class))),
             @ApiResponse( responseCode = "404", description = "Course offering not found", content = @Content)
     })
-    public ResponseEntity<?> getCourseOfferingById(@PathVariable Long id) {
+    public ResponseEntity<CourseOfferingResponse> getCourseOfferingById(@PathVariable Long id) {
         CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(id);
         if (Objects.isNull(courseOffering)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok( CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering));
+        return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering));
     }
 
     /**
