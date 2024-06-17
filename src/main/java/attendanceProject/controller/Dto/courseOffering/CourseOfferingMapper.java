@@ -4,7 +4,7 @@ import attendanceProject.controller.Dto.faculty.FacultyMapper;
 import attendanceProject.domain.CourseOffering;
 
 public class CourseOfferingMapper {
-    public static CourseOfferingResponse mapToCourseOfferingResponse(CourseOffering courseOffering) {
+    public static CourseOfferingResponse mapToCourseOfferingResponse( CourseOffering courseOffering) {
         CourseOfferingResponse courseOfferingResponse = new CourseOfferingResponse();
         courseOfferingResponse.setId(courseOffering.getId());
         courseOfferingResponse.setCapacity(courseOffering.getCapacity());

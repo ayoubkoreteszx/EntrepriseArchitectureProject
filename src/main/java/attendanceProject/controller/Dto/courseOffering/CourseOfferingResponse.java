@@ -12,7 +12,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-@Schema(description = "Course Offering Response")
+@Schema(description = "Course Offering Response ")
 public class CourseOfferingResponse {
     @Schema(description = "Id of the course offering", example = "1", required = true)
     private long id;

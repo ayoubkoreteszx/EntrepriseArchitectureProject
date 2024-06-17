@@ -33,20 +33,20 @@ public class CourseOfferingController {
     /**
      * Provide the details of a course offering with the given id.
      */
-    @GetMapping("/{id}")
-    @Operation(summary = "Get a course offering by id")
+    @GetMapping("/{id} ")
+    @Operation(summary = " Get a course offering by id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Found the course offering",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CourseOfferingResponse.class))),
-            @ApiResponse(responseCode = "404", description = "Course offering not found", content = @Content)
+            @ApiResponse(responseCode = " 200", description = "Found the course offering",
+                    content =  @Content(mediaType = "application/json",
+                            schema =  @Schema(implementation = CourseOfferingResponse.class))),
+            @ApiResponse( responseCode = "404", description = "Course offering not found", content = @Content)
     })
     public ResponseEntity<?> getCourseOfferingById(@PathVariable Long id) {
         CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(id);
         if (Objects.isNull(courseOffering)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering));
+        return ResponseEntity.ok( CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering));
     }
 
     /**
