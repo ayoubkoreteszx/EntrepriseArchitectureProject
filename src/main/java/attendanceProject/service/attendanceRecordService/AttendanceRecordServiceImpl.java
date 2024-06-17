@@ -71,7 +71,7 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     @Override
     public List<AttendanceRecordDTO> getAttendanceRecordsByCourseOffering(Long courseOfferingId){
         return AttendanceDTOMapper.mapToDTOList(
-                attendanceRecordRepository.findByCourseOffering_Id(courseOfferingId)
+                attendanceRecordRepository.findBySession_CourseOffering_Id(courseOfferingId)
         );
     }
 
