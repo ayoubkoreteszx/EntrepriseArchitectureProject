@@ -88,7 +88,7 @@ public class CourseOfferingController {
     })
     public ResponseEntity<Void> createCourseOffering(@RequestBody CourseOfferingRequest newCourseOffering) {
         Faculty facultyResponse = webClient.get()
-                .uri("http://localhost:8080/faculty/" + newCourseOffering.getFacultyId())
+                .uri("http://localhost:8080/faculty/faculty/" + newCourseOffering.getFacultyId())
                 .retrieve()
                 .bodyToMono(Faculty.class)
                 .block();

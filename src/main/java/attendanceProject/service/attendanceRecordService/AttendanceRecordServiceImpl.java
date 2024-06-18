@@ -27,8 +27,6 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     @Autowired
     private LocationRepository locationRepository;
 
-    private AttendanceRecordMapper attendanceRecordMapper = new AttendanceRecordMapper();
-
     @Override
     public AttendanceRecordDTOResponse createAttendanceRecord(AttendanceRecordDTORequest attendanceRecordDTORequest) {
         Student student =  personRepository.findByStudentId(attendanceRecordDTORequest.getStudentId());
@@ -38,7 +36,7 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
         attendanceRecord.setStudent(student);
         attendanceRecord.setSession(session);
         attendanceRecord.setLocation(location);
-        return attendanceRecordMapper.toDTOResponse(attendanceRecordRepository.save(attendanceRecord));
+        return AttendanceRecordMapper.toDTOResponse(attendanceRecordRepository.save(attendanceRecord));
     }
 
     @Override
@@ -47,7 +45,7 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
         if (attendanceRecord == null) {
             return null;
         }
-        return attendanceRecordMapper.toDTOResponse(attendanceRecord);
+        return AttendanceRecordMapper.toDTOResponse(attendanceRecord);
     }
 
     @Override
@@ -57,7 +55,7 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
 
     @Override
     public List<AttendanceRecordDTOResponse> getAllAttendanceRecords() {
-        return attendanceRecordMapper.toDTOsResponse(attendanceRecordRepository.findAll());
+        return AttendanceRecordMapper.toDTOsResponse(attendanceRecordRepository.findAll());
     }
 
     @Override
@@ -67,20 +65,22 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
 
     @Override
     public List<AttendanceRecordDTOResponse> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseOfferingId) {
-        return attendanceRecordMapper.toDTOsResponse(attendanceRecordRepository.
+        return AttendanceRecordMapper.toDTOsResponse(attendanceRecordRepository.
                 findByStudent_IdAndSession_CourseOffering_Id(studentId, courseOfferingId));
     }
 
     @Override
     public List<AttendanceRecordDTOResponse> getAttendanceRecordsByCourseOffering(Long courseOfferingId){
-        return attendanceRecordMapper.toDTOsResponse(
+        return AttendanceRecordMapper.toDTOsResponse(
                 attendanceRecordRepository.findBySession_CourseOffering_Id(courseOfferingId)
         );
     }
 
     @Override
-    public List<AttendanceRecord> getAttendanceRecordsByStudentId(long studentId) {
-        return attendanceRecordRepository.findByStudent_Id(studentId);
+    public List<AttendanceRecordDTOResponse> getAttendanceRecordsByStudentId(long studentId) {
+        return AttendanceRecordMapper.toDTOsResponse(
+                attendanceRecordRepository.findByStudent_Id(studentId)
+        );
     }
 
     @Override

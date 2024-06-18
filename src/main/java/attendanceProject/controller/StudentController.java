@@ -72,7 +72,7 @@ public class StudentController  {
     })
     public ResponseEntity<?> addStudent(@RequestBody StudentRequest student) {
         Faculty facultyResponse = webClient.get()
-                .uri("http://localhost:8080/faculty/" + student.getAdvisorId())
+                .uri("http://localhost:8080/faculty/faculty/" + student.getAdvisorId())
                 .retrieve()
                 .bodyToMono(Faculty.class)
                 .block();

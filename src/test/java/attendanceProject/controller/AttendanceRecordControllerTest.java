@@ -7,8 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
 import attendanceProject.service.attendanceRecordService.AttendanceRecordService;
-import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -44,11 +45,8 @@ public class AttendanceRecordControllerTest {
 
     @Test
     public void testGetAttendanceRecordById() throws Exception {
-        AttendanceRecordDTO attendanceRecordDTO = new AttendanceRecordDTO();
+        AttendanceRecordDTOResponse attendanceRecordDTO = new AttendanceRecordDTOResponse();
         attendanceRecordDTO.setId(1L);
-        attendanceRecordDTO.setSessionId("123");
-        attendanceRecordDTO.setLactionName("Here");
-        attendanceRecordDTO.setStudentId("123");
 
         when(attendanceRecordService.getAttendanceRecordById(1L)).thenReturn(attendanceRecordDTO);
 
@@ -74,11 +72,11 @@ public class AttendanceRecordControllerTest {
 
     @Test
     public void testAddAttendanceRecord() throws Exception {
-        AttendanceRecordDTO attendanceRecordDTO = new AttendanceRecordDTO();
+        AttendanceRecordDTOResponse attendanceRecordDTO = new AttendanceRecordDTOResponse();
         attendanceRecordDTO.setId(1L);
         // set other properties as needed
 
-        when(attendanceRecordService.createAttendanceRecord(any(AttendanceRecordDTO.class)))
+        when(attendanceRecordService.createAttendanceRecord(any(AttendanceRecordDTORequest.class)))
                 .thenReturn(attendanceRecordDTO);
 
         mockMvc.perform(post("/attendance-records")
@@ -88,7 +86,7 @@ public class AttendanceRecordControllerTest {
                 .andExpect(jsonPath("$.id").value(1L));
         // add other expectations for the properties
 
-        verify(attendanceRecordService, times(1)).createAttendanceRecord(any(AttendanceRecordDTO.class));
+        verify(attendanceRecordService, times(1)).createAttendanceRecord(any(AttendanceRecordDTORequest.class));
     }
 
     @Test
@@ -104,11 +102,11 @@ public class AttendanceRecordControllerTest {
 
     @Test
     public void testGetAllAttendanceRecords() throws Exception {
-        AttendanceRecordDTO attendanceRecordDTO1 = new AttendanceRecordDTO();
+        AttendanceRecordDTOResponse attendanceRecordDTO1 = new AttendanceRecordDTOResponse();
         attendanceRecordDTO1.setId(1L);
-        AttendanceRecordDTO attendanceRecordDTO2 = new AttendanceRecordDTO();
+        AttendanceRecordDTOResponse attendanceRecordDTO2 = new AttendanceRecordDTOResponse();
         attendanceRecordDTO2.setId(2L);
-        List<AttendanceRecordDTO> attendanceRecords = Arrays.asList(
+        List<AttendanceRecordDTOResponse> attendanceRecords = Arrays.asList(
               attendanceRecordDTO1, attendanceRecordDTO2
         );
 
