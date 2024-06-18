@@ -1,18 +1,19 @@
 package attendanceProject.service.attendanceRecordService;
 
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
 import attendanceProject.domain.AttendanceRecord;
-import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 
 import java.util.List;
 
 public interface AttendanceRecordService {
-    AttendanceRecordDTO createAttendanceRecord(AttendanceRecordDTO attendanceRecordDTO);
-    AttendanceRecordDTO getAttendanceRecordById(Long id);
-    AttendanceRecordDTO updateAttendanceRecord(Long id, AttendanceRecordDTO attendanceRecordDTO);
-    List<AttendanceRecordDTO> getAllAttendanceRecords();
+    AttendanceRecordDTOResponse createAttendanceRecord(AttendanceRecordDTORequest attendanceRecordDTOResponse);
+    AttendanceRecordDTOResponse getAttendanceRecordById(Long id);
+    AttendanceRecordDTOResponse updateAttendanceRecord(Long id, AttendanceRecordDTORequest attendanceRecordDTOResponse);
+    List<AttendanceRecordDTOResponse> getAllAttendanceRecords();
     void deleteAttendanceRecord(long id);
-    List<AttendanceRecordDTO> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseId);
-    List<AttendanceRecordDTO> getAttendanceRecordsByCourseOffering(Long courseOfferingId);
+    List<AttendanceRecordDTOResponse> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseId);
+    List<AttendanceRecordDTOResponse> getAttendanceRecordsByCourseOffering(Long courseOfferingId);
     public List<AttendanceRecord> getAttendanceRecordsByStudentId(long studentId);
     AttendanceRecord saveAttendanceRecord(AttendanceRecord attendanceRecord);
 }

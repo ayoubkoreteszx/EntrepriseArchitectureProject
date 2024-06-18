@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
-public class AttendanceRecordDTO {
+public class AttendanceRecordDTOResponse {
     private long id;
     private String studentId;
     private LocalDateTime scanDateTime;

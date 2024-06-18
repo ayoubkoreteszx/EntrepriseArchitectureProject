@@ -1,8 +1,8 @@
 package attendanceProject.service.courceService;
 
-import attendanceProject.service.DTO.CourseDTORequest;
+import attendanceProject.controller.Dto.course.CourseDTORequest;
 import attendanceProject.domain.Course;
-import attendanceProject.service.DTO.CourseDTOResponse;
+import attendanceProject.controller.Dto.course.CourseDTOResponse;
 
 import java.util.List;
 import java.util.Optional;

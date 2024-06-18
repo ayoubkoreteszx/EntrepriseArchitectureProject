@@ -48,7 +48,7 @@ public class CourseOffering {
                 morningSession.setStartTime(morningSessionStartTime);
                 morningSession.setEndTime(morningSessionEndTime);
                 morningSession.setDate(currentDate);
-                morningSession.setId(currentDate + "-AM");
+                morningSession.setName(currentDate + "-AM");
                 morningSession.setCourseOffering(this);
                 sessions.add(morningSession);
 
@@ -60,7 +60,7 @@ public class CourseOffering {
                     afternoonSession.setStartTime(afternoonSessionStartTime);
                     afternoonSession.setEndTime(afternoonSessionEndTime);
                     afternoonSession.setDate(currentDate);
-                    afternoonSession.setId(currentDate+ "-PM");
+                    afternoonSession.setName(currentDate+ "-PM");
                     afternoonSession.setCourseOffering(this);
                     sessions.add(afternoonSession);
                 }

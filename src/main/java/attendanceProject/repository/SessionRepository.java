@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public interface SessionRepository extends JpaRepository<Session, String> {
+public interface SessionRepository extends JpaRepository<Session, Long> {
     List<Session> findByCourseOffering_Id(Long id);
     @Query("select s from Session s where s.courseOffering.id =: courseOfferingId " +
             "and s.date <: currentDate")

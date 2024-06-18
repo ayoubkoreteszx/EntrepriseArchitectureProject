@@ -10,7 +10,9 @@ import java.time.LocalTime;
 @Data
 public class Session {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;

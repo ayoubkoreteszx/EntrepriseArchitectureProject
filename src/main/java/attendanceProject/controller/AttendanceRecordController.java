@@ -1,8 +1,9 @@
 package attendanceProject.controller;
 
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
 import attendanceProject.domain.AttendanceRecord;
 import attendanceProject.service.attendanceRecordService.AttendanceRecordService;
-import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,14 @@ public class AttendanceRecordController {
     }
 
     @GetMapping("/student/{studentId}")
-    public List<attendanceProject.service.DTO.AttendanceRecordDTO> getAttendanceRecords(@PathVariable long studentId) {
+    public List<AttendanceRecordDTOResponse> getAttendanceRecords(@PathVariable long studentId) {
         List<AttendanceRecord> attendanceRecords = attendanceRecordService.getAttendanceRecordsByStudentId(studentId);
-        return attendanceRecordMapper.toDTOs(attendanceRecords);
+        return attendanceRecordMapper.toDTOsResponse(attendanceRecords);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getAttendanceRecordById(@PathVariable long id) {
-        AttendanceRecordDTO attendanceRecord =  attendanceRecordService.getAttendanceRecordById(id);
+        AttendanceRecordDTOResponse attendanceRecord =  attendanceRecordService.getAttendanceRecordById(id);
         if (attendanceRecord == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -42,8 +43,9 @@ public class AttendanceRecordController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addAttendanceRecord(@RequestBody AttendanceRecordDTO attendanceRecordDTO) {
-        return new ResponseEntity<AttendanceRecordDTO>(
+    public ResponseEntity<?> addAttendanceRecord(@RequestBody AttendanceRecordDTORequest attendanceRecordDTO) {
+        AttendanceRecordMapper attendanceRecordMapper = new AttendanceRecordMapper();
+        return new ResponseEntity<AttendanceRecordDTOResponse>(
                 attendanceRecordService.createAttendanceRecord(attendanceRecordDTO),
                 HttpStatus.CREATED
         );
