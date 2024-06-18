@@ -1,12 +1,14 @@
 package attendanceProject.domain;
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Embeddable
 @Data
+@AllArgsConstructor
 public class Audit {
     LocalDate createdDate;
     LocalDate updatedDate;
@@ -15,18 +17,6 @@ public class Audit {
 
     public Audit() {
     }
-
-    public Audit(LocalDate createdDate, LocalDate updatedDate, String createdBy, String updatedBy) {
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
-        this.createdBy = createdBy;
-        this.updatedBy = updatedBy;
-    }
-
-//    public Audit(LocalDate createdDate, String createdBy) {
-//        this.createdDate = createdDate;
-//        this.createdBy = createdBy;
-//    }
 
     public Audit(String username) {
         this.createdDate = LocalDate.now();

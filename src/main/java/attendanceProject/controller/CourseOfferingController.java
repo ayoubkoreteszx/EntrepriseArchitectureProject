@@ -7,7 +7,6 @@ import attendanceProject.controller.Dto.courseOffering.CourseOfferingResponse;
 import attendanceProject.controller.webClientConfig.ResponseMessage;
 import attendanceProject.domain.Course;
 import attendanceProject.domain.CourseOffering;
-import attendanceProject.domain.CourseRegistration;
 import attendanceProject.domain.Faculty;
 import attendanceProject.service.courseOfferingService.CourseOfferingService;
 import attendanceProject.service.courseRegistrationService.CourseRegistrationService;
@@ -25,10 +24,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/course-offerings")
@@ -76,8 +73,6 @@ public class CourseOfferingController {
         return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingAdminResponse(courseOffering,studentIds));
     }
 
-
-
     /**
      * Provide a list of all course offerings.
      */
@@ -105,7 +100,8 @@ public class CourseOfferingController {
     @Operation(summary = "Add a course offering")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "New course offering is created",
-                    content = @Content(mediaType = "application/json"))
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseOffering.class)))
     })
     public ResponseEntity<Void> createCourseOffering(@RequestBody CourseOfferingRequest newCourseOffering) {
         Faculty facultyResponse = webClient.get()
@@ -142,6 +138,13 @@ public class CourseOfferingController {
 
     // Updates course offering
     @PutMapping("/{id}")
+    @Operation(summary = "CourseOffering update")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "CourseOffering updated",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseOffering.class))),
+            @ApiResponse(responseCode = "404", description = "CourseOffering not found", content = @Content)
+    })
     public ResponseEntity<Void> updateCourseOffering(@PathVariable Long id,
                                                   @RequestBody CourseOffering courseOfferingUpdate) {
 
@@ -154,6 +157,13 @@ public class CourseOfferingController {
 
     // Deletes course offering
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a CourseOffering")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Course offering deleted",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CourseOffering.class))),
+            @ApiResponse(responseCode = "204", description = "Course offering not found", content = @Content)
+    })
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(id);
         if (Objects.isNull(courseOffering)) {

@@ -74,4 +74,9 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
                         LocalDate.now())
         );
     }
+
+    @Override
+    public List<CourseOffering> getAllCourseOfferingsByDate(LocalDate date) {
+        return courseOfferingRepository.findAllCourseOfferingsByDate(date);
+    }
 }
