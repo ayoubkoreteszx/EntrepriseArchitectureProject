@@ -7,6 +7,7 @@ import attendanceProject.repository.CourseOfferingRepository;
 import attendanceProject.repository.SessionRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -62,6 +63,15 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
     public List<SessionResponse> findAllSessionsOfCourseOffering(Long courseOfferingId) {
         return SessionResponse.mapToSessionResponse(
                 sessionRepository.findByCourseOffering_Id(courseOfferingId)
+        );
+    }
+
+    @Override
+    public List<SessionResponse> findAllPassedSessions(long courseOfferingId) {
+        System.out.println(courseOfferingId);
+        return SessionResponse.mapToSessionResponse(
+                sessionRepository.findCompletedSessionByCourseOffering(courseOfferingId,
+                        LocalDate.now())
         );
     }
 }

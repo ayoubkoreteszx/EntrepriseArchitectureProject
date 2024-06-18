@@ -15,7 +15,8 @@ public class AttendanceRecordMapper {
         dto.setLocationTypeName(attendanceRecord.getLocation().getLocationType().getType());
         dto.setSessionDate(attendanceRecord.getSession().getDate());
         dto.setSessionStartTime(attendanceRecord.getSession().getStartTime());
-        dto.setSessionStartTime(attendanceRecord.getSession().getEndTime());
+        dto.setSessionEndTime(attendanceRecord.getSession().getEndTime());
+        dto.setSessionName(attendanceRecord.getSession().getName());
         return dto;
     }
 
