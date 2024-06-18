@@ -142,4 +142,12 @@ public class CourseOfferingController {
         courseOfferingService.deleteCourseOfferingById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}/sessions")
+    public ResponseEntity<?> getSessions(@PathVariable Long id){
+        return new ResponseEntity<>(
+                courseOfferingService.findAllSessionsOfCourseOffering(id),
+                HttpStatus.OK
+        );
+    }
 }
