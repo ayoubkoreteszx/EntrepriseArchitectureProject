@@ -1,13 +1,11 @@
 package attendanceProject.controller;
 
-import attendanceProject.domain.Location;
-import attendanceProject.service.locationService.DTO.LocationDTO;
+import attendanceProject.controller.Dto.location.CreateLocationParameters;
+import attendanceProject.controller.Dto.location.LocationDTO;
 import attendanceProject.service.locationService.LocationService;
 import org.junit.jupiter.api.Test;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -16,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -81,7 +78,11 @@ public class LocationControllerTest {
         location.setId(1L);
         location.setName("Location1");
 
-        when(locationService.createLocation(location)).thenReturn(location);
+        CreateLocationParameters parameters = new CreateLocationParameters();
+        parameters.setId(1L);
+        parameters.setName("Location1");
+
+        when(locationService.createLocation(parameters)).thenReturn(location);
 
         mockMvc.perform(post("/sys-admin/locations")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -99,7 +100,11 @@ public class LocationControllerTest {
         location.setId(1L);
         location.setName("UpdatedLocation");
 
-        when(locationService.updateLocation(1L, location)).thenReturn(location);
+        CreateLocationParameters parameters = new CreateLocationParameters();
+        parameters.setId(1L);
+        parameters.setName("UpdatedLocation");
+
+        when(locationService.updateLocation(1L, parameters)).thenReturn(location);
 
         mockMvc.perform(put("/sys-admin/locations/1")
                         .contentType(MediaType.APPLICATION_JSON)

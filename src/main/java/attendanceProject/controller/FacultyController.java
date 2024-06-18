@@ -56,7 +56,7 @@ public class FacultyController {
         }
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
-    @PostMapping("/faculty")
+    @PutMapping("/Update faculty")
     @Operation(summary = "Update a faculty")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Faculty updated",
@@ -66,6 +66,17 @@ public class FacultyController {
     public ResponseEntity<?> updateFaculty(@RequestBody FacultyRequest facultyRequest) {
        personService.updatePerson(FacultyMapper.mapToFaculty(facultyRequest));
        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    @PostMapping("/addFaculty")
+    @Operation(summary = "Add a faculty")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Faculty added",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = FacultyResponse.class)))
+    })
+    public ResponseEntity<?> addFaculty(@RequestBody FacultyRequest facultyRequest) {
+        personService.addPerson(FacultyMapper.mapToFaculty(facultyRequest));
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @DeleteMapping("/faculty/{id}")
     @Operation(summary = "Delete a faculty")

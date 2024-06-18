@@ -5,7 +5,7 @@ import attendanceProject.domain.Location;
 import attendanceProject.domain.Session;
 import attendanceProject.domain.Student;
 import attendanceProject.repository.*;
-import attendanceProject.service.attendanceRecordService.DTO.AttendanceDTOMapper;
+import attendanceProject.controller.Dto.attendance.AttendanceDTOMapper;
 import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

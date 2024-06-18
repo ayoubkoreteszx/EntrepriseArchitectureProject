@@ -4,7 +4,6 @@ import attendanceProject.service.DTO.CourseDTORequest;
 import attendanceProject.domain.Audit;
 import attendanceProject.domain.Course;
 import attendanceProject.repository.CourseRepository;
-import attendanceProject.service.DTO.CourseDTOResponse;
 import attendanceProject.service.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

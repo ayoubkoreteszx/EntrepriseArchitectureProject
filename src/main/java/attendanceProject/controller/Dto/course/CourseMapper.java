@@ -1,4 +1,4 @@
-package attendanceProject.service.mapper;
+package attendanceProject.controller.Dto.course;
 
 import attendanceProject.domain.Course;
 import attendanceProject.service.DTO.CourseDTORequest;

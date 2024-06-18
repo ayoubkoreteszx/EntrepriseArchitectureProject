@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +30,6 @@ public class CourseOffering {
     private CourseofferingType courseofferingType;
     private LocalDate startDate;
     private LocalDate endDate;
-//    @OneToMany
-//    @JoinColumn(name = "course_offering_id")
-//    private List<Session> sessions;
 
 //    Generate all the sessions for the course offering
 //    We have 2 sessions each day morning session 10 AM to 12:30 PM, afternoon session

@@ -1,10 +1,11 @@
 package attendanceProject.service.locationService;
 
+import attendanceProject.controller.Dto.location.CreateLocationParameters;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
 import attendanceProject.repository.LocationRepository;
-import attendanceProject.service.locationService.DTO.LocationDTO;
-import attendanceProject.service.locationService.DTO.LocationDTOMapper;
+import attendanceProject.controller.Dto.location.LocationDTO;
+import attendanceProject.controller.Dto.location.LocationDTOMapper;
 import attendanceProject.service.locationTypeService.LocationTypeService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +31,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public LocationDTO createLocation(LocationDTO locationDTO) {
-        LocationType locationType = locationTypeService.findLocationTypeById(locationDTO.getLocationTypeId());
+    public LocationDTO createLocation(CreateLocationParameters parameters) {
+        LocationType locationType = locationTypeService.findLocationTypeById(parameters.getLocationTypeId());
         if(Objects.isNull(locationType)) {
             throw new EntityNotFoundException("LocationType not found");
         }
-        Location location = new Location();
-        location.setLocationType(locationType);
-        location.setName(locationDTO.getName());
-        location.setCapacity(locationDTO.getCapacity());
+        Location location = LocationDTOMapper.mapToLocation(parameters, locationType);
         return LocationDTOMapper.mapToDTO(locationRepository.save(location));
     }
 
@@ -48,16 +46,14 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public LocationDTO updateLocation(Long id, LocationDTO locationDTO) {
-        LocationType locationType = locationTypeService.findLocationTypeById(locationDTO.getLocationTypeId());
+    public LocationDTO updateLocation(Long id, CreateLocationParameters parameters) {
+        LocationType locationType = locationTypeService.findLocationTypeById(parameters.getLocationTypeId());
         Location location = locationRepository.findById(id).orElse(null);
         if(Objects.nonNull(locationType) && Objects.nonNull(location)){
-            location.setLocationType(locationType);
-            location.setName(locationDTO.getName());
-            location.setCapacity(locationDTO.getCapacity());
-            locationRepository.save(location);
+            location = LocationDTOMapper.mapToLocation(parameters, locationType);
+            location.setId(id);
+            return LocationDTOMapper.mapToDTO(locationRepository.save(location));
         }
-
-        return LocationDTOMapper.mapToDTO(location);
+        return null;
     }
 }
