@@ -1,10 +1,5 @@
 package attendanceProject.controller;
 
-<<<<<<< HEAD
-import attendanceProject.service.DTO.CourseDTORequest;
-=======
-import attendanceProject.controller.Dto.course.CourseDTO;
->>>>>>> 3f02a60c8ffcbfe1f56785c6fffe75ae1e3bc94f
 import attendanceProject.domain.Course;
 import attendanceProject.service.DTO.CourseDTOResponse;
 import attendanceProject.service.courceService.CourseService;
