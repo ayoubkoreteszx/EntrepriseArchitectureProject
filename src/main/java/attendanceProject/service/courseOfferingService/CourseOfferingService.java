@@ -14,4 +14,5 @@ public interface CourseOfferingService {
     CourseOffering updateCourseOffering(Long id, CourseOffering courseOffering);
     List<CourseOffering> findAllCourseOfferings();
     List<SessionResponse> findAllSessionsOfCourseOffering(Long courseOfferingId);
+    List<SessionResponse> findAllPassedSessions(long courseOfferingId);
 }

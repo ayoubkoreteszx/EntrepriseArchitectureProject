@@ -16,5 +16,6 @@ public class AttendanceRecordDTOResponse {
     private LocalDate sessionDate;
     private LocalTime sessionStartTime;
     private LocalTime sessionEndTime;
+    private String sessionName;
 
 }

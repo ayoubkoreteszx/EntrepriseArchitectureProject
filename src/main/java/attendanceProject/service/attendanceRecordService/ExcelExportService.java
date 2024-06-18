@@ -1,25 +1,24 @@
-//package attendanceProject.service.attendanceRecordService;
-//
-//import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
-//import attendanceProject.domain.*;
-//import attendanceProject.repository.SessionRepository;
-//import org.apache.poi.ss.usermodel.Row;
-//import org.apache.poi.ss.usermodel.Sheet;
-//import org.apache.poi.ss.usermodel.Workbook;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import java.io.ByteArrayInputStream;
-//import java.io.ByteArrayOutputStream;
-//import java.io.IOException;
-//import java.time.LocalDate;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//
-//@Service
-//public class ExcelExportService {
+package attendanceProject.service.attendanceRecordService;
+
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.Dto.session.SessionResponse;
+import attendanceProject.service.courseOfferingService.CourseOfferingService;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Service
+public class ExcelExportService {
 //    CourseOffering courseOffering;
 //    Student student1;
 //    Student student2;
@@ -30,14 +29,14 @@
 //    AttendanceRecord attendanceRecord4;
 //    AttendanceRecord attendanceRecord5;
 //    AttendanceRecord attendanceRecord6;
-//
-//    @Autowired
-//    private SessionRepository sessionRepository;
-//
-//    @Autowired
-//    private AttendanceRecordService attendanceRecordService;
-//
-//
+
+    @Autowired
+    private CourseOfferingService courseOfferingService;
+
+    @Autowired
+    private AttendanceRecordService attendanceRecordService;
+
+
 //    public ExcelExportService(){
 //        Location location = new Location();
 //        location.setId(1L);
@@ -86,67 +85,65 @@
 //        attendanceRecord6.setLocation(location);
 //
 //    }
-//
-//    public ByteArrayInputStream exportAttendanceToExcel(Long offeringId) throws IOException {
-//        List<Student> students = List.of(student1, student2);
-//        List<AttendanceRecordDTOResponse> attendanceRecordDTOList = AttendanceDTOMapper.mapToDTOList(List.of(
-//                attendanceRecord1, attendanceRecord2, attendanceRecord3,
-//                attendanceRecord4, attendanceRecord5, attendanceRecord6
-//        ));
-//        Map<String, Map<String, String>> data = new HashMap<>();
-//        for(AttendanceRecordDTO attendanceRecordDTO : attendanceRecordDTOList){
-//            String studentId = attendanceRecordDTO.getStudentId();
-//            String sessionId = attendanceRecordDTO.getSessionId();
-//            data.computeIfAbsent(studentId, k-> new HashMap<>())
-//                    .put(sessionId, attendanceRecordDTO.getScanDateTime().toString());
-//        }
-////        printNestedMap(data);
-//
-//        try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-//            Sheet sheet = workbook.createSheet("Attendance Records");
-//
-//            // Create header row with session IDs
-//            Row headerRow = sheet.createRow(0);
-//            headerRow.createCell(0).setCellValue("Student ID");
-//
-//            int colNum = 1;
-//
-//            for (Session session : sessions) {
-////                System.out.println(session.getId());
-//                headerRow.createCell(colNum++).setCellValue(session.getId());
-//            }
-//
-//            // Create data rows
-//            int rowNum = 1;
-//            for (Map.Entry<String, Map<String, String>> entry : data.entrySet()) {
-//                Row row = sheet.createRow(rowNum++);
-//                String studentId = entry.getKey();
-//                row.createCell(0).setCellValue(studentId);
-//
-//                Map<String, String> attendance = entry.getValue();
-//                colNum = 1;
-//                for (Session session : sessions) {
-//                    row.createCell(colNum++).setCellValue(attendance.getOrDefault(session.getId(), "Absent"));
-//                }
-//            }
-//            workbook.write(out);
-//            return new ByteArrayInputStream(out.toByteArray());
-//        }
-//    }
-//
-//    private static void printNestedMap(Map<String, Map<String, String>> nestedMap) {
-//        for (Map.Entry<String, Map<String, String>> outerEntry : nestedMap.entrySet()) {
-//            String outerKey = outerEntry.getKey();
-//            Map<String, String> innerMap = outerEntry.getValue();
-//
-//            System.out.println("Course: " + outerKey);
-//            for (Map.Entry<String, String> innerEntry : innerMap.entrySet()) {
-//                String innerKey = innerEntry.getKey();
-//                String value = innerEntry.getValue();
-//
-//                System.out.println("  Session: " + innerKey + " - Status: " + value);
-//            }
-//        }
-//    }
-//
-//}
+
+    public ByteArrayInputStream exportAttendanceToExcel(Long offeringId) throws IOException {
+        System.out.println(offeringId);
+        List<AttendanceRecordDTOResponse> attendanceRecordDTOList = attendanceRecordService.getAttendanceRecordsByCourseOffering(offeringId);
+        List<SessionResponse> sessions = courseOfferingService.findAllPassedSessions(offeringId);
+        Map<String, Map<String, String>> data = new HashMap<>();
+        for(AttendanceRecordDTOResponse attendanceRecordDTO : attendanceRecordDTOList){
+            String studentId = attendanceRecordDTO.getStudentId();
+            String sessionId = attendanceRecordDTO.getSessionName();
+            data.computeIfAbsent(studentId, k-> new HashMap<>())
+                    .put(sessionId, attendanceRecordDTO.getScanDateTime().toLocalTime().toString());
+        }
+//        printNestedMap(data);
+
+
+        try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            Sheet sheet = workbook.createSheet("Attendance Records");
+
+            // Create header row with session IDs
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("Student ID");
+
+            int colNum = 1;
+
+            for (SessionResponse session : sessions) {
+//                System.out.println(session.getId());
+                headerRow.createCell(colNum++).setCellValue(session.getName());
+            }
+
+            // Create data rows
+            int rowNum = 1;
+            for (Map.Entry<String, Map<String, String>> entry : data.entrySet()) {
+                Row row = sheet.createRow(rowNum++);
+                String studentId = entry.getKey();
+                row.createCell(0).setCellValue(studentId);
+
+                Map<String, String> attendance = entry.getValue();
+                colNum = 1;
+                for (SessionResponse session : sessions) {
+                    row.createCell(colNum++).setCellValue(attendance.getOrDefault(session.getName(), "Absent"));
+                }
+            }
+            workbook.write(out);
+            return new ByteArrayInputStream(out.toByteArray());
+        }
+    }
+
+    private static void printNestedMap(Map<String, Map<String, String>> nestedMap) {
+        for (Map.Entry<String, Map<String, String>> outerEntry : nestedMap.entrySet()) {
+            String outerKey = outerEntry.getKey();
+            Map<String, String> innerMap = outerEntry.getValue();
+
+            System.out.println("Course: " + outerKey);
+            for (Map.Entry<String, String> innerEntry : innerMap.entrySet()) {
+                String innerKey = innerEntry.getKey();
+                String value = innerEntry.getValue();
+
+                System.out.println("  Session: " + innerKey + " - Status: " + value);
+            }
+        }
+    }
+}
