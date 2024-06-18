@@ -1,4 +1,4 @@
-package attendanceProject.controller.Dto.location;
+package attendanceProject.controller.dto.location;
 
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;

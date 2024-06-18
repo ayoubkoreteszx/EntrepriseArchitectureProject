@@ -1,7 +1,7 @@
 package attendanceProject.service.attendanceRecordService;
 
-import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
-import attendanceProject.controller.Dto.session.SessionResponse;
+import attendanceProject.controller.dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.dto.session.SessionResponse;
 import attendanceProject.service.courseOfferingService.CourseOfferingService;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;

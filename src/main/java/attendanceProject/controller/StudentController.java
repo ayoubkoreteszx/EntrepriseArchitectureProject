@@ -1,7 +1,7 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.student.StudentMapper;
-import attendanceProject.controller.Dto.student.StudentRequest;
+import attendanceProject.controller.dto.student.StudentMapper;
+import attendanceProject.controller.dto.student.StudentRequest;
 import attendanceProject.controller.webClientConfig.ResponseMessage;
 import attendanceProject.domain.Faculty;
 import attendanceProject.domain.Person;
@@ -26,10 +26,14 @@ import java.util.List;
 @RequestMapping("/student")
 @Tag(name = "Student Management System")
 public class StudentController  {
-    @Autowired
     private PersonService personService;
-    @Autowired
     private WebClient webClient;
+
+    public StudentController(PersonService personService, WebClient webClient) {
+        this.personService = personService;
+        this.webClient = webClient;
+    }
+
     @GetMapping("/all")
     @Operation(summary = "View a list of available students")
     @ApiResponses(value = {

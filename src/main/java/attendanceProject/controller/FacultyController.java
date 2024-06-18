@@ -1,8 +1,8 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.faculty.FacultyMapper;
-import attendanceProject.controller.Dto.faculty.FacultyRequest;
-import attendanceProject.controller.Dto.faculty.FacultyResponse;
+import attendanceProject.controller.dto.faculty.FacultyMapper;
+import attendanceProject.controller.dto.faculty.FacultyRequest;
+import attendanceProject.controller.dto.faculty.FacultyResponse;
 import attendanceProject.domain.Faculty;
 import attendanceProject.service.personService.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,8 +22,12 @@ import java.util.List;
 @Tag(name = "Faculty Management System")
 @RequestMapping("/faculty")
 public class FacultyController {
-    @Autowired
+
     private PersonService personService;
+
+    public FacultyController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @GetMapping("/all")
     @Operation(summary = "View a list of available faculty")

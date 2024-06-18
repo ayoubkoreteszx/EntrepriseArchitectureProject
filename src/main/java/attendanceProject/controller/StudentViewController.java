@@ -14,11 +14,14 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/student-view")
 public class StudentViewController {
-    @Autowired
-    private AttendanceRecordService attendanceRecordService;
 
-    @Autowired
+    private AttendanceRecordService attendanceRecordService;
     private WebClient webClient;
+
+    public StudentViewController(AttendanceRecordService attendanceRecordService, WebClient webClient) {
+        this.attendanceRecordService = attendanceRecordService;
+        this.webClient = webClient;
+    }
 
     @GetMapping("/course-offerings/{offeringId}/attendance")
     public ResponseEntity<?> getCourseOfferingAttendance(@PathVariable Long offeringId, @RequestParam Long studentId) {

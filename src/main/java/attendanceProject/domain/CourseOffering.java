@@ -1,5 +1,6 @@
 package attendanceProject.domain;
 
+import attendanceProject.domain.enums.CourseofferingType;
 import jakarta.persistence.*;
 import lombok.Data;
 

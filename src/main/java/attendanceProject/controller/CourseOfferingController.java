@@ -1,9 +1,9 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.courseOffering.CourseOfferingAdminResponse;
-import attendanceProject.controller.Dto.courseOffering.CourseOfferingMapper;
-import attendanceProject.controller.Dto.courseOffering.CourseOfferingRequest;
-import attendanceProject.controller.Dto.courseOffering.CourseOfferingResponse;
+import attendanceProject.controller.dto.courseOffering.CourseOfferingAdminResponse;
+import attendanceProject.controller.dto.courseOffering.CourseOfferingMapper;
+import attendanceProject.controller.dto.courseOffering.CourseOfferingRequest;
+import attendanceProject.controller.dto.courseOffering.CourseOfferingResponse;
 import attendanceProject.controller.webClientConfig.ResponseMessage;
 import attendanceProject.domain.Course;
 import attendanceProject.domain.CourseOffering;
@@ -32,15 +32,17 @@ import java.util.Objects;
 @Tag(name = "Course Offering Management System")
 public class CourseOfferingController {
 
-    @Autowired
-    CourseRegistrationService courseRegistrationService;
 
+    private final CourseRegistrationService courseRegistrationService;
     private final CourseOfferingService courseOfferingService;
     private final WebClient webClient;
 
-    public CourseOfferingController(CourseOfferingService courseOfferingService, WebClient webClient) {
+    public CourseOfferingController(CourseOfferingService courseOfferingService,
+                                    WebClient webClient,
+                                    CourseRegistrationService courseRegistrationService) {
         this.courseOfferingService = courseOfferingService;
         this.webClient = webClient;
+        this.courseRegistrationService = courseRegistrationService;
     }
 
     /**

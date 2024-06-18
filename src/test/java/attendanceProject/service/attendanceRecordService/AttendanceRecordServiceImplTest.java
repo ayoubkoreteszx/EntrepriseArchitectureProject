@@ -1,7 +1,7 @@
 package attendanceProject.service.attendanceRecordService;
 
-import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
-import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.dto.attendance.AttendanceRecordDTOResponse;
 import attendanceProject.domain.*;
 import attendanceProject.repository.*;
 import org.junit.jupiter.api.BeforeEach;
