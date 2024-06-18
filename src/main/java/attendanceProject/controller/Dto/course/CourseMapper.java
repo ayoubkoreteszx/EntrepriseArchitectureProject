@@ -1,12 +1,9 @@
 package attendanceProject.controller.Dto.course;
 
 import attendanceProject.domain.Course;
-import attendanceProject.service.DTO.CourseDTORequest;
-import attendanceProject.service.DTO.CourseDTOResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class CourseMapper {
     public Course DTOToCourse(CourseDTORequest courseDTORequest)

@@ -1,9 +1,10 @@
 package attendanceProject.controller;
 
+import attendanceProject.controller.Dto.course.CourseDTORequest;
+import attendanceProject.controller.Dto.course.CourseMapper;
 import attendanceProject.domain.Course;
-import attendanceProject.service.DTO.CourseDTOResponse;
+import attendanceProject.controller.Dto.course.CourseDTOResponse;
 import attendanceProject.service.courceService.CourseService;
-import attendanceProject.service.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

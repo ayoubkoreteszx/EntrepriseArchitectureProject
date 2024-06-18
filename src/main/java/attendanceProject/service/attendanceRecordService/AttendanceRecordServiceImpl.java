@@ -1,12 +1,13 @@
 package attendanceProject.service.attendanceRecordService;
 
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordMapper;
 import attendanceProject.domain.AttendanceRecord;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.Session;
 import attendanceProject.domain.Student;
 import attendanceProject.repository.*;
-import attendanceProject.controller.Dto.attendance.AttendanceDTOMapper;
-import attendanceProject.service.attendanceRecordService.DTO.AttendanceRecordDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     private AttendanceRecordRepository attendanceRecordRepository;
 
     @Autowired
-    StudentRepository studentRepository;
+    PersonRepository personRepository;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -26,35 +27,37 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     @Autowired
     private LocationRepository locationRepository;
 
+    private AttendanceRecordMapper attendanceRecordMapper = new AttendanceRecordMapper();
+
     @Override
-    public AttendanceRecordDTO createAttendanceRecord(AttendanceRecordDTO attendanceRecordDTO) {
-        Student student = (Student) studentRepository.findByStudentId(attendanceRecordDTO.getStudentId());
-        Session session = sessionRepository.findById(attendanceRecordDTO.getSessionId()).get();
-        Location location = locationRepository.findByName(attendanceRecordDTO.getLactionName());
+    public AttendanceRecordDTOResponse createAttendanceRecord(AttendanceRecordDTORequest attendanceRecordDTORequest) {
+        Student student =  personRepository.findByStudentId(attendanceRecordDTORequest.getStudentId());
+        Session session = sessionRepository.findById(attendanceRecordDTORequest.getSessionId()).get();
+        Location location = locationRepository.findById(attendanceRecordDTORequest.getLocationId()).get();
         AttendanceRecord attendanceRecord = new AttendanceRecord();
         attendanceRecord.setStudent(student);
         attendanceRecord.setSession(session);
         attendanceRecord.setLocation(location);
-        return AttendanceDTOMapper.mapToDTO(attendanceRecordRepository.save(attendanceRecord));
+        return attendanceRecordMapper.toDTOResponse(attendanceRecordRepository.save(attendanceRecord));
     }
 
     @Override
-    public AttendanceRecordDTO getAttendanceRecordById(Long id) {
+    public AttendanceRecordDTOResponse getAttendanceRecordById(Long id) {
         AttendanceRecord attendanceRecord = attendanceRecordRepository.findById(id).orElse(null);
         if (attendanceRecord == null) {
             return null;
         }
-        return AttendanceDTOMapper.mapToDTO(attendanceRecord);
+        return attendanceRecordMapper.toDTOResponse(attendanceRecord);
     }
 
     @Override
-    public AttendanceRecordDTO updateAttendanceRecord(Long id, AttendanceRecordDTO attendanceRecordDTO) {
+    public AttendanceRecordDTOResponse updateAttendanceRecord(Long id, AttendanceRecordDTORequest attendanceRecordDTOResponse) {
         return null;
     }
 
     @Override
-    public List<AttendanceRecordDTO> getAllAttendanceRecords() {
-        return AttendanceDTOMapper.mapToDTOList(attendanceRecordRepository.findAll());
+    public List<AttendanceRecordDTOResponse> getAllAttendanceRecords() {
+        return attendanceRecordMapper.toDTOsResponse(attendanceRecordRepository.findAll());
     }
 
     @Override
@@ -63,14 +66,14 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     }
 
     @Override
-    public List<AttendanceRecordDTO> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseOfferingId) {
-        return AttendanceDTOMapper.mapToDTOList(attendanceRecordRepository.
+    public List<AttendanceRecordDTOResponse> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseOfferingId) {
+        return attendanceRecordMapper.toDTOsResponse(attendanceRecordRepository.
                 findByStudent_IdAndSession_CourseOffering_Id(studentId, courseOfferingId));
     }
 
     @Override
-    public List<AttendanceRecordDTO> getAttendanceRecordsByCourseOffering(Long courseOfferingId){
-        return AttendanceDTOMapper.mapToDTOList(
+    public List<AttendanceRecordDTOResponse> getAttendanceRecordsByCourseOffering(Long courseOfferingId){
+        return attendanceRecordMapper.toDTOsResponse(
                 attendanceRecordRepository.findBySession_CourseOffering_Id(courseOfferingId)
         );
     }
