@@ -1,5 +1,6 @@
 package attendanceProject.controller.Dto.courseOffering;
 
+import attendanceProject.controller.Dto.course.CourseDTOResponse;
 import attendanceProject.controller.Dto.faculty.FacultyResponse;
 import attendanceProject.domain.Audit;
 import attendanceProject.domain.Course;
@@ -21,7 +22,7 @@ public class CourseOfferingResponse {
     @Schema(description = "location of the course offering", required = true)
     private String room;
     @Schema(description = "course related ", required = true)
-    private Course course;
+    private CourseDTOResponse course;
     @Schema(description = "faculty teaching this course", required = true)
     private FacultyResponse faculty;
     @Schema(description = "course offering type", required = true)

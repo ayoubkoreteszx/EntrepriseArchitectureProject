@@ -20,9 +20,8 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<CourseDTOResponse> createCourse(@RequestBody CourseDTORequest courseDTORequest) {
-        CourseMapper courseMapper = new CourseMapper();
         Course savedCourse = courseService.saveCourse(courseDTORequest);
-        return ResponseEntity.ok(courseMapper.CourseToDTO(savedCourse));
+        return ResponseEntity.ok(CourseMapper.CourseToDTO(savedCourse));
     }
 
     @GetMapping("/{id}")
@@ -40,9 +39,8 @@ public class CourseController {
     public ResponseEntity<CourseDTOResponse> updateCourse(@PathVariable Long id, @RequestBody CourseDTORequest newCourse) {
         Optional<Course> existingCourse = courseService.getCourseById(id);
         if (existingCourse.isPresent()) {
-            CourseMapper courseMapper = new CourseMapper();
             Course updatedCourse = courseService.updateCourse(existingCourse.get(), newCourse);
-            return ResponseEntity.ok(courseMapper.CourseToDTO(updatedCourse));
+            return ResponseEntity.ok(CourseMapper.CourseToDTO(updatedCourse));
         } else {
             return ResponseEntity.notFound().build();
         }

@@ -1,19 +1,23 @@
 package attendanceProject.controller;
 
+import attendanceProject.controller.Dto.courseOffering.CourseOfferingAdminResponse;
 import attendanceProject.controller.Dto.courseOffering.CourseOfferingMapper;
 import attendanceProject.controller.Dto.courseOffering.CourseOfferingRequest;
 import attendanceProject.controller.Dto.courseOffering.CourseOfferingResponse;
 import attendanceProject.controller.webClientConfig.ResponseMessage;
 import attendanceProject.domain.Course;
 import attendanceProject.domain.CourseOffering;
+import attendanceProject.domain.CourseRegistration;
 import attendanceProject.domain.Faculty;
 import attendanceProject.service.courseOfferingService.CourseOfferingService;
+import attendanceProject.service.courseRegistrationService.CourseRegistrationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -29,6 +34,9 @@ import java.util.Optional;
 @RequestMapping("/course-offerings")
 @Tag(name = "Course Offering Management System")
 public class CourseOfferingController {
+
+    @Autowired
+    CourseRegistrationService courseRegistrationService;
 
     private final CourseOfferingService courseOfferingService;
     private final WebClient webClient;
@@ -56,6 +64,19 @@ public class CourseOfferingController {
         }
         return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering));
     }
+
+    //USE CASE 7
+    @GetMapping("/admin-view/{offeringId}")
+    public ResponseEntity<CourseOfferingAdminResponse> getCourseOffering(@PathVariable long offeringId) {
+        CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(offeringId);
+        if (Objects.isNull(courseOffering)) {
+            return ResponseEntity.notFound().build();
+        }
+        List<Long> studentIds = courseRegistrationService.getRegisteredStudentsByCourseOffering(offeringId);
+        return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingAdminResponse(courseOffering,studentIds));
+    }
+
+
 
     /**
      * Provide a list of all course offerings.
