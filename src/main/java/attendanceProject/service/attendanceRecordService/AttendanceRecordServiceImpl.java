@@ -76,8 +76,8 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     }
 
     @Override
-    public List<AttendanceRecord> getAttendanceRecordsByStudentId(String studentId) {
-        return attendanceRecordRepository.findByStudent_StudentId(studentId);
+    public List<AttendanceRecord> getAttendanceRecordsByStudentId(long studentId) {
+        return attendanceRecordRepository.findByStudent_Id(studentId);
     }
 
     @Override

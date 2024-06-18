@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CourseDTO {
+public class CourseDTORequest {
     private double credits;
     private String courseDescription;
     private String courseName;

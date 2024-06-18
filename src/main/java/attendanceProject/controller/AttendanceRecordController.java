@@ -26,8 +26,8 @@ public class AttendanceRecordController {
         this.attendanceRecordService = attendanceRecordService;
     }
 
-    @GetMapping("/{studentId}")
-    public List<attendanceProject.service.DTO.AttendanceRecordDTO> getAttendanceRecords(@PathVariable String studentId) {
+    @GetMapping("/student/{studentId}")
+    public List<attendanceProject.service.DTO.AttendanceRecordDTO> getAttendanceRecords(@PathVariable long studentId) {
         List<AttendanceRecord> attendanceRecords = attendanceRecordService.getAttendanceRecordsByStudentId(studentId);
         return attendanceRecordMapper.toDTOs(attendanceRecords);
     }
@@ -59,4 +59,6 @@ public class AttendanceRecordController {
     public ResponseEntity<?> getAllAttendanceRecords() {
         return new ResponseEntity<>(attendanceRecordService.getAllAttendanceRecords(), HttpStatus.OK);
     }
+
+
 }

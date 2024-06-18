@@ -1,6 +1,5 @@
 package attendanceProject.domain;
 
-import attendanceProject.service.DTO.CourseDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
