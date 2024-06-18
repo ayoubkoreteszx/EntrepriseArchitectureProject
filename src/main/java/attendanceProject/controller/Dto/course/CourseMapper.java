@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseMapper {
-    public Course DTOToCourse(CourseDTORequest courseDTORequest)
+    public static Course DTOToCourse(CourseDTORequest courseDTORequest)
     {
         Course course = new Course();
         course.setCredits(courseDTORequest.getCredits());
@@ -16,7 +16,7 @@ public class CourseMapper {
         course.setDepartment(courseDTORequest.getDepartment());
         return course;
     }
-    public CourseDTOResponse CourseToDTO(Course course)
+    public static CourseDTOResponse CourseToDTO(Course course)
     {
         CourseDTOResponse courseDTOResponse = new CourseDTOResponse();
         courseDTOResponse.setId(course.getId());

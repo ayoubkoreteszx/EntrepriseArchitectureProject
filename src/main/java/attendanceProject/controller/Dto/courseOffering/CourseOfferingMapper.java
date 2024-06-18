@@ -1,5 +1,6 @@
 package attendanceProject.controller.Dto.courseOffering;
 
+import attendanceProject.controller.Dto.course.CourseMapper;
 import attendanceProject.controller.Dto.faculty.FacultyMapper;
 import attendanceProject.domain.CourseOffering;
 
@@ -24,7 +25,7 @@ public class CourseOfferingMapper {
         courseOfferingResponse.setId(courseOffering.getId());
         courseOfferingResponse.setCapacity(courseOffering.getCapacity());
         courseOfferingResponse.setRoom(courseOffering.getRoom());
-        courseOfferingResponse.setCourse(courseOffering.getCourse());
+        courseOfferingResponse.setCourse(CourseMapper.CourseToDTO(courseOffering.getCourse()));
         courseOfferingResponse.setFaculty(FacultyMapper.mapToFacultyResponse(courseOffering.getFaculty()));
         courseOfferingResponse.setCourseofferingType(courseOffering.getCourseofferingType());
         courseOfferingResponse.setStartDate(courseOffering.getStartDate());
@@ -35,4 +36,12 @@ public class CourseOfferingMapper {
     public static List<CourseOfferingResponse> mapToCourseOfferingResponseList(List<CourseOffering> courseOfferings) {
         return courseOfferings.stream().map(CourseOfferingMapper::mapToCourseOfferingResponse).collect(Collectors.toList());
     }
+
+    public static CourseOfferingAdminResponse mapToCourseOfferingAdminResponse(CourseOffering courseOffering, List<Long> studentIds) {
+        CourseOfferingAdminResponse courseOfferingResponse = new CourseOfferingAdminResponse(mapToCourseOfferingResponse(courseOffering));
+        courseOfferingResponse.setEnrolledStudentIds(studentIds);
+        return courseOfferingResponse;
+    }
+
+
 }
