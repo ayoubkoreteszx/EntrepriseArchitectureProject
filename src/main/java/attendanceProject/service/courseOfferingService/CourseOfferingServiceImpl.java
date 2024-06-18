@@ -4,6 +4,7 @@ import attendanceProject.domain.CourseOffering;
 import attendanceProject.repository.CourseOfferingRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,4 +47,8 @@ public class CourseOfferingServiceImpl implements CourseOfferingService {
         return courseOfferingRepository.findAll();
     }
 
+    @Override
+    public List<CourseOffering> getAllCourseOfferingsByDate(LocalDate date) {
+        return courseOfferingRepository.findAllCourseOfferingsByDate(date);
+    }
 }

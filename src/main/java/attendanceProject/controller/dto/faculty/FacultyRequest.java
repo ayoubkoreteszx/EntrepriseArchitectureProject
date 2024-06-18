@@ -1,11 +1,10 @@
-package attendanceProject.controller.Dto.faculty;
+package attendanceProject.controller.dto.faculty;
 
 import attendanceProject.domain.GenderType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 public class FacultyRequest {

@@ -1,7 +1,7 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.student.StudentMapper;
-import attendanceProject.controller.Dto.student.StudentRequest;
+import attendanceProject.controller.dto.student.StudentMapper;
+import attendanceProject.controller.dto.student.StudentRequest;
 import attendanceProject.controller.webClientConfig.ResponseMessage;
 import attendanceProject.domain.Faculty;
 import attendanceProject.domain.Person;

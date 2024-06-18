@@ -1,7 +1,6 @@
-package attendanceProject.controller.Dto.course;
+package attendanceProject.controller.dto.course;
 
 import attendanceProject.domain.Course;
-import attendanceProject.controller.Dto.course.CourseDTO;
 
 public class CourseMapper {
     public Course CourseMapperDTO(CourseDTO courseDTO)

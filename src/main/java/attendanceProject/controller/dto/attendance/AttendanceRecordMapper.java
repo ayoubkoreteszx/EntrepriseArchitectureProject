@@ -1,7 +1,6 @@
-package attendanceProject.controller.Dto.attendance;
+package attendanceProject.controller.dto.attendance;
 
 import attendanceProject.domain.AttendanceRecord;
-import attendanceProject.controller.Dto.attendance.AttendanceRecordDTO;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;

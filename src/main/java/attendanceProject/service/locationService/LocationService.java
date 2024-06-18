@@ -1,7 +1,7 @@
 package attendanceProject.service.locationService;
 
-import attendanceProject.controller.Dto.location.CreateLocationParameters;
-import attendanceProject.controller.Dto.location.LocationDTO;
+import attendanceProject.controller.dto.location.CreateLocationParameters;
+import attendanceProject.controller.dto.location.LocationDTO;
 
 import java.util.List;
 

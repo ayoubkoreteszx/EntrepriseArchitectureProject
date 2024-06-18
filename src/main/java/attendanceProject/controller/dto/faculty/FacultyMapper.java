@@ -1,4 +1,4 @@
-package attendanceProject.controller.Dto.faculty;
+package attendanceProject.controller.dto.faculty;
 
 import attendanceProject.domain.Faculty;
 

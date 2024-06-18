@@ -1,12 +1,9 @@
-package attendanceProject.controller.Dto.courseOffering;
+package attendanceProject.controller.dto.courseOffering;
 
-import attendanceProject.controller.Dto.faculty.FacultyResponse;
-import attendanceProject.domain.Audit;
+import attendanceProject.controller.dto.faculty.FacultyResponse;
 import attendanceProject.domain.Course;
 import attendanceProject.domain.CourseofferingType;
-import attendanceProject.domain.Faculty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;

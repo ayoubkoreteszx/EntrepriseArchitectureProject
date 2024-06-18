@@ -2,7 +2,7 @@ package attendanceProject.service.courseOfferingService;
 
 import attendanceProject.domain.CourseOffering;
 
-import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CourseOfferingService {
@@ -11,4 +11,5 @@ public interface CourseOfferingService {
     CourseOffering createCourseOffering(CourseOffering courseOffering);
     CourseOffering updateCourseOffering(Long id, CourseOffering courseOffering);
     List<CourseOffering> findAllCourseOfferings();
+    List<CourseOffering> getAllCourseOfferingsByDate(LocalDate date);
 }

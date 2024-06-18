@@ -1,4 +1,4 @@
-package attendanceProject.controller.Dto.courseOffering;
+package attendanceProject.controller.dto.courseOffering;
 
 import attendanceProject.domain.Audit;
 import attendanceProject.domain.CourseofferingType;

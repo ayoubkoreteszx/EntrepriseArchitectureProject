@@ -1,8 +1,8 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.faculty.FacultyMapper;
-import attendanceProject.controller.Dto.faculty.FacultyRequest;
-import attendanceProject.controller.Dto.faculty.FacultyResponse;
+import attendanceProject.controller.dto.faculty.FacultyMapper;
+import attendanceProject.controller.dto.faculty.FacultyRequest;
+import attendanceProject.controller.dto.faculty.FacultyResponse;
 import attendanceProject.domain.Faculty;
 import attendanceProject.service.personService.PersonService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,6 +1,6 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.course.CourseDTO;
+import attendanceProject.controller.dto.course.CourseDTO;
 import attendanceProject.domain.Course;
 import attendanceProject.service.courceService.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
