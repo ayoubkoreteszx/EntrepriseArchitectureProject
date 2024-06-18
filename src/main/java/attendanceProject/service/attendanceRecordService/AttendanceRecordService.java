@@ -14,6 +14,6 @@ public interface AttendanceRecordService {
     void deleteAttendanceRecord(long id);
     List<AttendanceRecordDTOResponse> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseId);
     List<AttendanceRecordDTOResponse> getAttendanceRecordsByCourseOffering(Long courseOfferingId);
-    public List<AttendanceRecord> getAttendanceRecordsByStudentId(long studentId);
+    public List<AttendanceRecordDTOResponse> getAttendanceRecordsByStudentId(long studentId);
     AttendanceRecord saveAttendanceRecord(AttendanceRecord attendanceRecord);
 }

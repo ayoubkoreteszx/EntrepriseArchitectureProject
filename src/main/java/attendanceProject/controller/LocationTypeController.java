@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/sys-admin/location-types")
+@RequestMapping("/location-types")
 public class LocationTypeController {
     @Autowired
     private LocationTypeService locationTypeService;

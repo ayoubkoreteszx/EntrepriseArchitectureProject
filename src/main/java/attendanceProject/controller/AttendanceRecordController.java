@@ -19,18 +19,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/attendance-records")
 public class AttendanceRecordController {
-    private AttendanceRecordService attendanceRecordService;
-    
-    @Autowired
-    private AttendanceRecordMapper attendanceRecordMapper;
+    private final AttendanceRecordService attendanceRecordService;
+
     public AttendanceRecordController(AttendanceRecordService attendanceRecordService) {
         this.attendanceRecordService = attendanceRecordService;
     }
 
     @GetMapping("/student/{studentId}")
-    public List<AttendanceRecordDTOResponse> getAttendanceRecords(@PathVariable long studentId) {
-        List<AttendanceRecord> attendanceRecords = attendanceRecordService.getAttendanceRecordsByStudentId(studentId);
-        return attendanceRecordMapper.toDTOsResponse(attendanceRecords);
+    public ResponseEntity<?> getAttendanceRecords(@PathVariable long studentId) {
+        return new ResponseEntity<>(
+                attendanceRecordService.getAttendanceRecordsByStudentId(studentId),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/{id}")
@@ -61,6 +61,4 @@ public class AttendanceRecordController {
     public ResponseEntity<?> getAllAttendanceRecords() {
         return new ResponseEntity<>(attendanceRecordService.getAllAttendanceRecords(), HttpStatus.OK);
     }
-
-
 }

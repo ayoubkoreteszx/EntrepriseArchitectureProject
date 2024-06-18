@@ -5,9 +5,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
 public class AttendanceRecordMapper {
-    public AttendanceRecordDTOResponse toDTOResponse(AttendanceRecord attendanceRecord) {
+    public static AttendanceRecordDTOResponse toDTOResponse(AttendanceRecord attendanceRecord) {
         AttendanceRecordDTOResponse dto = new AttendanceRecordDTOResponse();
         dto.setId(attendanceRecord.getId());
         dto.setStudentId(attendanceRecord.getStudent().getStudentId());
@@ -20,9 +19,9 @@ public class AttendanceRecordMapper {
         return dto;
     }
 
-    public List<AttendanceRecordDTOResponse> toDTOsResponse(List<AttendanceRecord> attendanceRecords) {
+    public static List<AttendanceRecordDTOResponse> toDTOsResponse(List<AttendanceRecord> attendanceRecords) {
         return attendanceRecords.stream()
-                .map(this::toDTOResponse)
+                .map(AttendanceRecordMapper::toDTOResponse)
                 .collect(Collectors.toList());
     }
 //    public static AttendanceRecord DTORequestToAttendanceRecord(AttendanceRecordDTORequest attendanceRecordDTORequest){
