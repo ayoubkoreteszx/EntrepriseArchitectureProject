@@ -1,19 +1,23 @@
 package attendanceProject.service.courceService;
 
-import attendanceProject.controller.Dto.course.CourseDTO;
+import attendanceProject.service.DTO.CourseDTORequest;
 import attendanceProject.domain.Course;
+import attendanceProject.service.DTO.CourseDTOResponse;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CourseService {
     //CREATE
-    Course saveCourse(CourseDTO courseDTO);
+    Course saveCourse(CourseDTORequest courseDTORequest);
     //READ
+    Optional<CourseDTOResponse> getCourseByIdDTO(Long id);
+
     Optional<Course> getCourseById(Long id);
-    List<Course> getAllCourses();
+
+    List<CourseDTOResponse> getAllCourses();
     //UPDATE
-    Course updateCourse(Course existingCourse, Course newCourse);
+    Course updateCourse(Course existingCourse, CourseDTORequest newCourse);
     //DELETE
     void deleteCourse(Long id);
 }

@@ -13,6 +13,6 @@ public interface AttendanceRecordService {
     void deleteAttendanceRecord(long id);
     List<AttendanceRecordDTO> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseId);
     List<AttendanceRecordDTO> getAttendanceRecordsByCourseOffering(Long courseOfferingId);
-    public List<AttendanceRecord> getAttendanceRecordsByStudentId(String studentId);
+    public List<AttendanceRecord> getAttendanceRecordsByStudentId(long studentId);
     AttendanceRecord saveAttendanceRecord(AttendanceRecord attendanceRecord);
 }
