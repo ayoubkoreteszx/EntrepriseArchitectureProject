@@ -13,8 +13,12 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/location-types")
 public class LocationTypeController {
-    @Autowired
+
     private LocationTypeService locationTypeService;
+
+    public LocationTypeController(LocationTypeService locationTypeService) {
+        this.locationTypeService = locationTypeService;
+    }
 
     @GetMapping
     public ResponseEntity<?> findAll() {
