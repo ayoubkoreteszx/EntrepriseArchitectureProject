@@ -12,6 +12,5 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
     List<Session> findByCourseOffering_Id(Long id);
     @Query("select s from Session s where s.courseOffering.id =: courseOfferingId " +
             "and s.date <: currentDate")
-    List<Session> findCompletedSessionByCourseOffering(Long courseOfferingId,
-                                                       LocalDate currentDate);
+    List<Session> findCompletedSessionByCourseOffering(Long courseOfferingId, LocalDate currentDate);
 }
