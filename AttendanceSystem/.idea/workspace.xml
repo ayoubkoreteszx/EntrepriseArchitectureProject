@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4472c6a3-8760-4294-9b43-e94130403d0a" name="Changes" comment="Move use case5 to admin view service">
-      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/dto/CourseOfferingResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/dto/CourseofferingType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessagingService/src/main/java/com/example/messagingservice/JmsSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessagingService/src/main/java/com/example/messagingservice/StudentFeignClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MessagingService/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/AdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/AdminViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/CourseRegistrationSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/CourseRegistrationSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/mailTrigger/CourseEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/mailTrigger/CourseEventAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/mailTrigger/JmsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/StudentViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/StudentViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/CourseOfferingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/CourseOfferingSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +33,16 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -114,9 +122,9 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "view-services",
+    "git-widget-placeholder": "abdallah",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/EA/EA-Project/AttendanceSystem",
+    "last_opened_file_path": "D:/MIU/Courses/07 - EA Attemp2/Project/Ayoub/EntrepriseArchitectureProject/AttendanceSystem",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -255,8 +263,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17890.1" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17890.1" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -279,6 +286,7 @@
       <workItem from="1718769464862" duration="171000" />
       <workItem from="1718769865955" duration="719000" />
       <workItem from="1718812682913" duration="5195000" />
+      <workItem from="1718837272218" duration="755000" />
     </task>
     <task id="LOCAL-00001" summary="Move use case5 to admin view service">
       <option name="closed" value="true" />
