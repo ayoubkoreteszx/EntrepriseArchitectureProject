@@ -28,9 +28,10 @@ public class CourseMapper {
         //courseDTOResponse.setPrerequisiteIds(course.getPrerequisites());
         List<Course> prerequisites = course.getPrerequisites();
         List<String> prerequisiteNames = new ArrayList<String>();
-        for (Course prerequisite : prerequisites)
-        {
-            prerequisiteNames.add(prerequisite.getCourseName());
+        if (prerequisites != null) {
+            for (Course prerequisite : prerequisites) {
+                prerequisiteNames.add(prerequisite.getCourseName());
+            }
         }
         courseDTOResponse.setPrerequisiteNames(prerequisiteNames);
         return courseDTOResponse;
