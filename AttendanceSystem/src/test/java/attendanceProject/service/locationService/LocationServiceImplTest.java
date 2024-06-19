@@ -1,13 +1,14 @@
 package attendanceProject.service.locationService;
 
 import attendanceProject.controller.dto.location.CreateLocationParameters;
+import attendanceProject.controller.dto.locationType.LocationTypeResponse;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
 import attendanceProject.repository.LocationRepository;
 import attendanceProject.controller.dto.location.LocationDTO;
-import attendanceProject.controller.dto.location.LocationDTOMapper;
-import attendanceProject.service.locationTypeService.LocationTypeService;
+import attendanceProject.repository.LocationTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,24 +28,39 @@ class LocationServiceImplTest {
     private LocationRepository locationRepository;
 
     @Mock
-    private LocationTypeService locationTypeService;
+    private LocationTypeRepository locationTypeRepository;
 
     @InjectMocks
     private LocationServiceImpl locationService;
 
-    @Test
-    void findAllLocations() {
-        LocationType locationType = new LocationType();
+    private LocationTypeResponse locationTypeResponse;
+    private Location location1;
+    private Location location2;
+    private CreateLocationParameters parameters;
+    private LocationType locationType;
+
+    @BeforeEach
+    void setUp(){
+        locationType = new LocationType();
         locationType.setId(1);
-        Location location1 = new Location();
-        location1.setId(1L);
+        location1 = new Location();
+        location1.setId(0L);
         location1.setName("Location1");
         location1.setLocationType(locationType);
-
-        Location location2 = new Location();
+        location2 = new Location();
         location2.setId(2L);
         location2.setName("Location2");
         location2.setLocationType(locationType);
+        locationTypeResponse = new LocationTypeResponse();
+        locationTypeResponse.setId(1L);
+
+        parameters = new CreateLocationParameters();
+        parameters.setLocationTypeId(1L);
+        parameters.setName("Location1");
+    }
+
+    @Test
+    void findAllLocations() {
 
         when(locationRepository.findAll()).thenReturn(Arrays.asList(location1, location2));
 
@@ -56,14 +72,7 @@ class LocationServiceImplTest {
 
     @Test
     void findLocationByIdFound() {
-        LocationType locationType = new LocationType();
-        locationType.setId(1);
-        Location location = new Location();
-        location.setId(1L);
-        location.setName("Location1");
-        location.setLocationType(locationType);
-
-        when(locationRepository.findById(1L)).thenReturn(Optional.of(location));
+        when(locationRepository.findById(1L)).thenReturn(Optional.of(location1));
 
         LocationDTO result = locationService.findLocationById(1L);
 
@@ -85,48 +94,29 @@ class LocationServiceImplTest {
 
     @Test
     void createLocation() {
-        LocationType locationType = new LocationType();
-        locationType.setId(1L);
-        locationType.setType("Type1");
 
-        Location location = new Location();
-        location.setName("Location1");
-        location.setLocationType(locationType);
-        CreateLocationParameters parameters = new CreateLocationParameters();
-        parameters.setLocationTypeId(1L);
-
-
-        when(locationTypeService.findLocationTypeById(1L)).thenReturn(locationType);
-        when(locationRepository.save(location)).thenReturn(location);
+        when(locationTypeRepository.findById(1L)).thenReturn(Optional.of(locationType));
+        when(locationRepository.save(location1)).thenReturn(location1);
 
         LocationDTO result = locationService.createLocation(parameters);
 
         assertNotNull(result);
 //        assertEquals("Location1", result.getName());
 //        assertEquals(locationType, result.getLocationType());
-        verify(locationTypeService, times(1)).findLocationTypeById(1L);
-        verify(locationRepository, times(1)).save(location);
+        verify(locationTypeRepository, times(1)).findById(1L);
+        verify(locationRepository, times(1)).save(location1);
     }
 
     @Test
     public void testCreateLocationWithNonExistentLocationType() {
-        LocationType locationType = new LocationType();
-        locationType.setId(1L);
-        Location location = new Location();
-        location.setName("Location1");
-        location.setLocationType(locationType);
-
-        CreateLocationParameters parameters = new CreateLocationParameters();
-        parameters.setLocationTypeId(1L);
-
-        when(locationTypeService.findLocationTypeById(1L)).thenReturn(null);
+        when(locationTypeRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> {
             locationService.createLocation(parameters);
         });
 
-        verify(locationTypeService, times(1)).findLocationTypeById(1L);
-        verify(locationRepository, never()).save(location);
+        verify(locationTypeRepository, times(1)).findById(1L);
+        verify(locationRepository, never()).save(any());
     }
 
     @Test
@@ -140,34 +130,23 @@ class LocationServiceImplTest {
 
     @Test
     public void testUpdateLocation() {
-        LocationType locationType = new LocationType();
-        locationType.setId(1L);
-        locationType.setType("Type1");
-
-        Location oldLocation = new Location();
-        oldLocation.setId(1L);
-        oldLocation.setName("OldLocation");
-        oldLocation.setLocationType(locationType);
 
         Location newLocation = new Location();
         newLocation.setName("NewLocation");
         newLocation.setId(1L);
         newLocation.setLocationType(locationType);
-        LocationDTO locationDTO = LocationDTOMapper.mapToDTO(newLocation);
 
-        when(locationTypeService.findLocationTypeById(1L)).thenReturn(locationType);
-        when(locationRepository.findById(1L)).thenReturn(Optional.of(oldLocation));
+        when(locationTypeRepository.findById(1L)).thenReturn(Optional.of(locationType));
+        when(locationRepository.findById(1L)).thenReturn(Optional.of(location1));
         when(locationRepository.save(any(Location.class))).thenReturn(newLocation);
-        CreateLocationParameters parameters = new CreateLocationParameters();
-        parameters.setLocationTypeId(1L);
+
         parameters.setName("NewLocation");
         LocationDTO result = locationService.updateLocation(1L, parameters);
 
         assertNotNull(result);
         assertEquals("NewLocation", result.getName());
         assertEquals(1L, result.getLocationTypeId());
-        assertEquals(oldLocation.getId(), newLocation.getId());
-        verify(locationTypeService, times(1)).findLocationTypeById(1L);
+        verify(locationTypeRepository, times(1)).findById(1L);
         verify(locationRepository, times(1)).save(newLocation);
     }
 

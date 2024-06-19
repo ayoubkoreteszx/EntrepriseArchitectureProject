@@ -1,13 +1,15 @@
 package attendanceProject.service.locationTypeService;
 
+import attendanceProject.controller.dto.locationType.LocationTypeRequest;
+import attendanceProject.controller.dto.locationType.LocationTypeResponse;
 import attendanceProject.domain.LocationType;
 
 import java.util.List;
 
 public interface LocationTypeService {
-    public List<LocationType> findAllLocationTypes();
-    public LocationType findLocationTypeById(long id);
-    public LocationType createLocationType(LocationType locationType);
-    public void deleteLocationType(Long id);
-    public LocationType updateLocationType(Long id, LocationType locationType);
+    List<LocationTypeResponse> findAllLocationTypes();
+    LocationTypeResponse createLocationType(LocationTypeRequest locationType);
+    LocationTypeResponse findLocationTypeById(long id);
+    LocationTypeResponse updateLocationType(Long id, LocationTypeRequest locationType);
+    void deleteLocationType(Long id);
 }

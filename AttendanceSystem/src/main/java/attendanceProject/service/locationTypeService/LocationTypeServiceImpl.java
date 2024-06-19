@@ -1,5 +1,8 @@
 package attendanceProject.service.locationTypeService;
 
+import attendanceProject.controller.dto.locationType.LocationTypeMapper;
+import attendanceProject.controller.dto.locationType.LocationTypeRequest;
+import attendanceProject.controller.dto.locationType.LocationTypeResponse;
 import attendanceProject.domain.LocationType;
 import attendanceProject.repository.LocationTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +16,19 @@ public class LocationTypeServiceImpl implements LocationTypeService {
     @Autowired
     private LocationTypeRepository locationTypeRepository;
     @Override
-    public List<LocationType> findAllLocationTypes() {
-        return locationTypeRepository.findAll();
+    public List<LocationTypeResponse> findAllLocationTypes() {
+        return LocationTypeMapper.mapToResponse(locationTypeRepository.findAll());
     }
 
     @Override
-    public LocationType findLocationTypeById(long id) {
-        return locationTypeRepository.findById(id).orElse(null);
+    public LocationTypeResponse findLocationTypeById(long id) {
+        return LocationTypeMapper.mapToResponse(locationTypeRepository.findById(id).orElse(null));
     }
 
     @Override
-    public LocationType createLocationType(LocationType locationType) {
-        return locationTypeRepository.save(locationType);
+    public LocationTypeResponse createLocationType(LocationTypeRequest request) {
+        LocationType locationType = LocationTypeMapper.mapToLocationType(request);
+        return LocationTypeMapper.mapToResponse(locationTypeRepository.save(locationType));
     }
 
     @Override
@@ -33,12 +37,12 @@ public class LocationTypeServiceImpl implements LocationTypeService {
     }
 
     @Override
-    public LocationType updateLocationType(Long id, LocationType locationType) {
-        LocationType oldLocationType = findLocationTypeById(id);
-        if(Objects.nonNull(oldLocationType)) {
+    public LocationTypeResponse updateLocationType(Long id, LocationTypeRequest request) {
+        LocationType locationType = locationTypeRepository.findById(id).orElse(null);
+        if(Objects.nonNull(locationType)) {
             locationType.setId(id);
-            locationTypeRepository.save(locationType);
+            return LocationTypeMapper.mapToResponse(locationTypeRepository.save(locationType));
         }
-        return locationType;
+        return null;
     }
 }
