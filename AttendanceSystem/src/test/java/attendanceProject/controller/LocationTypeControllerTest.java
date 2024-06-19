@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
+import attendanceProject.controller.dto.locationType.LocationTypeRequest;
+import attendanceProject.controller.dto.locationType.LocationTypeResponse;
 import attendanceProject.domain.LocationType;
 import attendanceProject.service.locationTypeService.LocationTypeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,28 +37,36 @@ public class LocationTypeControllerTest {
 
     @InjectMocks
     private LocationTypeController locationTypeController;
+    private LocationTypeResponse locationType1;
+    private LocationTypeResponse locationType2;
+    private LocationTypeRequest parameters;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(locationTypeController).build();
+
+        locationType1 = new LocationTypeResponse();
+        locationType1.setId(1);
+        locationType1.setType("Type A");
+
+        locationType2 = new LocationTypeResponse();
+        locationType2.setId(2);
+        locationType2.setType("Type B");
+
+        parameters = new LocationTypeRequest();
+        parameters.setType("Type A");
     }
 
     @Test
     public void testFindAll() throws Exception {
-        LocationType locationType1 = new LocationType();
-        locationType1.setId(1);
-        locationType1.setType("Type A");
-        LocationType locationType2 = new LocationType();
-        locationType2.setId(2);
-        locationType2.setType("Type B");
-        List<LocationType> locationTypes = Arrays.asList(
+        List<LocationTypeResponse> locationTypes = Arrays.asList(
         locationType1, locationType2
         );
 
         when(locationTypeService.findAllLocationTypes()).thenReturn(locationTypes);
 
-        mockMvc.perform(get("/sys-admin/location-types")
+        mockMvc.perform(get("/location-types")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
@@ -69,13 +79,10 @@ public class LocationTypeControllerTest {
 
     @Test
     public void testFindById() throws Exception {
-        LocationType locationType = new LocationType();
-        locationType.setId(1L);
-        locationType.setType("Type A");
 
-        when(locationTypeService.findLocationTypeById(1L)).thenReturn(locationType);
+        when(locationTypeService.findLocationTypeById(1L)).thenReturn(locationType1);
 
-        mockMvc.perform(get("/sys-admin/location-types/1")
+        mockMvc.perform(get("/location-types/1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
@@ -88,7 +95,7 @@ public class LocationTypeControllerTest {
     public void testFindById_NotFound() throws Exception {
         when(locationTypeService.findLocationTypeById(1L)).thenReturn(null);
 
-        mockMvc.perform(get("/sys-admin/location-types/1")
+        mockMvc.perform(get("/location-types/1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 
@@ -97,47 +104,42 @@ public class LocationTypeControllerTest {
 
     @Test
     public void testCreateLocationType() throws Exception {
-        LocationType locationType = new LocationType();
-        locationType.setType("Type A");
-        LocationType createdLocationType = new LocationType();
-        createdLocationType.setId(1L);
-        createdLocationType.setType("Type A");
 
-        when(locationTypeService.createLocationType(any(LocationType.class))).thenReturn(createdLocationType);
+        when(locationTypeService.createLocationType(parameters)).thenReturn(locationType1);
 
-        mockMvc.perform(post("/sys-admin/location-types")
+        mockMvc.perform(post("/location-types")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(locationType)))
+                        .content(asJsonString(parameters)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.type").value("Type A"));
 
-        verify(locationTypeService, times(1)).createLocationType(any(LocationType.class));
+        verify(locationTypeService, times(1)).createLocationType(parameters);
     }
 
     @Test
     public void testUpdateLocationType() throws Exception {
-        LocationType locationType = new LocationType();
-        locationType.setId(1L);
-        locationType.setType("Updated Type A");
+        LocationTypeResponse updatedLocationType = new LocationTypeResponse();
+        updatedLocationType.setId(1L);
+        updatedLocationType.setType("Updated Type A");
 
-        when(locationTypeService.updateLocationType(eq(1L), any(LocationType.class))).thenReturn(locationType);
+        when(locationTypeService.updateLocationType(1L, parameters)).thenReturn(updatedLocationType);
 
-        mockMvc.perform(put("/sys-admin/location-types/1")
+        mockMvc.perform(put("/location-types/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(locationType)))
+                        .content(asJsonString(parameters)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.type").value("Updated Type A"));
 
-        verify(locationTypeService, times(1)).updateLocationType(eq(1L), any(LocationType.class));
+        verify(locationTypeService, times(1)).updateLocationType(1L, parameters);
     }
 
     @Test
     public void testDeleteLocationType() throws Exception {
         doNothing().when(locationTypeService).deleteLocationType(1L);
 
-        mockMvc.perform(delete("/sys-admin/location-types/1")
+        mockMvc.perform(delete("/location-types/1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 

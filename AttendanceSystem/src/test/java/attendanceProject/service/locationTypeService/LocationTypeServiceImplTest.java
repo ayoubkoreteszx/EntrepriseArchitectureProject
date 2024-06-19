@@ -1,7 +1,10 @@
 package attendanceProject.service.locationTypeService;
 
+import attendanceProject.controller.dto.locationType.LocationTypeRequest;
+import attendanceProject.controller.dto.locationType.LocationTypeResponse;
 import attendanceProject.domain.LocationType;
 import attendanceProject.repository.LocationTypeRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -26,19 +29,30 @@ class LocationTypeServiceImplTest {
     @InjectMocks
     private LocationTypeServiceImpl locationTypeService;
 
-    @Test
-    void findAllLocationTypes() {
-        LocationType locationType1 = new LocationType();
-        locationType1.setId(1L);
-        locationType1.setType("Type1");
+    private LocationTypeRequest request1;
+    private LocationTypeRequest request2;
+    private LocationType locationType1;
+    private LocationType locationType2;
 
-        LocationType locationType2 = new LocationType();
+    @BeforeEach
+    void setUp(){
+        request1 = new LocationTypeRequest();
+        request1.setType("Type1");
+        request2 = new LocationTypeRequest();
+        request2.setType("Updated Type");
+        locationType1 = new LocationType();
+        locationType1.setId(0L);
+        locationType1.setType("Type1");
+        locationType2 = new LocationType();
         locationType2.setId(2L);
         locationType2.setType("Type2");
+    }
 
+    @Test
+    void findAllLocationTypes() {
         when(locationTypeRepository.findAll()).thenReturn(Arrays.asList(locationType1, locationType2));
 
-        List<LocationType> result = locationTypeService.findAllLocationTypes();
+        List<LocationTypeResponse> result = locationTypeService.findAllLocationTypes();
 
         assertEquals(2, result.size());
         verify(locationTypeRepository, times(1)).findAll();
@@ -46,11 +60,8 @@ class LocationTypeServiceImplTest {
 
     @Test
     void testFindLocationTypeByIdFound() {
-        LocationType locationType1 = new LocationType();
-        locationType1.setId(1L);
-        locationType1.setType("Type1");
         when(locationTypeRepository.findById(1L)).thenReturn(Optional.of(locationType1));
-        LocationType result = locationTypeService.findLocationTypeById(1L);
+        LocationTypeResponse result = locationTypeService.findLocationTypeById(1L);
         assertNotNull(result);
         assertEquals("Type1", result.getType());
         verify(locationTypeRepository, times(1)).findById(1L);
@@ -60,23 +71,20 @@ class LocationTypeServiceImplTest {
     void testFindLocationTypeByIdNotFound() {
         Long id = 1L;
         when(locationTypeRepository.findById(id)).thenReturn(Optional.empty());
-        LocationType result = locationTypeService.findLocationTypeById(id);
+        LocationTypeResponse result = locationTypeService.findLocationTypeById(id);
         assertNull(result);
         verify(locationTypeRepository, times(1)).findById(id);
     }
 
     @Test
     void createLocationType() {
-        LocationType locationType = new LocationType();
-        locationType.setType("Type1");
+        when(locationTypeRepository.save(locationType1)).thenReturn(locationType1);
 
-        when(locationTypeRepository.save(locationType)).thenReturn(locationType);
-
-        LocationType result = locationTypeService.createLocationType(locationType);
+        LocationTypeResponse result = locationTypeService.createLocationType(request1);
 
         assertNotNull(result);
         assertEquals("Type1", result.getType());
-        verify(locationTypeRepository, times(1)).save(locationType);
+        verify(locationTypeRepository, times(1)).save(locationType1);
     }
 
     @Test
@@ -90,40 +98,26 @@ class LocationTypeServiceImplTest {
 
     @Test
     void updateLocationType() {
-        LocationType oldLocationType = new LocationType();
-        oldLocationType.setId(1L);
-        oldLocationType.setType("OldType");
+        when(locationTypeRepository.findById(1L)).thenReturn(Optional.of(locationType1));
+        when(locationTypeRepository.save(any(LocationType.class))).thenReturn(locationType1);
 
-        LocationType newLocationType = new LocationType();
-        newLocationType.setType("NewType");
-
-        when(locationTypeRepository.findById(1L)).thenReturn(Optional.of(oldLocationType));
-        when(locationTypeRepository.save(any(LocationType.class))).thenReturn(newLocationType);
-
-        LocationType result = locationTypeService.updateLocationType(1L, newLocationType);
+        LocationTypeResponse result = locationTypeService.updateLocationType(1L, request1);
 
         assertNotNull(result);
-        assertEquals("NewType", result.getType());
+        assertEquals("Type1", result.getType());
         verify(locationTypeRepository, times(1)).findById(1L);
-        verify(locationTypeRepository, times(1)).save(newLocationType);
+        verify(locationTypeRepository, times(1)).save(locationType1);
     }
 
     @Test
     void updateLocationTypeNoTExisting() {
-//        LocationType oldLocationType = new LocationType();
-//        oldLocationType.setId(1L);
-//        oldLocationType.setType("OldType");
-
-        LocationType newLocationType = new LocationType();
-        newLocationType.setType("NewType");
 
         when(locationTypeRepository.findById(1L)).thenReturn(Optional.empty());
 
-        LocationType result = locationTypeService.updateLocationType(1L, newLocationType);
+        LocationTypeResponse result = locationTypeService.updateLocationType(1L, request2);
 
-        assertNotNull(result);
-        assertEquals("NewType", result.getType());
+        assertNull(result);
         verify(locationTypeRepository, times(1)).findById(1L);
-        verify(locationTypeRepository, times(0)).save(newLocationType);
+        verify(locationTypeRepository, never()).save(any());
     }
 }

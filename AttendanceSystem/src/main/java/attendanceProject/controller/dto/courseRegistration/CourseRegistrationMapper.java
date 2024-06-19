@@ -19,5 +19,4 @@ public class CourseRegistrationMapper {
                 .map(CourseRegistrationMapper::toCourseRegistrationResponse)
                 .collect(Collectors.toList());
     }
-
 }

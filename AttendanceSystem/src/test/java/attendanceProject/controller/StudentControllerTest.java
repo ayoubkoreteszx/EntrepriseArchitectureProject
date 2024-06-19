@@ -1,6 +1,6 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.student.StudentRequest;
+import attendanceProject.controller.dto.student.StudentRequest;
 import attendanceProject.domain.Faculty;
 import attendanceProject.domain.Student;
 import attendanceProject.service.personService.PersonService;

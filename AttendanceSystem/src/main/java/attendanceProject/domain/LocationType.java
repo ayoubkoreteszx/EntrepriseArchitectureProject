@@ -12,5 +12,5 @@ public class LocationType {
     private long id;
     private String type;
     @Embedded
-    private Audit audit;
+    private Audit audit = new Audit();
 }

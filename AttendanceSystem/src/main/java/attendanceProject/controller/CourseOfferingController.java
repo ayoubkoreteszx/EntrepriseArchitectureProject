@@ -116,7 +116,7 @@ public class CourseOfferingController {
         }
 
         Course course = webClient.get()
-                .uri("http://localhost:8080/courses/" + newCourseOffering.getId())
+                .uri("http://localhost:8080/courses/" + newCourseOffering.getCourseId())
                 .retrieve()
                 .bodyToMono(Course.class)
                 .block();

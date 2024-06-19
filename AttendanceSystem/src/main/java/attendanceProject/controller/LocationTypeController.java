@@ -1,8 +1,9 @@
 package attendanceProject.controller;
 
+import attendanceProject.controller.dto.locationType.LocationTypeRequest;
+import attendanceProject.controller.dto.locationType.LocationTypeResponse;
 import attendanceProject.domain.LocationType;
 import attendanceProject.service.locationTypeService.LocationTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,29 +23,29 @@ public class LocationTypeController {
 
     @GetMapping
     public ResponseEntity<?> findAll() {
-        return new ResponseEntity<List<LocationType>>(
+        return new ResponseEntity<List<LocationTypeResponse>>(
                 locationTypeService.findAllLocationTypes(),
                 HttpStatus.OK
         );
     }
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        LocationType locationType = locationTypeService.findLocationTypeById(id);
+        LocationTypeResponse locationType = locationTypeService.findLocationTypeById(id);
         if (Objects.isNull(locationType)) {
-            return new ResponseEntity<LocationType>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<LocationTypeResponse>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<LocationType>(locationType, HttpStatus.OK);
+        return new ResponseEntity<LocationTypeResponse>(locationType, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<?> createLocationType(@RequestBody LocationType locationType) {
-        return new ResponseEntity<LocationType>(
+    public ResponseEntity<?> createLocationType(@RequestBody LocationTypeRequest locationType) {
+        return new ResponseEntity<LocationTypeResponse>(
                 locationTypeService.createLocationType(locationType),
                 HttpStatus.CREATED
         );
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateLocationType(@PathVariable Long id, @RequestBody LocationType locationType) {
-        return new ResponseEntity<LocationType>(
+    public ResponseEntity<?> updateLocationType(@PathVariable Long id, @RequestBody LocationTypeRequest locationType) {
+        return new ResponseEntity<LocationTypeResponse>(
                 locationTypeService.updateLocationType(id, locationType),
                 HttpStatus.OK
         );

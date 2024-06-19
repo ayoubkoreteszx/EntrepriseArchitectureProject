@@ -5,49 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4472c6a3-8760-4294-9b43-e94130403d0a" name="Changes" comment="Move use case5 to admin view service">
-      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/dto/CourseRegistrationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/dto/FacultyResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/dto/GenderType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/dto/StudentResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/CourseRegistrationSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/dto/CourseDTOResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/dto/CourseOfferingResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/dto/CourseRegistrationResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/dto/CourseofferingType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/dto/FacultyResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/dto/GenderType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/dto/StudentResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/CourseOfferingSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/CourseRegistrationSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AdminView/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/AdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/AdminViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/CourseRegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/CourseRegistrationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/attendance/AttendanceRecordDTORequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/attendance/AttendanceRecordDTORequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/attendance/AttendanceRecordDTOResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/attendance/AttendanceRecordDTOResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/attendance/AttendanceRecordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/attendance/AttendanceRecordMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/course/CourseDTORequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/course/CourseDTORequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/course/CourseDTOResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/course/CourseDTOResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/course/CourseMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/course/CourseMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseOffering/CourseOfferingAdminResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseOffering/CourseOfferingAdminResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseOffering/CourseOfferingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseOffering/CourseOfferingMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseOffering/CourseOfferingRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseOffering/CourseOfferingRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseOffering/CourseOfferingResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseOffering/CourseOfferingResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseRegistration/CourseRegistrationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseRegistration/CourseRegistrationRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/faculty/FacultyMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/faculty/FacultyMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/faculty/FacultyRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/faculty/FacultyRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/faculty/FacultyResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/faculty/FacultyResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/location/CreateLocationParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/location/CreateLocationParameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/location/LocationDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/location/LocationDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/CourseOfferingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/CourseOfferingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/LocationTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/LocationTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseRegistration/CourseRegistrationMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/courseRegistration/CourseRegistrationMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/location/LocationDTOMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/location/LocationDTOMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/session/SessionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/session/SessionResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/student/StudentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/student/StudentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/student/StudentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/student/StudentRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/student/StudentResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/controller/dto/student/StudentResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StudentView/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/StudentViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/StudentViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/AttendanceSystemClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/AttendanceSystemClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/domain/Audit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/domain/Audit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/domain/CourseOffering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/domain/CourseOffering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/domain/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/domain/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/domain/LocationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/domain/LocationType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/service/locationService/LocationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/service/locationService/LocationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/service/locationTypeService/LocationTypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/service/locationTypeService/LocationTypeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/service/locationTypeService/LocationTypeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/service/locationTypeService/LocationTypeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/LocationControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/LocationControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/LocationTypeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/LocationTypeControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/StudentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/StudentControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/service/locationService/LocationServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/service/locationService/LocationServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/service/locationTypeService/LocationTypeServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/service/locationTypeService/LocationTypeServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,8 +41,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -140,16 +119,14 @@
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.ProjectEaApplication (1).executor": "Run",
     "Spring Boot.ProjectEaApplication.executor": "Run",
-    "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "view-services",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/EA/EA-Project/AttendanceSystem",
+    "last_opened_file_path": "D:/EA/EA-Project/AdminView",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -177,92 +154,86 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.ProjectEaApplication (1)">
-    <configuration name="AttendanceRecordControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CourseOfferingTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectEA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="attendanceProject.controller.*" />
+          <option name="PATTERN" value="attendanceProject.domain.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="attendanceProject.controller" />
-      <option name="MAIN_CLASS_NAME" value="attendanceProject.controller.AttendanceRecordControllerTest" />
+      <option name="PACKAGE_NAME" value="attendanceProject.domain" />
+      <option name="MAIN_CLASS_NAME" value="attendanceProject.domain.CourseOfferingTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AttendanceRecordControllerTest.testGetAttendanceRecordById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LocationServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectEA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="attendanceProject.controller.*" />
+          <option name="PATTERN" value="attendanceProject.service.locationService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="attendanceProject.controller" />
-      <option name="MAIN_CLASS_NAME" value="attendanceProject.controller.AttendanceRecordControllerTest" />
-      <option name="METHOD_NAME" value="testGetAttendanceRecordById" />
+      <option name="PACKAGE_NAME" value="attendanceProject.service.locationService" />
+      <option name="MAIN_CLASS_NAME" value="attendanceProject.service.locationService.LocationServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LocationServiceImplTest.createLocation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProjectEA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="attendanceProject.service.locationService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="attendanceProject.service.locationService" />
+      <option name="MAIN_CLASS_NAME" value="attendanceProject.service.locationService.LocationServiceImplTest" />
+      <option name="METHOD_NAME" value="createLocation" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AttendanceRecordServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LocationServiceImplTest.testCreateLocationWithNonExistentLocationType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectEA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="attendanceProject.service.attendanceRecordService.*" />
+          <option name="PATTERN" value="attendanceProject.service.locationService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="attendanceProject.service.attendanceRecordService" />
-      <option name="MAIN_CLASS_NAME" value="attendanceProject.service.attendanceRecordService.AttendanceRecordServiceImplTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AttendanceRecordServiceImplTest.createAttendanceRecord_ShouldReturnSavedRecordDTO" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ProjectEA" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="attendanceProject.service.attendanceRecordService.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="attendanceProject.service.attendanceRecordService" />
-      <option name="MAIN_CLASS_NAME" value="attendanceProject.service.attendanceRecordService.AttendanceRecordServiceImplTest" />
-      <option name="METHOD_NAME" value="createAttendanceRecord_ShouldReturnSavedRecordDTO" />
+      <option name="PACKAGE_NAME" value="attendanceProject.service.locationService" />
+      <option name="MAIN_CLASS_NAME" value="attendanceProject.service.locationService.LocationServiceImplTest" />
+      <option name="METHOD_NAME" value="testCreateLocationWithNonExistentLocationType" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LocationControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LocationServiceImplTest.testUpdateLocation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectEA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="attendanceProject.controller.*" />
+          <option name="PATTERN" value="attendanceProject.service.locationService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="attendanceProject.controller" />
-      <option name="MAIN_CLASS_NAME" value="attendanceProject.controller.LocationControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="attendanceProject.service.locationService" />
+      <option name="MAIN_CLASS_NAME" value="attendanceProject.service.locationService.LocationServiceImplTest" />
+      <option name="METHOD_NAME" value="testUpdateLocation" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="ProjectEaApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="ProjectEA" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="attendanceProject.ProjectEaApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProjectEaApplication (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="AttendanceSystem" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="attendanceProject.ProjectEaApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -277,11 +248,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AttendanceRecordServiceImplTest" />
-        <item itemvalue="JUnit.AttendanceRecordServiceImplTest.createAttendanceRecord_ShouldReturnSavedRecordDTO" />
-        <item itemvalue="JUnit.AttendanceRecordControllerTest" />
-        <item itemvalue="JUnit.AttendanceRecordControllerTest.testGetAttendanceRecordById" />
-        <item itemvalue="JUnit.LocationControllerTest" />
+        <item itemvalue="JUnit.CourseOfferingTest" />
+        <item itemvalue="JUnit.LocationServiceImplTest" />
+        <item itemvalue="JUnit.LocationServiceImplTest.testUpdateLocation" />
+        <item itemvalue="JUnit.LocationServiceImplTest.testCreateLocationWithNonExistentLocationType" />
+        <item itemvalue="JUnit.LocationServiceImplTest.createLocation" />
       </list>
     </recent_temporary>
   </component>
@@ -310,8 +281,8 @@
       <workItem from="1718746834521" duration="25000" />
       <workItem from="1718746968910" duration="12247000" />
       <workItem from="1718769464862" duration="171000" />
-      <workItem from="1718769865955" duration="719000" />
-      <workItem from="1718812682913" duration="1913000" />
+      <workItem from="1718769865955" duration="2785000" />
+      <workItem from="1718808998061" duration="13685000" />
     </task>
     <task id="LOCAL-00001" summary="Move use case5 to admin view service">
       <option name="closed" value="true" />
@@ -332,19 +303,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="Move use case5 to admin view service" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/EA_Project$LocationTypeControllerTest.ic" NAME="LocationTypeControllerTest Coverage Results" MODIFIED="1718412208503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/EA_Project$LocationControllerTest_testDeleteLocation.ic" NAME="LocationControllerTest.testDeleteLocation Coverage Results" MODIFIED="1718412076183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>attendanceProject.controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/EA_Project$AttendanceRecordRepositoryTest.ic" NAME="AttendanceRecordRepositoryTest Coverage Results" MODIFIED="1718470449903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>attendanceProject.repository.*</FILTER>
+    <SUITE FILE_PATH="coverage/EA_Project$LocationTypeControllerTest.ic" NAME="LocationTypeControllerTest Coverage Results" MODIFIED="1718412208503" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>attendanceProject.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/EA_Project$CourseOfferingTest.ic" NAME="CourseOfferingTest Coverage Results" MODIFIED="1718425451964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>attendanceProject.domain.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/EA_Project$LocationControllerTest.ic" NAME="LocationControllerTest Coverage Results" MODIFIED="1718412237585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
-      <FILTER>attendanceProject.controller.*</FILTER>
+    <SUITE FILE_PATH="coverage/EA_Project$AttendanceRecordRepositoryTest.ic" NAME="AttendanceRecordRepositoryTest Coverage Results" MODIFIED="1718470449903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>attendanceProject.repository.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/EA_Project$LocationControllerTest_testDeleteLocation.ic" NAME="LocationControllerTest.testDeleteLocation Coverage Results" MODIFIED="1718412076183" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+    <SUITE FILE_PATH="coverage/EA_Project$LocationControllerTest.ic" NAME="LocationControllerTest Coverage Results" MODIFIED="1718412237585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>attendanceProject.controller.*</FILTER>
     </SUITE>
   </component>
