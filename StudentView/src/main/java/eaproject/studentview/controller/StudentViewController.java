@@ -16,7 +16,7 @@ public class StudentViewController {
     @Autowired
     CourseOfferingSystem courseOfferingSystem;
     @RequestMapping("/course-offerings/{offeringId}/attendance")
-    public ResponseEntity<?> getAttendanceRecordsForCourseOffering
+    public ResponseEntity<?>  getAttendanceRecordsForCourseOffering
             (@PathVariable long offeringId, @RequestParam long studentId){
         return new ResponseEntity<>(
                 client.getStudentAttendanceRecordsForCourseOffering(studentId,
