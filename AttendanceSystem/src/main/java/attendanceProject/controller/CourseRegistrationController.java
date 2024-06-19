@@ -1,6 +1,6 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.courseRegistration.CourseRegistrationRequest;
+import attendanceProject.controller.dto.courseRegistration.CourseRegistrationRequest;
 
 import attendanceProject.controller.dto.courseRegistration.CourseRegistrationMapper;
 import attendanceProject.controller.dto.student.StudentMapper;

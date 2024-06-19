@@ -18,7 +18,7 @@ public class CourseMapper {
     }
     public static CourseDTOResponse CourseToDTO(Course course)
     {
-        CourseDTOResponse courseDTOResponse = new CourseDTOResponse();
+       CourseDTOResponse courseDTOResponse = new CourseDTOResponse();
         courseDTOResponse.setId(course.getId());
         courseDTOResponse.setCredits(course.getCredits());
         courseDTOResponse.setCourseDescription(course.getCourseDescription());

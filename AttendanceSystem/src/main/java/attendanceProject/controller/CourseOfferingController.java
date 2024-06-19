@@ -85,7 +85,7 @@ public class CourseOfferingController {
                         schema = @Schema(implementation = CourseOfferingResponse.class))),
             @ApiResponse(responseCode = "404", description = "Course offerings not found", content = @Content)
     })
-    public ResponseEntity<List<?>> findAllCourseOfferings() {
+    public ResponseEntity<List<CourseOfferingResponse>> findAllCourseOfferings() {
         List<CourseOffering> courseOfferings = courseOfferingService.findAllCourseOfferings();
         if (Objects.isNull(courseOfferings)) {
             return ResponseEntity.notFound().build();
