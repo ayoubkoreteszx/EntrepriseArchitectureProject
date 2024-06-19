@@ -10,7 +10,7 @@ import attendanceProject.domain.CourseOffering;
 import attendanceProject.domain.CourseRegistration;
 import attendanceProject.domain.Faculty;
 import attendanceProject.service.courseOfferingService.CourseOfferingService;
-import attendanceProject.service.courseRegistrationService.CourseRegistrationService;
+import attendanceProject.service.courseRegistration.CourseRegistrationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -73,7 +73,7 @@ public class CourseOfferingController {
             return ResponseEntity.notFound().build();
         }
         List<Long> studentIds = courseRegistrationService.getRegisteredStudentsByCourseOffering(offeringId);
-        return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingAdminResponse(courseOffering,studentIds));
+        return ResponseEntity.ok(new CourseOfferingAdminResponse(CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering)));
     }
 
 

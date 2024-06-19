@@ -4,53 +4,26 @@ import attendanceProject.controller.Dto.student.StudentRequest;
 import attendanceProject.domain.Faculty;
 import attendanceProject.domain.Student;
 import attendanceProject.service.personService.PersonService;
-import attendanceProject.service.locationTypeService.LocationTypeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
+import org.mockito.InjectMocks;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.internal.SuppressSignatureCheck;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.reactive.function.client.WebClient;
-
-
-import reactor.core.publisher.Mono;
-
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -73,7 +46,9 @@ public class StudentControllerTest {
     @SuppressWarnings("rawtypes")
     @Mock
     private WebClient.RequestHeadersUriSpec requestHeadersUriSpecMock;
-
+    WebClient.ResponseSpec responseSpec ;
+    @InjectMocks
+    private StudentController studentController;
 
 
     @BeforeEach
@@ -82,15 +57,12 @@ public class StudentControllerTest {
 
 
         // Set up the WebClient mock chain
-        WebClient.ResponseSpec responseSpec = Mockito.mock(WebClient.ResponseSpec.class);
+        responseSpec = Mockito.mock(WebClient.ResponseSpec.class);
         Mockito.when(webClientMock.get()).thenReturn(requestHeadersUriSpecMock);
         Mockito.when(requestHeadersUriSpecMock.uri(Mockito.anyString())).thenReturn(requestHeadersSpecMock);
         Mockito.when(requestHeadersSpecMock.retrieve()).thenReturn(responseSpec);
-        Faculty mockFaculty = new Faculty();
-        mockFaculty.setId(1L);
-        mockFaculty.setFirstName("Dr. Smith");
 
-        Mockito.when(responseSpec.bodyToMono(Mockito.eq(Faculty.class))).thenReturn(Mono.just(mockFaculty));
+
     }
 
     @Test
@@ -163,12 +135,19 @@ public class StudentControllerTest {
     }
     @Test
     public void testCreateStudent() throws Exception {
+        //Arrange
         StudentRequest studentRequest = new StudentRequest();
         studentRequest.setAdvisorId(1L);
         studentRequest.setFirstName("John Doe");
+        Faculty mockFaculty = new Faculty();
+        mockFaculty.setId(1L);
+        mockFaculty.setFirstName("Dr. Smith");
+        //Act
+
+        Mockito.when(responseSpec.bodyToMono(Mockito.eq(Faculty.class))).thenReturn(Mono.just(mockFaculty));
 
         String studentRequestJson = new ObjectMapper().writeValueAsString(studentRequest);
-
+        //Assert
         mockMvc.perform(MockMvcRequestBuilders.post("/student/addStudent")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(studentRequestJson))
@@ -177,5 +156,83 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.advisorId").value(1L));
 
         Mockito.verify(studentService, Mockito.times(1)).addPerson(Mockito.any(Student.class));
+    }
+    @Test
+    public void testCreateStudent_FacultyNotFound() throws Exception {
+        //Arrange
+        StudentRequest studentRequest = new StudentRequest();
+        studentRequest.setAdvisorId(1L);
+        studentRequest.setFirstName("John Doe");
+        //Act
+        Mockito.when(responseSpec.bodyToMono(Mockito.eq(Faculty.class))).thenReturn(Mono.empty());
+
+        String studentRequestJson = new ObjectMapper().writeValueAsString(studentRequest);
+        //Assert
+        mockMvc.perform(MockMvcRequestBuilders.post("/student/addStudent")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(studentRequestJson))
+                .andExpect(status().isNotFound());
+
+        Mockito.verify(studentService, Mockito.times(0)).addPerson(Mockito.any(Student.class));
+    }
+    @Test
+    public void testUpdateStudent_Success() throws Exception {
+        // Arrange
+        StudentRequest studentRequest = new StudentRequest();
+        studentRequest.setId(1L);
+        studentRequest.setAdvisorId(1L);
+        studentRequest.setFirstName("John Doe");
+
+        Student expectedStudent = new Student();
+        expectedStudent.setId(1L);
+        expectedStudent.setStudentId("1L");
+        expectedStudent.setFirstName("John Doe");
+        Faculty mockFaculty = new Faculty();
+        mockFaculty.setId(1L);
+        mockFaculty.setFirstName("Dr. Smith");
+        expectedStudent.setAdvisor(mockFaculty);
+
+        Mockito.when(studentService.getStudentById(studentRequest.getId())).thenReturn(expectedStudent);
+
+        Mockito.doNothing().when(studentService).updatePerson(Mockito.any(Student.class));
+        Mockito.when(responseSpec.bodyToMono(Mockito.eq(Faculty.class))).thenReturn(Mono.just(mockFaculty));
+        String studentRequestJson = new ObjectMapper().writeValueAsString(studentRequest);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.put("/student/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(studentRequestJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.advisorId").value(1L))
+                .andExpect(jsonPath("$.firstName").value("John Doe"));
+
+        Mockito.verify(studentService, Mockito.times(1)).updatePerson(Mockito.any(Student.class));
+    }
+    @Test
+    public void UpdateStudent_WhenStudentNotFound() throws Exception {
+        //Arrange
+        StudentRequest studentRequest = new StudentRequest();
+        studentRequest.setId(1L);
+        studentRequest.setAdvisorId(1L);
+        studentRequest.setFirstName("John Doe");
+        //Act
+        Mockito.when(responseSpec.bodyToMono(Mockito.eq(Faculty.class))).thenReturn(Mono.empty());
+
+        String studentRequestJson = new ObjectMapper().writeValueAsString(studentRequest);
+        //Assert
+        mockMvc.perform(MockMvcRequestBuilders.put("/student/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(studentRequestJson))
+                .andExpect(status().isNotFound());
+
+        Mockito.verify(studentService, Mockito.times(0)).updatePerson(Mockito.any(Student.class));
+    }
+    @Test
+    public void testDeleteStudent() throws Exception {
+        mockMvc.perform(delete("/student/delete/1"))
+                .andExpect(status().isNoContent());
+
+        Mockito.verify(studentService, Mockito.times(1)).deletePerson(1L);
     }
 }

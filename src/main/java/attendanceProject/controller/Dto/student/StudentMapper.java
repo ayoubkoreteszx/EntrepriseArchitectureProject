@@ -26,6 +26,7 @@ public  class StudentMapper {
     public static StudentResponse mapToStudentResponse(Student student) {
 
         StudentResponse studentResponse = new StudentResponse();
+        studentResponse.setId(student.getId());
         studentResponse.setStudentId(student.getStudentId());
         studentResponse.setFirstName(student.getFirstName());
         studentResponse.setLastName(student.getLastName());
