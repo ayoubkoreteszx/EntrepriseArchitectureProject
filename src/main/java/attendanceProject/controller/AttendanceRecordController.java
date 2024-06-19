@@ -1,12 +1,14 @@
 package attendanceProject.controller;
 
+
 import attendanceProject.controller.dto.attendance.AttendanceRecordDTORequest;
 import attendanceProject.controller.dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.dto.attendance.AttendanceRecordMapper;
 import attendanceProject.service.attendanceRecordService.AttendanceRecordService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import attendanceProject.controller.dto.attendance.AttendanceRecordMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,5 +58,13 @@ public class AttendanceRecordController {
     @GetMapping
     public ResponseEntity<?> getAllAttendanceRecords() {
         return new ResponseEntity<>(attendanceRecordService.getAllAttendanceRecords(), HttpStatus.OK);
+    }
+
+    @GetMapping("/course-offering/{offeringId}")
+    public ResponseEntity<?> getAttendanceRecordForCourseOffering(@PathVariable long offeringId){
+        return new ResponseEntity<>(
+                attendanceRecordService.getAttendanceRecordsByCourseOffering(offeringId),
+                HttpStatus.OK
+        );
     }
 }

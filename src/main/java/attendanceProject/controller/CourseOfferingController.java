@@ -183,4 +183,12 @@ public class CourseOfferingController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/{id}/passed-sessions")
+    public ResponseEntity<?> getPassedSessions(@PathVariable Long id){
+        return new ResponseEntity<>(
+                courseOfferingService.findAllPassedSessions(id),
+                HttpStatus.OK
+        );
+    }
 }
