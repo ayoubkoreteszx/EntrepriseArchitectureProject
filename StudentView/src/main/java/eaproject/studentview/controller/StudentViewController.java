@@ -16,7 +16,7 @@ public class StudentViewController {
     @Autowired
     CourseOfferingSystem courseOfferingSystem;
     @RequestMapping("/course-offerings/{offeringId}/attendance")
-    public ResponseEntity<?> getAttendanceRecordsForCourseOffering
+    public ResponseEntity<?>  getAttendanceRecordsForCourseOffering
             (@PathVariable long offeringId, @RequestParam long studentId){
         return new ResponseEntity<>(
                 client.getStudentAttendanceRecordsForCourseOffering(studentId,
@@ -26,8 +26,17 @@ public class StudentViewController {
     }
     @GetMapping("/course-offerings/{offeringId}")
     public ResponseEntity<CourseOfferingResponse> getCourseOfferingById(@PathVariable long offeringId){
-        return new ResponseEntity<CourseOfferingResponse>(
-                courseOfferingSystem.getCourseOfferingById(offeringId),
-                HttpStatus.OK);
+        try {
+            ResponseEntity<?> response = courseOfferingSystem.getCourseOfferingById(offeringId);
+            if (response.getStatusCode() == HttpStatus.OK){
+                return new ResponseEntity<>((CourseOfferingResponse) response.getBody(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+        }
+
     }
 }

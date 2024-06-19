@@ -5,6 +5,7 @@ import adminview.feignClients.CourseRegistrationSystem;
 import adminview.service.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,16 @@ public class AdminViewController {
         }
     }
     @GetMapping("/course-registrations/allByStudentId/{id}")
-    public CourseRegistrationResponse getAllCourseRegistrationsByStudentId(@PathVariable long id){
-        return courseRegistrationSystem.getAllCourseRegistrationsByStudentId(id);
+    public ResponseEntity<?> getAllCourseRegistrationsByStudentId(@PathVariable long id){
+        try {
+            ResponseEntity<?> response = courseRegistrationSystem.getAllCourseRegistrationsByStudentId(id);
+            if (response.getStatusCode() == HttpStatus.OK){
+                return new ResponseEntity<>((CourseRegistrationResponse) response.getBody(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+        }
     }
 }
