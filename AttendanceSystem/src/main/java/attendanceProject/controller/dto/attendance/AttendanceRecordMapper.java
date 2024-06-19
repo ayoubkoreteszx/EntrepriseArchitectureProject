@@ -1,4 +1,4 @@
-package attendanceProject.controller.Dto.attendance;
+package attendanceProject.controller.dto.attendance;
 
 import attendanceProject.domain.AttendanceRecord;
 

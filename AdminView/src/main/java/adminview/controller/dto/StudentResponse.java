@@ -1,7 +1,5 @@
-package attendanceProject.controller.dto.student;
+package adminview.controller.dto;
 
-import attendanceProject.controller.dto.faculty.FacultyResponse;
-import attendanceProject.domain.enums.GenderType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

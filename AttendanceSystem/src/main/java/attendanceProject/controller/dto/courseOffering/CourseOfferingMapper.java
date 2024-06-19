@@ -1,7 +1,7 @@
-package attendanceProject.controller.Dto.courseOffering;
+package attendanceProject.controller.dto.courseOffering;
 
-import attendanceProject.controller.Dto.course.CourseMapper;
-import attendanceProject.controller.Dto.faculty.FacultyMapper;
+import attendanceProject.controller.dto.course.CourseMapper;
+import attendanceProject.controller.dto.faculty.FacultyMapper;
 import attendanceProject.domain.CourseOffering;
 
 

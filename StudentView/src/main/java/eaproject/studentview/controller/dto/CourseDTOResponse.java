@@ -1,4 +1,4 @@
-package attendanceProject.controller.dto.course;
+package eaproject.studentview.controller.dto;
 
 import lombok.Data;
 
