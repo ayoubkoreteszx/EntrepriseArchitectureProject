@@ -36,12 +36,4 @@ public class CourseOfferingMapper {
     public static List<CourseOfferingResponse> mapToCourseOfferingResponseList(List<CourseOffering> courseOfferings) {
         return courseOfferings.stream().map(CourseOfferingMapper::mapToCourseOfferingResponse).collect(Collectors.toList());
     }
-
-    public static CourseOfferingAdminResponse mapToCourseOfferingAdminResponse(CourseOffering courseOffering, List<Long> studentIds) {
-        CourseOfferingAdminResponse courseOfferingResponse = new CourseOfferingAdminResponse(mapToCourseOfferingResponse(courseOffering));
-        courseOfferingResponse.setEnrolledStudentIds(studentIds);
-        return courseOfferingResponse;
-    }
-
-
 }

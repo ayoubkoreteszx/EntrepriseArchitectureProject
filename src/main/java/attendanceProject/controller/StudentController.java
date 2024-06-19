@@ -1,7 +1,8 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.dto.student.StudentMapper;
-import attendanceProject.controller.dto.student.StudentRequest;
+import attendanceProject.controller.Dto.student.StudentMapper;
+import attendanceProject.controller.Dto.student.StudentRequest;
+import attendanceProject.controller.Dto.student.StudentResponse;
 import attendanceProject.controller.webClientConfig.ResponseMessage;
 import attendanceProject.domain.Faculty;
 import attendanceProject.domain.Person;
@@ -26,14 +27,10 @@ import java.util.List;
 @RequestMapping("/student")
 @Tag(name = "Student Management System")
 public class StudentController  {
+    @Autowired
     private PersonService personService;
+    @Autowired
     private WebClient webClient;
-
-    public StudentController(PersonService personService, WebClient webClient) {
-        this.personService = personService;
-        this.webClient = webClient;
-    }
-
     @GetMapping("/all")
     @Operation(summary = "View a list of available students")
     @ApiResponses(value = {
@@ -90,20 +87,7 @@ public class StudentController  {
         personService.addPerson(student1);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
-/*
-    @Operation(summary = "Add a faculty")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Faculty added successfully",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Faculty.class)))
-    })
-    @PostMapping("/addFaculty")
-    public ResponseEntity<Faculty> addFaculty(@RequestBody Faculty faculty) {
-        personService.addPerson(faculty);
-        return new ResponseEntity<>(faculty, HttpStatus.OK);
-    }
 
-*/
 
     @PutMapping ("/update")
     @Operation(summary = "Update a Student")
@@ -114,18 +98,25 @@ public class StudentController  {
             @ApiResponse(responseCode = "404", description = "Person not updated", content = @Content)
     })
     public ResponseEntity<?> updateStudent(@RequestBody StudentRequest person) {
+        ResponseEntity<?> studentResponse=getStudentById(person.getId());
+        if(studentResponse.getStatusCode()==HttpStatus.NOT_FOUND){
+            ResponseMessage rs=new ResponseMessage();
+            rs.setMessage("Student not found");
+            return new ResponseEntity<>(rs, HttpStatus.NOT_FOUND);
+        }
+
         personService.updatePerson(StudentMapper.mapToStudent(person));
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
 
-    @DeleteMapping ("/delete")
+    @DeleteMapping ("/delete/{personId}")
     @Operation(summary = "Delete a Student")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "student deleted",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Person.class))),
-            @ApiResponse(responseCode = "404", description = "Student not deleted", content = @Content)
+            @ApiResponse(responseCode = "204", description = "Student not deleted", content = @Content)
     })
     public ResponseEntity<?> deletePerson(@PathVariable long personId) {
         personService.deletePerson(personId);

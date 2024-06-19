@@ -1,9 +1,9 @@
 package attendanceProject.controller;
 
 
-import attendanceProject.controller.dto.attendance.AttendanceRecordDTORequest;
-import attendanceProject.controller.dto.attendance.AttendanceRecordDTOResponse;
-import attendanceProject.controller.dto.attendance.AttendanceRecordMapper;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordMapper;
 import attendanceProject.service.attendanceRecordService.AttendanceRecordService;
 
 import org.springframework.http.HttpStatus;

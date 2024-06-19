@@ -1,8 +1,9 @@
 package attendanceProject.service.attendanceRecordService;
 
-import attendanceProject.controller.dto.attendance.AttendanceRecordDTORequest;
-import attendanceProject.controller.dto.attendance.AttendanceRecordDTOResponse;
-import attendanceProject.controller.dto.attendance.AttendanceRecordMapper;
+
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.Dto.attendance.AttendanceRecordMapper;
 import attendanceProject.domain.*;
 import attendanceProject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;

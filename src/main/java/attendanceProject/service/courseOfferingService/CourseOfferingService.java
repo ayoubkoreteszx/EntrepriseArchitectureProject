@@ -1,6 +1,6 @@
 package attendanceProject.service.courseOfferingService;
 
-import attendanceProject.controller.dto.session.SessionResponse;
+import attendanceProject.controller.Dto.session.SessionResponse;
 import attendanceProject.domain.CourseOffering;
 
 import java.time.LocalDate;

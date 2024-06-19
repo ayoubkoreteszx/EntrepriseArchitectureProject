@@ -1,22 +1,21 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.dto.courseOffering.CourseOfferingAdminResponse;
-import attendanceProject.controller.dto.courseOffering.CourseOfferingMapper;
-import attendanceProject.controller.dto.courseOffering.CourseOfferingRequest;
-import attendanceProject.controller.dto.courseOffering.CourseOfferingResponse;
+import attendanceProject.controller.Dto.courseOffering.CourseOfferingAdminResponse;
+import attendanceProject.controller.Dto.courseOffering.CourseOfferingMapper;
+import attendanceProject.controller.Dto.courseOffering.CourseOfferingRequest;
+import attendanceProject.controller.Dto.courseOffering.CourseOfferingResponse;
 import attendanceProject.controller.webClientConfig.ResponseMessage;
 import attendanceProject.domain.Course;
 import attendanceProject.domain.CourseOffering;
 import attendanceProject.domain.Faculty;
 import attendanceProject.service.courseOfferingService.CourseOfferingService;
-import attendanceProject.service.courseRegistrationService.CourseRegistrationService;
+import attendanceProject.service.courseRegistration.CourseRegistrationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,7 +71,7 @@ public class CourseOfferingController {
             return ResponseEntity.notFound().build();
         }
         List<Long> studentIds = courseRegistrationService.getRegisteredStudentsByCourseOffering(offeringId);
-        return ResponseEntity.ok(CourseOfferingMapper.mapToCourseOfferingAdminResponse(courseOffering,studentIds));
+        return ResponseEntity.ok(new CourseOfferingAdminResponse(CourseOfferingMapper.mapToCourseOfferingResponse(courseOffering)));
     }
 
     /**
@@ -86,7 +85,7 @@ public class CourseOfferingController {
                         schema = @Schema(implementation = CourseOfferingResponse.class))),
             @ApiResponse(responseCode = "404", description = "Course offerings not found", content = @Content)
     })
-    public ResponseEntity<List<CourseOfferingResponse>> findAllCourseOfferings() {
+    public ResponseEntity<List<?>> findAllCourseOfferings() {
         List<CourseOffering> courseOfferings = courseOfferingService.findAllCourseOfferings();
         if (Objects.isNull(courseOfferings)) {
             return ResponseEntity.notFound().build();
@@ -117,7 +116,7 @@ public class CourseOfferingController {
         }
 
         Course course = webClient.get()
-                .uri("http://localhost:8080/courses/" + newCourseOffering.getCourseId())
+                .uri("http://localhost:8080/courses/" + newCourseOffering.getId())
                 .retrieve()
                 .bodyToMono(Course.class)
                 .block();

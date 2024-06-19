@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @Data
 @Schema(description = "Details about the student")
 public class StudentResponse {
+    @Schema(description = "Id of the student", example = "1", required = true)
+    private long id;
     @Schema(description = "Student Id of the student", example = "123", required = true)
     private String studentId;
     @Schema(description = "First name of the student", example = "John", required = true)
