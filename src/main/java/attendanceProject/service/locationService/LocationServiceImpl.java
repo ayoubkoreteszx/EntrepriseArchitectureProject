@@ -1,11 +1,11 @@
 package attendanceProject.service.locationService;
 
-import attendanceProject.controller.Dto.location.CreateLocationParameters;
+import attendanceProject.controller.dto.location.CreateLocationParameters;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
 import attendanceProject.repository.LocationRepository;
-import attendanceProject.controller.Dto.location.LocationDTO;
-import attendanceProject.controller.Dto.location.LocationDTOMapper;
+import attendanceProject.controller.dto.location.LocationDTO;
+import attendanceProject.controller.dto.location.LocationDTOMapper;
 import attendanceProject.service.locationTypeService.LocationTypeService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

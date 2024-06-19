@@ -10,8 +10,8 @@ import java.time.LocalTime;
 @Data
 public class Session {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private LocalDate date;
     private LocalTime startTime;

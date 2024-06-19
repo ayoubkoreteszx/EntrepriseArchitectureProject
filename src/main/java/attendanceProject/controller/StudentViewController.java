@@ -14,13 +14,16 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/student-view")
 public class StudentViewController {
-    @Autowired
-    private AttendanceRecordService attendanceRecordService;
 
-    @Autowired
+    private AttendanceRecordService attendanceRecordService;
     private WebClient webClient;
 
-    @GetMapping("/course-offerings/{offeringId}/attendance")
+    public StudentViewController(AttendanceRecordService attendanceRecordService, WebClient webClient) {
+        this.attendanceRecordService = attendanceRecordService;
+        this.webClient = webClient;
+    }
+
+/*    @GetMapping("/course-offerings/{offeringId}/attendance")
     public ResponseEntity<?> getCourseOfferingAttendance(@PathVariable Long offeringId, @RequestParam Long studentId) {
         CourseOffering courseOffering = webClient.get()
                 .uri("http://localhost:8080/courseOffering/" + offeringId)
@@ -39,4 +42,7 @@ public class StudentViewController {
                 throw new IllegalStateException("Course offering has not started yet.");
             }
         }
+
+        moved to student view app
+ */
 }

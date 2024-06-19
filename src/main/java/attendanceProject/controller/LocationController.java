@@ -1,9 +1,9 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.location.CreateLocationParameters;
+import attendanceProject.controller.dto.location.CreateLocationParameters;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
-import attendanceProject.controller.Dto.location.LocationDTO;
+import attendanceProject.controller.dto.location.LocationDTO;
 import attendanceProject.service.locationService.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +16,12 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/locations")
 public class LocationController {
-    @Autowired
+
     private LocationService locationService;
+
+    public LocationController(LocationService locationService) {
+        this.locationService = locationService;
+    }
 
     @GetMapping
     public ResponseEntity<?> findAll() {

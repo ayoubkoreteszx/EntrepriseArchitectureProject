@@ -1,10 +1,9 @@
 package attendanceProject.service.courseOfferingService;
 
-import attendanceProject.controller.Dto.session.SessionResponse;
+import attendanceProject.controller.dto.session.SessionResponse;
 import attendanceProject.domain.CourseOffering;
-import attendanceProject.domain.Session;
 
-import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CourseOfferingService {
@@ -15,4 +14,5 @@ public interface CourseOfferingService {
     List<CourseOffering> findAllCourseOfferings();
     List<SessionResponse> findAllSessionsOfCourseOffering(Long courseOfferingId);
     List<SessionResponse> findAllPassedSessions(long courseOfferingId);
+    List<CourseOffering> getAllCourseOfferingsByDate(LocalDate date);
 }
