@@ -1,8 +1,8 @@
 package attendanceProject.service.courceService;
 
-import attendanceProject.controller.dto.course.CourseDTORequest;
-import attendanceProject.controller.dto.course.CourseDTOResponse;
-import attendanceProject.controller.dto.course.CourseMapper;
+import attendanceProject.controller.Dto.course.CourseDTORequest;
+import attendanceProject.controller.Dto.course.CourseDTOResponse;
+import attendanceProject.controller.Dto.course.CourseMapper;
 import attendanceProject.domain.Audit;
 import attendanceProject.domain.Course;
 import attendanceProject.repository.CourseRepository;
