@@ -13,3 +13,4 @@ public interface AttendanceSystemClient{
     List<AttendanceRecordDTOResponse> getStudentAttendanceRecordsForCourseOffering(
             @PathVariable long studentId, @PathVariable long offeringId);
 }
+
