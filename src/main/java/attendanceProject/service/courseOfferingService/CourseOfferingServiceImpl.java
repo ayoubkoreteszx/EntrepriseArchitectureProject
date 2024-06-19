@@ -1,6 +1,6 @@
 package attendanceProject.service.courseOfferingService;
 
-import attendanceProject.controller.Dto.session.SessionResponse;
+import attendanceProject.controller.dto.session.SessionResponse;
 import attendanceProject.domain.CourseOffering;
 import attendanceProject.domain.Session;
 import attendanceProject.repository.CourseOfferingRepository;

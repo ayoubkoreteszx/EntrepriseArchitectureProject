@@ -1,10 +1,8 @@
 package attendanceProject.service.courseOfferingService;
 
-import attendanceProject.controller.Dto.session.SessionResponse;
+import attendanceProject.controller.dto.session.SessionResponse;
 import attendanceProject.domain.CourseOffering;
-import attendanceProject.domain.Session;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
