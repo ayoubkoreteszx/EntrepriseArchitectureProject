@@ -1,4 +1,4 @@
-package attendanceProject.controller.dto.student;
+package attendanceProject.controller.Dto.student;
 
 import attendanceProject.domain.Audit;
 import attendanceProject.domain.enums.GenderType;

@@ -1,4 +1,4 @@
-package attendanceProject.controller.dto.faculty;
+package attendanceProject.controller.Dto.faculty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

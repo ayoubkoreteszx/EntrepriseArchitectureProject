@@ -1,8 +1,9 @@
-package attendanceProject.controller.dto.courseOffering;
+package attendanceProject.controller.Dto.courseOffering;
 
-import attendanceProject.controller.dto.course.CourseMapper;
-import attendanceProject.controller.dto.faculty.FacultyMapper;
+import attendanceProject.controller.Dto.course.CourseMapper;
+import attendanceProject.controller.Dto.faculty.FacultyMapper;
 import attendanceProject.domain.CourseOffering;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class CourseOfferingMapper {
     }
 
     public static CourseOfferingResponse mapToCourseOfferingResponse(CourseOffering courseOffering) {
-        CourseOfferingResponse courseOfferingResponse = new CourseOfferingResponse();
+      CourseOfferingResponse courseOfferingResponse = new CourseOfferingResponse();
         courseOfferingResponse.setId(courseOffering.getId());
         courseOfferingResponse.setCapacity(courseOffering.getCapacity());
         courseOfferingResponse.setRoom(courseOffering.getRoom());

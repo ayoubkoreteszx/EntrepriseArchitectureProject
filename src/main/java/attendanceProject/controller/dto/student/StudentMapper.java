@@ -1,6 +1,6 @@
-package attendanceProject.controller.dto.student;
+package attendanceProject.controller.Dto.student;
 
-import attendanceProject.controller.dto.faculty.FacultyMapper;
+import attendanceProject.controller.Dto.faculty.FacultyMapper;
 import attendanceProject.domain.Student;
 
 import java.util.List;

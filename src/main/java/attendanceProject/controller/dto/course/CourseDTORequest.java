@@ -1,4 +1,4 @@
-package attendanceProject.controller.dto.course;
+package attendanceProject.controller.Dto.course;
 
 import lombok.Data;
 

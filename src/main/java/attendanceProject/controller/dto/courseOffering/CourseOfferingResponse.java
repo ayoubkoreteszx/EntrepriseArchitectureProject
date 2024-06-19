@@ -1,7 +1,7 @@
-package attendanceProject.controller.dto.courseOffering;
+package attendanceProject.controller.Dto.courseOffering;
 
-import attendanceProject.controller.dto.course.CourseDTOResponse;
-import attendanceProject.controller.dto.faculty.FacultyResponse;
+import attendanceProject.controller.Dto.course.CourseDTOResponse;
+import attendanceProject.controller.Dto.faculty.FacultyResponse;
 import attendanceProject.domain.enums.CourseofferingType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package attendanceProject.controller.dto.faculty;
+package attendanceProject.controller.Dto.faculty;
 
 import attendanceProject.domain.enums.GenderType;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,4 +1,4 @@
-package attendanceProject.controller.dto.session;
+package attendanceProject.controller.Dto.session;
 
 import attendanceProject.domain.Session;
 import lombok.Data;
