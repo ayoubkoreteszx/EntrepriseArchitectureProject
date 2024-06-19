@@ -1,7 +1,8 @@
 package attendanceProject.controller;
 
-import attendanceProject.controller.Dto.location.CreateLocationParameters;
-import attendanceProject.controller.Dto.location.LocationDTO;
+
+import attendanceProject.controller.dto.location.CreateLocationParameters;
+import attendanceProject.controller.dto.location.LocationDTO;
 import attendanceProject.service.locationService.LocationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class LocationControllerTest {
 
         when(locationService.findAllLocations()).thenReturn(locations);
 
-        mockMvc.perform(get("/sys-admin/locations"))
+        mockMvc.perform(get("/locations"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].id").value(1L))
@@ -57,7 +58,7 @@ public class LocationControllerTest {
 
         when(locationService.findLocationById(1L)).thenReturn(location);
 
-        mockMvc.perform(get("/sys-admin/locations/1"))
+        mockMvc.perform(get("/locations/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(1L))
@@ -68,7 +69,7 @@ public class LocationControllerTest {
     public void testFindById_NotFound() throws Exception {
         when(locationService.findLocationById(1L)).thenReturn(null);
 
-        mockMvc.perform(get("/sys-admin/locations/1"))
+        mockMvc.perform(get("/locations/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -84,7 +85,7 @@ public class LocationControllerTest {
 
         when(locationService.createLocation(parameters)).thenReturn(location);
 
-        mockMvc.perform(post("/sys-admin/locations")
+        mockMvc.perform(post("/locations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .param("locationTypeId", "1")
                         .content("{\"id\": 1, \"name\": \"Location1\"}"))
@@ -106,7 +107,7 @@ public class LocationControllerTest {
 
         when(locationService.updateLocation(1L, parameters)).thenReturn(location);
 
-        mockMvc.perform(put("/sys-admin/locations/1")
+        mockMvc.perform(put("/locations/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .param("locationTypeId", "1")
                         .content("{\"id\": 1, \"name\": \"UpdatedLocation\"}"))
@@ -118,7 +119,7 @@ public class LocationControllerTest {
 
     @Test
     public void testDeleteLocation() throws Exception {
-        mockMvc.perform(delete("/sys-admin/locations/1"))
+        mockMvc.perform(delete("/locations/1"))
                 .andExpect(status().isNoContent());
     }
 }

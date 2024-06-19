@@ -13,7 +13,7 @@ public class Location {
     @JoinColumn(name = "type_id")
     private LocationType locationType;
     @Embedded
-    private Audit audit;
+    private Audit audit = new Audit();
     private String name;
     private int capacity;
 

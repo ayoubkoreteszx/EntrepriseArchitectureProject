@@ -6,7 +6,7 @@ import attendanceProject.controller.dto.location.LocationDTOMapper;
 import attendanceProject.domain.Location;
 import attendanceProject.domain.LocationType;
 import attendanceProject.repository.LocationRepository;
-import attendanceProject.service.locationTypeService.LocationTypeService;
+import attendanceProject.repository.LocationTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class LocationServiceImpl implements LocationService {
     @Autowired
     private LocationRepository locationRepository;
     @Autowired
-    LocationTypeService locationTypeService;
+    LocationTypeRepository locationTypeRepository;
     @Override
     public List<LocationDTO> findAllLocations() {
         return LocationDTOMapper.mapToDTOList(locationRepository.findAll());
@@ -32,7 +32,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public LocationDTO createLocation(CreateLocationParameters parameters) {
-        LocationType locationType = locationTypeService.findLocationTypeById(parameters.getLocationTypeId());
+        LocationType locationType = locationTypeRepository.findById(parameters.getLocationTypeId()).orElse(null);
         if(Objects.isNull(locationType)) {
             throw new EntityNotFoundException("LocationType not found");
         }
@@ -47,7 +47,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public LocationDTO updateLocation(Long id, CreateLocationParameters parameters) {
-        LocationType locationType = locationTypeService.findLocationTypeById(parameters.getLocationTypeId());
+        LocationType locationType = locationTypeRepository.findById(parameters.getLocationTypeId()).orElse(null);
         Location location = locationRepository.findById(id).orElse(null);
         if(Objects.nonNull(locationType) && Objects.nonNull(location)){
             location = LocationDTOMapper.mapToLocation(parameters, locationType);

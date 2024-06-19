@@ -23,6 +23,8 @@ public class LocationDTOMapper {
                 .collect(Collectors.toList());
     }
     public static Location mapToLocation(CreateLocationParameters parameters, LocationType locationType){
+        if(parameters==null)
+            return null;
         Location location = new Location();
         location.setLocationType(locationType);
         location.setName(parameters.getName());
