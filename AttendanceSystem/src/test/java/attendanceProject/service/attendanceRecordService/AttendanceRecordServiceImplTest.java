@@ -1,7 +1,7 @@
 package attendanceProject.service.attendanceRecordService;
 
-import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
-import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.dto.attendance.AttendanceRecordDTOResponse;
 import attendanceProject.domain.*;
 import attendanceProject.repository.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,9 @@ class AttendanceRecordServiceImplTest {
 
     @Mock
     private LocationRepository locationRepository;
+
+    @Mock
+    private CourseOfferingRepository courseOfferingRepository;
 
     @InjectMocks
     private AttendanceRecordServiceImpl attendanceRecordService;
@@ -121,8 +125,10 @@ class AttendanceRecordServiceImplTest {
     void getAttendanceRecordsByStudentAndCourseOffering_ShouldReturnRecordDTOs() {
         Long studentId = 1L;
         Long courseOfferingId = 1L;
+        CourseOffering courseOffering = new CourseOffering();
+        courseOffering.setStartDate(LocalDate.of(2024, 01,11));
         List<AttendanceRecord> records = List.of(attendanceRecord);
-
+        when(courseOfferingRepository.findById(courseOfferingId)).thenReturn(Optional.of(courseOffering));
         when(attendanceRecordRepository.findByStudent_IdAndSession_CourseOffering_Id(studentId, courseOfferingId)).thenReturn(records);
 
         List<AttendanceRecordDTOResponse> foundRecordDTOs = attendanceRecordService.getAttendanceRecordsByStudentAndCourseOffering(studentId, courseOfferingId);

@@ -7,8 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
-import attendanceProject.controller.Dto.attendance.AttendanceRecordDTORequest;
-import attendanceProject.controller.Dto.attendance.AttendanceRecordDTOResponse;
+import attendanceProject.controller.dto.attendance.AttendanceRecordDTORequest;
+import attendanceProject.controller.dto.attendance.AttendanceRecordDTOResponse;
 import attendanceProject.service.attendanceRecordService.AttendanceRecordService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
