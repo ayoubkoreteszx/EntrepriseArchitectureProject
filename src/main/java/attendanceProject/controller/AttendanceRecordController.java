@@ -67,4 +67,12 @@ public class AttendanceRecordController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping("/student/{studentId}/course-offering/{offeringId}")
+    public ResponseEntity<?> getStudentAttendanceRecordForCourseOffering(@PathVariable long studentId, @PathVariable long offeringId){
+        return new ResponseEntity<>(
+                attendanceRecordService.getAttendanceRecordsByStudentAndCourseOffering(studentId, offeringId),
+                HttpStatus.OK
+        );
+    }
 }

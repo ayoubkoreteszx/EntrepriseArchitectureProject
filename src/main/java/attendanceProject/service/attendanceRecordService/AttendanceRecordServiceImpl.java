@@ -3,15 +3,14 @@ package attendanceProject.service.attendanceRecordService;
 import attendanceProject.controller.dto.attendance.AttendanceRecordDTORequest;
 import attendanceProject.controller.dto.attendance.AttendanceRecordDTOResponse;
 import attendanceProject.controller.dto.attendance.AttendanceRecordMapper;
-import attendanceProject.domain.AttendanceRecord;
-import attendanceProject.domain.Location;
-import attendanceProject.domain.Session;
-import attendanceProject.domain.Student;
+import attendanceProject.domain.*;
 import attendanceProject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AttendanceRecordServiceImpl implements AttendanceRecordService {
@@ -26,6 +25,9 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
 
     @Autowired
     private LocationRepository locationRepository;
+
+    @Autowired
+    CourseOfferingRepository courseOfferingRepository;
 
     @Override
     public AttendanceRecordDTOResponse createAttendanceRecord(AttendanceRecordDTORequest attendanceRecordDTORequest) {
@@ -65,8 +67,11 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
 
     @Override
     public List<AttendanceRecordDTOResponse> getAttendanceRecordsByStudentAndCourseOffering(Long studentId, Long courseOfferingId) {
-        return AttendanceRecordMapper.toDTOsResponse(attendanceRecordRepository.
+        CourseOffering courseOffering = courseOfferingRepository.findById(courseOfferingId).get();
+        if(!courseOffering.getStartDate().isAfter(LocalDate.now()))
+            return AttendanceRecordMapper.toDTOsResponse(attendanceRecordRepository.
                 findByStudent_IdAndSession_CourseOffering_Id(studentId, courseOfferingId));
+        throw new IllegalStateException("Course offering has not started yet.");
     }
 
     @Override

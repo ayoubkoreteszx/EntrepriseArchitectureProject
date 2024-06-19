@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: StudentView
+server:
+  port: 8086

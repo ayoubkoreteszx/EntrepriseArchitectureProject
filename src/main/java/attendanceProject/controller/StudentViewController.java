@@ -23,7 +23,7 @@ public class StudentViewController {
         this.webClient = webClient;
     }
 
-    @GetMapping("/course-offerings/{offeringId}/attendance")
+/*    @GetMapping("/course-offerings/{offeringId}/attendance")
     public ResponseEntity<?> getCourseOfferingAttendance(@PathVariable Long offeringId, @RequestParam Long studentId) {
         CourseOffering courseOffering = webClient.get()
                 .uri("http://localhost:8080/courseOffering/" + offeringId)
@@ -42,4 +42,7 @@ public class StudentViewController {
                 throw new IllegalStateException("Course offering has not started yet.");
             }
         }
+
+        moved to student view app
+ */
 }
