@@ -1,6 +1,8 @@
 package adminview.controller;
 
+import adminview.controller.dto.CourseOfferingAdminResponse;
 import adminview.controller.dto.CourseRegistrationResponse;
+import adminview.feignClients.AttendanceSystemClient;
 import adminview.feignClients.CourseRegistrationSystem;
 import adminview.service.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/admin-view")
@@ -23,6 +27,9 @@ public class AdminViewController {
     ExcelService excelService;
     @Autowired
     CourseRegistrationSystem courseRegistrationSystem;
+    @Autowired
+    AttendanceSystemClient attendanceSystemClient;
+
 
     @GetMapping("/course-offerings/{offeringId}/attendance")
     public ResponseEntity<?> downloadAttendanceReportForCourseOffering
@@ -53,4 +60,14 @@ public class AdminViewController {
             return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
+
+    //USE CASE 7
+    @GetMapping("/course-offerings/{offeringId}")
+    public ResponseEntity<CourseOfferingAdminResponse> getCourseOffering(@PathVariable long offeringId) {
+        return new ResponseEntity<>(
+                attendanceSystemClient.getCourseOfferingById(offeringId),
+                HttpStatus.OK
+        );
+    }
+
 }

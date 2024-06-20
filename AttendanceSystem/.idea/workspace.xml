@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4472c6a3-8760-4294-9b43-e94130403d0a" name="Changes" comment="Mail Service (Sender)" />
+    <list default="true" id="4472c6a3-8760-4294-9b43-e94130403d0a" name="Changes" comment="Mail Service (Sender)">
+      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/dto/CourseDTOResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/dto/CourseOfferingAdminResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/AttendanceRecordClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/AdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/AdminViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/AttendanceSystemClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/AttendanceSystemClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/StudentViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/controller/StudentViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/AttendanceSystemClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/AttendanceSystemClient.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -116,7 +125,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "abdallah",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/MIU/Courses/07 - EA Attemp2/Project/Ayoub/EntrepriseArchitectureProject",
+    "last_opened_file_path": "D:/MIU/Courses/07 - EA Attemp2/Project/Ayoub/EntrepriseArchitectureProject/StudentView",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -278,7 +287,7 @@
       <workItem from="1718769464862" duration="171000" />
       <workItem from="1718769865955" duration="719000" />
       <workItem from="1718812682913" duration="5195000" />
-      <workItem from="1718837272218" duration="1727000" />
+      <workItem from="1718837272218" duration="6160000" />
     </task>
     <task id="LOCAL-00001" summary="Move use case5 to admin view service">
       <option name="closed" value="true" />
