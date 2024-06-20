@@ -1,7 +1,7 @@
 package adminview.controller;
 
 import adminview.controller.dto.CourseRegistrationResponse;
-import adminview.feignClients.CourseRegistrationSystem;
+//import adminview.feignClients.CourseRegistrationSystem;
 import adminview.service.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,8 +20,8 @@ import java.io.IOException;
 public class AdminViewController {
     @Autowired
     ExcelService excelService;
-    @Autowired
-    CourseRegistrationSystem courseRegistrationSystem;
+//    @Autowired
+//    CourseRegistrationSystem courseRegistrationSystem;
 
     @GetMapping("/course-offerings/{offeringId}/attendance")
     public ResponseEntity<?> downloadAttendanceReportForCourseOffering
@@ -39,8 +39,8 @@ public class AdminViewController {
             return ResponseEntity.status(500).build();
         }
     }
-    @GetMapping("/course-registrations/allByStudentId/{id}")
-    public CourseRegistrationResponse getAllCourseRegistrationsByStudentId(@PathVariable long id){
-        return courseRegistrationSystem.getAllCourseRegistrationsByStudentId(id);
-    }
+//    @GetMapping("/course-registrations/allByStudentId/{id}")
+//    public CourseRegistrationResponse getAllCourseRegistrationsByStudentId(@PathVariable long id){
+//        return courseRegistrationSystem.getAllCourseRegistrationsByStudentId(id);
+//    }
 }

@@ -5,15 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4472c6a3-8760-4294-9b43-e94130403d0a" name="Changes" comment="Move use case5 to admin view service">
+      <change beforePath="$PROJECT_DIR$/../AdminView/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/AdminViewApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/AdminViewApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/AdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/controller/AdminViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/AttendanceSystemClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/AttendanceSystemClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/CourseRegistrationSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/java/adminview/feignClients/CourseRegistrationSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AdminView/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../AdminView/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/AttendanceRecordControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/AttendanceRecordControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/LocationControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/controller/LocationControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/repository/AttendanceRecordRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/repository/AttendanceRecordRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/attendanceProject/service/attendanceRecordService/AttendanceRecordServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/attendanceProject/service/attendanceRecordService/AttendanceRecordServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/attendanceProject/controller/CourseOfferingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/attendanceProject/controller/CourseOfferingController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/attendanceProject/controller/LocationControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/attendanceProject/controller/LocationControllerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/attendanceProject/repository/AttendanceRecordRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/attendanceProject/repository/AttendanceRecordRepositoryTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/attendanceProject/service/attendanceRecordService/AttendanceRecordServiceImplTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/attendanceProject/service/attendanceRecordService/AttendanceRecordServiceImplTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/attendanceProject/ProjectEaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/attendanceProject/ProjectEaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/attendanceProject/ProjectEaApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/attendanceProject/ProjectEaApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentView/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/StudentViewApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/StudentViewApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/AttendanceSystemClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/java/eaproject/studentview/feignClients/AttendanceSystemClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StudentView/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../StudentView/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +155,7 @@
       <recent name="attendanceProject.service.locationService" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AttendanceRecordRepositoryTest.findByStudent_IdAndSession_CourseOffering_Id">
+  <component name="RunManager" selected="Spring Boot.ProjectEaApplication (1)">
     <configuration name="AttendanceRecordRepositoryTest.findByStudent_IdAndSession_CourseOffering_Id" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProjectEA" />
       <extension name="coverage">
