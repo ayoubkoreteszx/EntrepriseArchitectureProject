@@ -3,7 +3,7 @@ package adminview.controller;
 import adminview.controller.dto.CourseOfferingAdminResponse;
 import adminview.controller.dto.CourseRegistrationResponse;
 import adminview.feignClients.AttendanceSystemClient;
-import adminview.feignClients.CourseRegistrationSystem;
+//import adminview.feignClients.CourseRegistrationSystem;
 import adminview.service.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,8 +25,8 @@ import java.util.Objects;
 public class AdminViewController {
     @Autowired
     ExcelService excelService;
-    @Autowired
-    CourseRegistrationSystem courseRegistrationSystem;
+//    @Autowired
+//    CourseRegistrationSystem courseRegistrationSystem;
     @Autowired
     AttendanceSystemClient attendanceSystemClient;
 
@@ -47,19 +47,19 @@ public class AdminViewController {
             return ResponseEntity.status(500).build();
         }
     }
-    @GetMapping("/course-registrations/allByStudentId/{id}")
-    public ResponseEntity<?> getAllCourseRegistrationsByStudentId(@PathVariable long id){
-        try {
-            ResponseEntity<?> response = courseRegistrationSystem.getAllCourseRegistrationsByStudentId(id);
-            if (response.getStatusCode() == HttpStatus.OK){
-                return new ResponseEntity<>((CourseRegistrationResponse) response.getBody(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
-        }
-    }
+//    @GetMapping("/course-registrations/allByStudentId/{id}")
+//    public ResponseEntity<?> getAllCourseRegistrationsByStudentId(@PathVariable long id){
+//        try {
+//            ResponseEntity<?> response = courseRegistrationSystem.getAllCourseRegistrationsByStudentId(id);
+//            if (response.getStatusCode() == HttpStatus.OK){
+//                return new ResponseEntity<>((CourseRegistrationResponse) response.getBody(), HttpStatus.OK);
+//            } else {
+//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            }
+//        } catch (Exception e){
+//            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+//        }
+//    }
 
     //USE CASE 7
     @GetMapping("/course-offerings/{offeringId}")
