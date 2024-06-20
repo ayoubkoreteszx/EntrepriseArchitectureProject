@@ -12,5 +12,7 @@ public interface AttendanceSystemClient{
     @GetMapping("/attendance-records/student/{studentId}/course-offering/{offeringId}")
     List<AttendanceRecordDTOResponse> getStudentAttendanceRecordsForCourseOffering(
             @PathVariable long studentId, @PathVariable long offeringId);
+    @GetMapping("/attendance-records/student/{studentId}")
+    List<AttendanceRecordDTOResponse> getStudentAttendanceRecords(@PathVariable long studentId);
 }
 

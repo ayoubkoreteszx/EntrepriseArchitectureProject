@@ -1,5 +1,6 @@
 package eaproject.studentview.controller;
 
+import eaproject.studentview.controller.dto.AttendanceRecordDTOResponse;
 import eaproject.studentview.controller.dto.CourseOfferingResponse;
 import eaproject.studentview.feignClients.AttendanceSystemClient;
 import eaproject.studentview.feignClients.CourseOfferingSystem;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/student-view")
@@ -39,4 +42,9 @@ public class StudentViewController {
         }
 
     }
+    @GetMapping("/attendance-records/{studentId}")
+    public ResponseEntity<List<AttendanceRecordDTOResponse>> getAttendanceRecordById(@PathVariable long studentId){
+        return new ResponseEntity<>(client.getStudentAttendanceRecords(studentId), HttpStatus.OK);
+    }
+
 }

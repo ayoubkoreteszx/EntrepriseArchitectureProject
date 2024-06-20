@@ -1,6 +1,7 @@
 package adminview.feignClients;
 
 import adminview.controller.dto.AttendanceRecordDTOResponse;
+import adminview.controller.dto.CourseOfferingAdminResponse;
 import adminview.controller.dto.SessionResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,4 +17,6 @@ public interface AttendanceSystemClient {
 
     @GetMapping("/attendance-records/course-offering/{offeringId}")
     List<AttendanceRecordDTOResponse> getAttendanceRecordsForCourseOffering(@PathVariable long offeringId);
+    @GetMapping("/course-offerings/admin-view/{offeringId}")
+    CourseOfferingAdminResponse getCourseOfferingById(@PathVariable long offeringId);
 }
